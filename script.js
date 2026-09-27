@@ -761,4 +761,120 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    // ==================== 5. OFFER PACKAGE SELECTION & CONTACT SYNC ====================
+    const offerPackageButtons = document.querySelectorAll('.btn-offer-cta[data-select-package]');
+    const packageNeedSelect = document.getElementById('packageNeed');
+    const contactFormPaper = document.querySelector('.contact-form-paper');
+
+    offerPackageButtons.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            const selectedPackage = btn.getAttribute('data-select-package');
+            if (packageNeedSelect && selectedPackage) {
+                packageNeedSelect.value = selectedPackage;
+            }
+
+            if (contactFormPaper) {
+                contactFormPaper.classList.remove('form-focus-pulse');
+                void contactFormPaper.offsetWidth; // Trigger reflow
+                contactFormPaper.classList.add('form-focus-pulse');
+            }
+
+            // Focus on name field
+            setTimeout(() => {
+                const nameInput = document.getElementById('clientName');
+                if (nameInput) nameInput.focus();
+            }, 600);
+        });
+    });
+
+    // ==================== 6. CONTACT FORM SUBMISSION & CONFIRMATION ====================
+    const projectForm = document.getElementById('projectInquiryForm');
+    const formSuccessBanner = document.getElementById('formSuccessBanner');
+    const formSubmitBtn = document.getElementById('formSubmitBtn');
+
+    if (projectForm) {
+        projectForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            // Client-side validation check
+            const name = document.getElementById('clientName');
+            const email = document.getElementById('clientEmail');
+            const product = document.getElementById('clientProduct');
+            const packageNeed = document.getElementById('packageNeed');
+            const message = document.getElementById('clientMessage');
+
+            const requiredFields = [name, email, product, packageNeed, message];
+            let hasError = false;
+
+            requiredFields.forEach(field => {
+                if (!field || !field.value.trim()) {
+                    if (field) {
+                        field.style.borderColor = '#e03131';
+                        field.addEventListener('input', () => {
+                            field.style.borderColor = '';
+                        }, { once: true });
+                    }
+                    hasError = true;
+                }
+            });
+
+            if (hasError) {
+                // Focus first invalid field
+                const firstInvalid = requiredFields.find(f => f && !f.value.trim());
+                if (firstInvalid) firstInvalid.focus();
+                return;
+            }
+
+            // Button loading state
+            if (formSubmitBtn) {
+                formSubmitBtn.disabled = true;
+                const btnText = formSubmitBtn.querySelector('.btn-text');
+                if (btnText) btnText.textContent = 'SENDING INQUIRY...';
+            }
+
+            // Gather inquiry payload
+            const formData = {
+                name: name.value.trim(),
+                email: email.value.trim(),
+                brand: (document.getElementById('clientBrand')?.value || '').trim(),
+                website: (document.getElementById('clientWebsite')?.value || '').trim(),
+                product: product.value.trim(),
+                package: packageNeed.value,
+                goal: document.getElementById('monthlyGoal')?.value || '',
+                budget: document.getElementById('budgetRange')?.value || '',
+                message: message.value.trim(),
+                timestamp: new Date().toISOString()
+            };
+
+            // Store in localStorage as backup lead store
+            try {
+                const existingLeads = JSON.parse(localStorage.getItem('dibendu_project_leads') || '[]');
+                existingLeads.push(formData);
+                localStorage.setItem('dibendu_project_leads', JSON.stringify(existingLeads));
+            } catch (err) {
+                console.warn('LocalStorage unavailable for lead backup:', err);
+            }
+
+            // Simulate fast reliable network delivery
+            setTimeout(() => {
+                // Show clean confirmation state
+                if (formSuccessBanner) {
+                    formSuccessBanner.style.display = 'flex';
+                    formSuccessBanner.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                }
+
+                // Reset form inputs except select
+                projectForm.reset();
+
+                // Restore button
+                if (formSubmitBtn) {
+                    formSubmitBtn.disabled = false;
+                    const btnText = formSubmitBtn.querySelector('.btn-text');
+                    if (btnText) btnText.innerHTML = 'START A PROJECT →';
+                }
+            }, 500);
+        });
+    }
+
 });
+
