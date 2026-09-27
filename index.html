@@ -15,7 +15,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&family=Caveat:wght@400;600;700&family=Inter:wght@400;500;600;700;800;900&family=Outfit:wght@500;700;800;900&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css?v=3">
+    <link rel="stylesheet" href="style.css?v=5">
 </head>
 <body class="desk-mat">
 
@@ -107,16 +107,34 @@
                     <span class="sticker-pill pill-cream">SWEAT THE DETAILS</span>
                 </div>
 
-                <!-- Main Name Display in Hand-Drawn Orange Box -->
-                <div class="hero-name-centerpiece">
+                <!-- Main Intro Video Display in Hand-Drawn Orange Paper Frame -->
+                <div class="hero-name-centerpiece hero-video-centerpiece">
                     <!-- Flanking Profile Badge (Left) -->
                     <div class="avatar-badge avatar-left" title="Dibendu Das">
                         <img src="images/avatar.jpg" alt="Dibendu Das" class="avatar-img" onerror="this.src='';this.classList.add('avatar-fallback');">
                     </div>
 
-                    <!-- The Iconic Hand-Drawn Orange Frame -->
-                    <div class="orange-marker-box">
-                        <h1 class="pixel-name">DIBENDU</h1>
+                    <!-- The Iconic Hand-Drawn Orange Paper Video Frame -->
+                    <div class="hero-video-frame" id="heroIntroVideo">
+                        <!-- Realistic Scrapbook Masking Tape on Corners -->
+                        <div class="masking-tape hero-tape-tl" aria-hidden="true"></div>
+                        <div class="masking-tape hero-tape-tr" aria-hidden="true"></div>
+
+                        <!-- 16:9 Responsive Video Screen -->
+                        <div class="hero-video-screen">
+                            <iframe 
+                                class="hero-intro-iframe"
+                                src="https://www.youtube-nocookie.com/embed/jL4rIEfj8eg?autoplay=1&mute=1&playsinline=1&rel=0&modestbranding=1&loop=1&playlist=jL4rIEfj8eg" 
+                                title="Dibendu Das — Video Editor Introduction" 
+                                frameborder="0" 
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                                allowfullscreen
+                                loading="eager">
+                            </iframe>
+                        </div>
+
+                        <!-- Bottom Corner Tape Detail -->
+                        <div class="masking-tape hero-tape-br" aria-hidden="true"></div>
                     </div>
 
                     <!-- Flanking Profile Badge (Right) -->
@@ -294,223 +312,80 @@
             </div>
         </section>
 
-        <!-- ==================== SELECTED WORK / PORTFOLIO (FOLDER TABS) ==================== -->
-        <section class="work-section" id="work">
+        <!-- ==================== SELECTED WORK / PORTFOLIO (EDITORIAL WORKBOARD) ==================== -->
+        <section class="work-section" id="work" aria-label="Selected Edits Portfolio">
             <div class="work-inner">
                 
+                <!-- Section Header -->
                 <div class="work-section-header">
                     <span class="handwritten-tag">selected edits</span>
                     <div class="boxed-title">the work</div>
                 </div>
 
-                <!-- Interactive Folder Navigation Tab Bar -->
-                <div class="binder-tabs-bar" id="binderTabs">
-                    <button class="binder-tab tab-blue active" data-folder="0">
-                        <span class="tab-glyph">◆</span> PROJECT 01
+                <!-- Portfolio Category Tabs (Client / Niche) -->
+                <div class="category-tabs-bar" id="categoryTabs" role="tablist" aria-label="Portfolio Categories">
+                    <button class="category-tab active" data-category="personal-brand" role="tab" aria-selected="true" id="catTab-personal">
+                        <span class="tab-glyph">★</span>
+                        <span class="tab-label">PERSONAL BRAND &amp; BUSINESS</span>
                     </button>
-                    <button class="binder-tab tab-yellow" data-folder="1">
-                        <span class="tab-glyph">◆</span> PROJECT 02
+                    <button class="category-tab" data-category="ai-coaches" role="tab" aria-selected="false" id="catTab-ai">
+                        <span class="tab-glyph">⚡</span>
+                        <span class="tab-label">AI &amp; COACHES</span>
                     </button>
-                    <button class="binder-tab tab-blue-dark" data-folder="2">
-                        <span class="tab-glyph">◆</span> PROJECT 03
-                    </button>
-                    <button class="binder-tab tab-pink" data-folder="3">
-                        <span class="tab-glyph">◆</span> PROJECT 04
-                    </button>
-                    <button class="binder-tab tab-green" data-folder="4">
-                        <span class="tab-glyph">◆</span> PROJECT 05
+                    <button class="category-tab" data-category="real-estate" role="tab" aria-selected="false" id="catTab-realestate">
+                        <span class="tab-glyph">◆</span>
+                        <span class="tab-label">REAL ESTATE</span>
                     </button>
                 </div>
 
-                <!-- Stacked Folder Card 01 (Matte Black with Blue Tab) -->
-                <div class="folder-card folder-black active" id="projectCard0">
-                    <div class="folder-header-strip">
-                        <div class="folder-tab-shoulder shoulder-blue">
-                            <span class="folder-tab-label">◆ PROJECT 01</span>
-                        </div>
-                        <div class="folder-tab-secondary">
-                            <span class="secondary-label">◆ PROJECT 02</span>
-                        </div>
+                <!-- Scrapbook Creative Editor's Workboard Container -->
+                <div class="workboard-container" id="workboardContainer">
+                    
+                    <!-- Dynamic Category Descriptor Strip -->
+                    <div class="category-descriptor-strip" id="categoryDescriptor">
+                        <span class="category-pill-label" id="categoryPillLabel">01 — PERSONAL BRAND &amp; BUSINESS</span>
+                        <span class="category-mission-text" id="categoryMissionText">Talking-head content built for personal brands and businesses.</span>
                     </div>
-                    <div class="folder-body">
-                        <div class="folder-left-content">
-                            <div class="folder-meta-date">
-                                <span class="meta-dot">●</span> MAR 2, 2026
-                            </div>
-                            <h3 class="folder-title">Retention Edit 01</h3>
-                            <p class="folder-description">
-                                Retention-focused short-form editing designed to keep the viewer watching. Every cut, sound effect, and subtitle has a direct psychological purpose.
-                            </p>
-                            <a href="https://youtube.com/shorts/AuKz7l4qT5A" target="_blank" rel="noopener" class="folder-link">
-                                VIEW PROJECT <span class="arrow-ne">↗</span>
-                            </a>
-                        </div>
-                        <div class="folder-right-media">
-                            <div class="taped-media-box">
-                                <div class="scotch-tape tape-tl"></div>
-                                <div class="scotch-tape tape-tr"></div>
-                                <div class="scotch-tape tape-bl"></div>
-                                <div class="scotch-tape tape-br"></div>
-                                <a href="https://youtube.com/shorts/AuKz7l4qT5A" target="_blank" rel="noopener" class="media-link" aria-label="Watch Project 01 on YouTube">
-                                    <img src="https://img.youtube.com/vi/AuKz7l4qT5A/maxresdefault.jpg" alt="Project 01 Thumbnail" class="media-thumb" loading="lazy">
-                                    <div class="play-pill-overlay">
-                                        <span class="play-triangle">▶</span> WATCH SHORT
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
-                <!-- Stacked Folder Card 02 (Golden Yellow with Warm Vibe) -->
-                <div class="folder-card folder-yellow" id="projectCard1">
-                    <div class="folder-header-strip">
-                        <div class="folder-tab-shoulder shoulder-yellow">
-                            <span class="folder-tab-label text-dark">◆ PROJECT 02</span>
-                        </div>
-                        <div class="folder-tab-secondary">
-                            <span class="secondary-label text-dark">◆ PROJECT 03</span>
-                        </div>
-                    </div>
-                    <div class="folder-body">
-                        <div class="folder-left-content">
-                            <div class="folder-meta-date text-dark">
-                                <span class="meta-dot">●</span> FEB 18, 2026
-                            </div>
-                            <h3 class="folder-title text-dark">Hook &amp; Pacing Edit</h3>
-                            <p class="folder-description text-dark-muted">
-                                Psychology-driven editing that hooks the viewer in the first 0.8 seconds and maintains momentum with zero dead air.
-                            </p>
-                            <a href="https://www.youtube.com/shorts/_UCS9Feah-4" target="_blank" rel="noopener" class="folder-link text-dark">
-                                VIEW PROJECT <span class="arrow-ne">↗</span>
-                            </a>
-                        </div>
-                        <div class="folder-right-media">
-                            <div class="taped-media-box">
-                                <div class="scotch-tape tape-tl"></div>
-                                <div class="scotch-tape tape-tr"></div>
-                                <div class="scotch-tape tape-bl"></div>
-                                <div class="scotch-tape tape-br"></div>
-                                <a href="https://www.youtube.com/shorts/_UCS9Feah-4" target="_blank" rel="noopener" class="media-link" aria-label="Watch Project 02 on YouTube">
-                                    <img src="https://img.youtube.com/vi/_UCS9Feah-4/maxresdefault.jpg" alt="Project 02 Thumbnail" class="media-thumb" loading="lazy">
-                                    <div class="play-pill-overlay">
-                                        <span class="play-triangle">▶</span> WATCH SHORT
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                    <!-- Carousel Outer Stage -->
+                    <div class="carousel-stage">
+                        
+                        <!-- Custom Scrapbook Arrow Button: Left / Prev -->
+                        <button class="carousel-arrow arrow-prev" id="carouselPrev" aria-label="Previous project" title="Previous Project">
+                            <span class="arrow-icon">←</span>
+                        </button>
 
-                <!-- Stacked Folder Card 03 (Royal Deep Navy) -->
-                <div class="folder-card folder-navy" id="projectCard2">
-                    <div class="folder-header-strip">
-                        <div class="folder-tab-shoulder shoulder-navy">
-                            <span class="folder-tab-label">◆ PROJECT 03</span>
-                        </div>
-                    </div>
-                    <div class="folder-body">
-                        <div class="folder-left-content">
-                            <div class="folder-meta-date">
-                                <span class="meta-dot">●</span> JAN 30, 2026
-                            </div>
-                            <h3 class="folder-title">Storytelling &amp; Rhythm</h3>
-                            <p class="folder-description">
-                                Strategic pacing and visual storytelling that transforms talking-head recordings into immersive narrative experiences.
-                            </p>
-                            <a href="https://www.youtube.com/shorts/g4YGTfwBy58" target="_blank" rel="noopener" class="folder-link">
-                                VIEW PROJECT <span class="arrow-ne">↗</span>
-                            </a>
-                        </div>
-                        <div class="folder-right-media">
-                            <div class="taped-media-box">
-                                <div class="scotch-tape tape-tl"></div>
-                                <div class="scotch-tape tape-tr"></div>
-                                <div class="scotch-tape tape-bl"></div>
-                                <div class="scotch-tape tape-br"></div>
-                                <a href="https://www.youtube.com/shorts/g4YGTfwBy58" target="_blank" rel="noopener" class="media-link" aria-label="Watch Project 03 on YouTube">
-                                    <img src="https://img.youtube.com/vi/g4YGTfwBy58/maxresdefault.jpg" alt="Project 03 Thumbnail" class="media-thumb" loading="lazy">
-                                    <div class="play-pill-overlay">
-                                        <span class="play-triangle">▶</span> WATCH SHORT
-                                    </div>
-                                </a>
+                        <!-- Carousel Viewport Window -->
+                        <div class="carousel-viewport" id="carouselViewport">
+                            <div class="carousel-track" id="carouselTrack">
+                                <!-- Slides rendered dynamically by script.js from PORTFOLIO_DATA -->
                             </div>
                         </div>
-                    </div>
-                </div>
 
-                <!-- Stacked Folder Card 04 (Rose Warm Editorial) -->
-                <div class="folder-card folder-pink" id="projectCard3">
-                    <div class="folder-header-strip">
-                        <div class="folder-tab-shoulder shoulder-pink">
-                            <span class="folder-tab-label text-dark">◆ PROJECT 04</span>
-                        </div>
+                        <!-- Custom Scrapbook Arrow Button: Right / Next -->
+                        <button class="carousel-arrow arrow-next" id="carouselNext" aria-label="Next project" title="Next Project">
+                            <span class="arrow-icon">→</span>
+                        </button>
                     </div>
-                    <div class="folder-body">
-                        <div class="folder-left-content">
-                            <div class="folder-meta-date text-dark">
-                                <span class="meta-dot">●</span> JAN 15, 2026
-                            </div>
-                            <h3 class="folder-title text-dark">Psychology &amp; Conversions</h3>
-                            <p class="folder-description text-dark-muted">
-                                Content repurposed and crafted for high watch time, driving genuine viewer trust and clear call-to-actions.
-                            </p>
-                            <a href="https://www.youtube.com/shorts/cOm7ed43IuI" target="_blank" rel="noopener" class="folder-link text-dark">
-                                VIEW PROJECT <span class="arrow-ne">↗</span>
-                            </a>
-                        </div>
-                        <div class="folder-right-media">
-                            <div class="taped-media-box">
-                                <div class="scotch-tape tape-tl"></div>
-                                <div class="scotch-tape tape-tr"></div>
-                                <div class="scotch-tape tape-bl"></div>
-                                <div class="scotch-tape tape-br"></div>
-                                <a href="https://www.youtube.com/shorts/cOm7ed43IuI" target="_blank" rel="noopener" class="media-link" aria-label="Watch Project 04 on YouTube">
-                                    <img src="https://img.youtube.com/vi/cOm7ed43IuI/maxresdefault.jpg" alt="Project 04 Thumbnail" class="media-thumb" loading="lazy">
-                                    <div class="play-pill-overlay">
-                                        <span class="play-triangle">▶</span> WATCH SHORT
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
-                <!-- Stacked Folder Card 05 (Forest Sage Minimal) -->
-                <div class="folder-card folder-green" id="projectCard4">
-                    <div class="folder-header-strip">
-                        <div class="folder-tab-shoulder shoulder-green">
-                            <span class="folder-tab-label">◆ PROJECT 05</span>
+                    <!-- Workboard Carousel Control & Indicator Bar -->
+                    <div class="workboard-meta-bar">
+                        <!-- Editorial Project Number Counter -->
+                        <div class="project-indicator" id="projectIndicator" aria-label="Current Project Position">
+                            <span class="indicator-badge" id="indicatorText">01 / 05</span>
+                        </div>
+
+                        <!-- Interactive Project Dot/Pill Selectors -->
+                        <div class="carousel-pagination" id="carouselPagination" role="tablist" aria-label="Project slides">
+                            <!-- Populated dynamically by script.js -->
+                        </div>
+
+                        <!-- Scrapbook Handwritten Exploration Hint -->
+                        <div class="carousel-swipe-hint">
+                            <span class="handwritten-hint">swipe or use arrows to inspect edits ✎</span>
                         </div>
                     </div>
-                    <div class="folder-body">
-                        <div class="folder-left-content">
-                            <div class="folder-meta-date">
-                                <span class="meta-dot">●</span> DEC 28, 2025
-                            </div>
-                            <h3 class="folder-title">Pattern Interrupt Precision</h3>
-                            <p class="folder-description">
-                                Purposeful sound cues, dynamic text animation, and motion design that reset attention spans every few seconds.
-                            </p>
-                            <a href="https://www.youtube.com/shorts/bMrSniqziH4" target="_blank" rel="noopener" class="folder-link">
-                                VIEW PROJECT <span class="arrow-ne">↗</span>
-                            </a>
-                        </div>
-                        <div class="folder-right-media">
-                            <div class="taped-media-box">
-                                <div class="scotch-tape tape-tl"></div>
-                                <div class="scotch-tape tape-tr"></div>
-                                <div class="scotch-tape tape-bl"></div>
-                                <div class="scotch-tape tape-br"></div>
-                                <a href="https://www.youtube.com/shorts/bMrSniqziH4" target="_blank" rel="noopener" class="media-link" aria-label="Watch Project 05 on YouTube">
-                                    <img src="https://img.youtube.com/vi/bMrSniqziH4/maxresdefault.jpg" alt="Project 05 Thumbnail" class="media-thumb" loading="lazy">
-                                    <div class="play-pill-overlay">
-                                        <span class="play-triangle">▶</span> WATCH SHORT
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
+
                 </div>
 
             </div>
