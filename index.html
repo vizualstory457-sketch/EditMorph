@@ -47,6 +47,9 @@
                     <a href="#offers" class="nav-pill" data-section="offers">
                         <span class="nav-pill-icon">⚡</span> OFFERS
                     </a>
+                    <a href="/store" class="nav-pill nav-pill-store" data-section="store" title="Digital Products Store">
+                        <span class="nav-pill-icon">◆</span> STORE
+                    </a>
                 </div>
 
                 <div class="nav-right">
@@ -84,6 +87,7 @@
                     <li><a href="#services" class="mobile-link">⚡ SERVICES</a></li>
                     <li><a href="#process" class="mobile-link">◆ PROCESS</a></li>
                     <li><a href="#offers" class="mobile-link">⚡ OFFERS</a></li>
+                    <li><a href="/store" class="mobile-link">◆ STORE</a></li>
                     <li><a href="#contact" class="mobile-link">♥ CONTACT</a></li>
                 </ul>
                 <div class="mobile-socials-row">
@@ -515,67 +519,154 @@
                 <div class="section-header-centered">
                     <span class="handwritten-tag">client qualification ✎</span>
                     <div class="boxed-title">who this is built for</div>
-                    <p class="qualification-lead">
-                        "Built for businesses with something worth selling."
-                    </p>
+                    <h2 class="qual-main-heading">Already have something to sell?</h2>
+                    <p class="qual-sub-heading">"I work with businesses that already have an offer. You bring the offer — I turn the content into attention."</p>
                 </div>
 
-                <!-- Scrapbook Qualification Board -->
-                <div class="qualification-card">
-                    <div class="qual-tape tape-tl"></div>
-                    <div class="qual-tape tape-tr"></div>
-                    
-                    <div class="qual-eyebrow-row">
-                        <span class="qual-prompt-pill">ALREADY HAVE SOMETHING TO SELL?</span>
+                <!-- Scrapbook Storyboard Qualification Canvas -->
+                <div class="qual-storyboard-board" id="qualStoryboard">
+                    <div class="board-tape tape-tl"></div>
+                    <div class="board-tape tape-tr"></div>
+                    <div class="board-pushpin" aria-hidden="true">📌</div>
+
+                    <!-- STEP 1: Offer Cluster / Pinned Notes -->
+                    <div class="storyboard-phase phase-offers">
+                        <div class="phase-header-badge">
+                            <span class="phase-pill">YOUR EXISTING OFFER</span>
+                            <span class="phase-scribble">← you bring this</span>
+                        </div>
+
+                        <!-- 8 Physical Scrapbook Stickers / Pinned Notes with organic rotations -->
+                        <div class="qual-stickers-cluster" id="qualStickers">
+                            <div class="qual-sticker sticker-kraft" style="--rot: -2.5deg; --anim-order: 1;">
+                                <span class="sticker-pin">📍</span>
+                                <span class="sticker-text">PRODUCT</span>
+                            </div>
+                            <div class="qual-sticker sticker-yellow" style="--rot: 2.2deg; --anim-order: 2;">
+                                <span class="sticker-tape-mini"></span>
+                                <span class="sticker-text">SERVICE</span>
+                            </div>
+                            <div class="qual-sticker sticker-mint" style="--rot: -3deg; --anim-order: 3;">
+                                <span class="sticker-text">COURSE</span>
+                            </div>
+                            <div class="qual-sticker sticker-pink" style="--rot: 2.6deg; --anim-order: 4;">
+                                <span class="sticker-pin">📍</span>
+                                <span class="sticker-text">COACHING</span>
+                            </div>
+                            <div class="qual-sticker sticker-ruled" style="--rot: -1.8deg; --anim-order: 5;">
+                                <span class="sticker-tape-mini"></span>
+                                <span class="sticker-text">CONSULTING</span>
+                            </div>
+                            <div class="qual-sticker sticker-manila" style="--rot: 3deg; --anim-order: 6;">
+                                <span class="sticker-text">REAL ESTATE</span>
+                            </div>
+                            <div class="qual-sticker sticker-cyan" style="--rot: -2.2deg; --anim-order: 7;">
+                                <span class="sticker-text">AI BUSINESS</span>
+                            </div>
+                            <div class="qual-sticker sticker-stamp" style="--rot: 1.6deg; --anim-order: 8;">
+                                <span class="sticker-pin">📍</span>
+                                <span class="sticker-text">PERSONAL BRAND</span>
+                            </div>
+                        </div>
                     </div>
 
-                    <!-- Visual Qualification Checkmarks Grid -->
-                    <div class="qual-checks-grid">
-                        <div class="check-pill">
-                            <span class="check-symbol">✓</span>
-                            <span class="check-name">Product</span>
-                        </div>
-                        <div class="check-pill">
-                            <span class="check-symbol">✓</span>
-                            <span class="check-name">Service</span>
-                        </div>
-                        <div class="check-pill">
-                            <span class="check-symbol">✓</span>
-                            <span class="check-name">Course</span>
-                        </div>
-                        <div class="check-pill">
-                            <span class="check-symbol">✓</span>
-                            <span class="check-name">Coaching</span>
-                        </div>
-                        <div class="check-pill">
-                            <span class="check-symbol">✓</span>
-                            <span class="check-name">Consulting</span>
-                        </div>
-                        <div class="check-pill">
-                            <span class="check-symbol">✓</span>
-                            <span class="check-name">Real Estate</span>
-                        </div>
-                        <div class="check-pill">
-                            <span class="check-symbol">✓</span>
-                            <span class="check-name">AI Business</span>
-                        </div>
-                        <div class="check-pill">
-                            <span class="check-symbol">✓</span>
-                            <span class="check-name">Personal Brand</span>
+                    <!-- Storyboard Flow Connector 1 -->
+                    <div class="storyboard-connector connector-to-content">
+                        <svg class="flow-arrow-svg" width="44" height="48" viewBox="0 0 44 48" fill="none">
+                            <path d="M22 2 C22 16, 20 28, 22 40" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-dasharray="4 3"/>
+                            <path d="M15 32 L22 42 L29 32" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <span class="connector-scribble">You bring the offer ↓</span>
+                    </div>
+
+                    <!-- STEP 2: The Content Reel Engine -->
+                    <div class="storyboard-phase phase-content">
+                        <div class="content-filmstrip-card" id="contentCard">
+                            <div class="filmstrip-sprockets left-sprockets"><span></span><span></span><span></span></div>
+                            <div class="filmstrip-center">
+                                <div class="filmstrip-top-bar">
+                                    <span class="rec-dot-pulse">● REC</span>
+                                    <span class="filmstrip-label">YOUR CONTENT</span>
+                                    <span class="filmstrip-ratio">9:16 REEL</span>
+                                </div>
+                                <div class="filmstrip-body">
+                                    <div class="filmstrip-waveform">
+                                        <span style="height: 35%"></span>
+                                        <span style="height: 75%"></span>
+                                        <span style="height: 50%"></span>
+                                        <span style="height: 95%"></span>
+                                        <span style="height: 45%"></span>
+                                        <span style="height: 85%"></span>
+                                        <span style="height: 60%"></span>
+                                        <span style="height: 30%"></span>
+                                    </div>
+                                    <div class="filmstrip-action-badge">
+                                        <span class="action-highlight">I turn the content into attention.</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="filmstrip-sprockets right-sprockets"><span></span><span></span><span></span></div>
                         </div>
                     </div>
 
-                    <!-- The Core Value Equation Strip -->
-                    <div class="qual-formula-box">
-                        <div class="formula-line">
-                            <span class="formula-left">You bring the offer.</span>
-                            <span class="formula-arrow">→</span>
-                            <span class="formula-right">I turn the content into attention.</span>
+                    <!-- Storyboard Flow Connector 2 -->
+                    <div class="storyboard-connector connector-to-outcomes">
+                        <svg class="flow-arrow-svg" width="44" height="48" viewBox="0 0 44 48" fill="none">
+                            <path d="M22 2 C23 16, 21 28, 22 40" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-dasharray="4 3"/>
+                            <path d="M15 32 L22 42 L29 32" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <span class="connector-scribble">transforms into ↓</span>
+                    </div>
+
+                    <!-- STEP 3: Business Outcomes (ATTENTION → LEADS → SALES) -->
+                    <div class="storyboard-phase phase-outcomes">
+                        <div class="outcomes-pipeline-row" id="outcomesPipeline">
+                            
+                            <!-- ATTENTION -->
+                            <div class="outcome-stamp stamp-attention">
+                                <span class="stamp-tape-strip"></span>
+                                <div class="stamp-stage-pill">01</div>
+                                <div class="stamp-icon">👁️</div>
+                                <h4 class="stamp-title">ATTENTION</h4>
+                                <p class="stamp-detail">Stop the scroll &amp; build trust</p>
+                            </div>
+
+                            <div class="outcome-arrow-step" aria-hidden="true">
+                                <span class="arrow-symbol">→</span>
+                            </div>
+
+                            <!-- LEADS -->
+                            <div class="outcome-stamp stamp-leads">
+                                <span class="stamp-tape-strip"></span>
+                                <div class="stamp-stage-pill">02</div>
+                                <div class="stamp-icon">💬</div>
+                                <h4 class="stamp-title">LEADS</h4>
+                                <p class="stamp-detail">Direct conversations &amp; DMs</p>
+                            </div>
+
+                            <div class="outcome-arrow-step" aria-hidden="true">
+                                <span class="arrow-symbol">→</span>
+                            </div>
+
+                            <!-- SALES -->
+                            <div class="outcome-stamp stamp-sales">
+                                <span class="stamp-tape-strip"></span>
+                                <div class="stamp-stage-pill">03</div>
+                                <div class="stamp-icon">📈</div>
+                                <h4 class="stamp-title">SALES</h4>
+                                <p class="stamp-detail">Support business outcomes</p>
+                            </div>
+
                         </div>
-                        <p class="formula-subline">
-                            "Let's turn your content into a reason to buy."
+                    </div>
+
+                    <!-- Final Value Narrative Box -->
+                    <div class="qual-summary-strip">
+                        <p class="summary-line-quote">
+                            "Attention that can support leads, conversations and sales."
                         </p>
                     </div>
+
                 </div>
             </div>
         </section>
@@ -587,92 +678,234 @@
                     <span class="handwritten-tag">the editing system ✎</span>
                     <div class="boxed-title">how raw footage becomes a reel</div>
                     <p class="process-lead-quote">
-                        "I don't just cut clips together. There is a proven system behind every edit."
+                        "Every cut has a job."
                     </p>
                 </div>
 
-                <!-- Visual 8-Step Pipeline (Two Balanced Rows of 4) -->
-                <div class="pipeline-flow-wrapper">
-                    
-                    <!-- Row 1: Steps 01 to 04 -->
-                    <div class="pipeline-row">
-                        <div class="pipeline-card">
-                            <div class="pipeline-num">01</div>
-                            <div class="pipeline-icon">📹</div>
-                            <h4 class="pipeline-step-title">RAW FOOTAGE</h4>
-                            <p class="pipeline-step-desc">Podcasts &amp; raw video</p>
+                <!-- Video Editor's Timeline & Storyboard Workspace -->
+                <div class="nle-timeline-workspace" id="nleTimelineWorkspace">
+                    <!-- Workbench Tape & Clip Accents -->
+                    <div class="nle-tape tape-tl"></div>
+                    <div class="nle-tape tape-tr"></div>
+                    <div class="nle-paperclip" aria-hidden="true">📎</div>
+
+                    <!-- Editor Workspace Header & Timecode Readout -->
+                    <div class="nle-toolbar-header">
+                        <div class="nle-window-dots">
+                            <span class="dot-red"></span>
+                            <span class="dot-yellow"></span>
+                            <span class="dot-green"></span>
+                            <span class="nle-comp-name">REEL_BUILD_SYSTEM.prproj // 9:16 COMP</span>
                         </div>
-
-                        <div class="pipeline-arrow" aria-hidden="true">→</div>
-
-                        <div class="pipeline-card">
-                            <div class="pipeline-num">02</div>
-                            <div class="pipeline-icon">⚡</div>
-                            <h4 class="pipeline-step-title">HOOK</h4>
-                            <p class="pipeline-step-desc">0.8s pattern interrupt</p>
-                        </div>
-
-                        <div class="pipeline-arrow" aria-hidden="true">→</div>
-
-                        <div class="pipeline-card">
-                            <div class="pipeline-num">03</div>
-                            <div class="pipeline-icon">✂️</div>
-                            <h4 class="pipeline-step-title">CUTS</h4>
-                            <p class="pipeline-step-desc">Zero dead air &amp; flow</p>
-                        </div>
-
-                        <div class="pipeline-arrow" aria-hidden="true">→</div>
-
-                        <div class="pipeline-card">
-                            <div class="pipeline-num">04</div>
-                            <div class="pipeline-icon">💬</div>
-                            <h4 class="pipeline-step-title">CAPTIONS</h4>
-                            <p class="pipeline-step-desc">Kinetic typography</p>
+                        <div class="nle-timecode-monitor">
+                            <button type="button" class="nle-play-btn" id="timelinePlayToggle" title="Scrub Timeline" aria-label="Scrub through timeline">▶</button>
+                            <span class="tc-label">TIMECODE:</span>
+                            <span class="tc-display" id="timelineTcDisplay">00:00:30:00</span>
+                            <span class="nle-fps-tag">60 FPS</span>
                         </div>
                     </div>
 
-                    <!-- Flow Connector Down to Next Row -->
-                    <div class="pipeline-turn-divider" aria-hidden="true">
-                        <span class="pipeline-turn-pill">NEXT STAGE ↓</span>
+                    <!-- Horizontal Timeline Tracks Board -->
+                    <div class="timeline-board-scrollable" id="timelineBoard">
+                        
+                        <!-- Top Timecode Ruler with Playhead -->
+                        <div class="timeline-ruler-track" id="timelineRulerTrack">
+                            <div class="ruler-marker-line">
+                                <span class="ruler-tick tick-major" style="left: 0%;">00:00<small>INGEST</small></span>
+                                <span class="ruler-tick tick-major" style="left: 14%;">00:01<small>HOOK</small></span>
+                                <span class="ruler-tick tick-minor" style="left: 28%;">00:04<small>CUTS</small></span>
+                                <span class="ruler-tick tick-major" style="left: 42%;">00:08<small>CAPTIONS</small></span>
+                                <span class="ruler-tick tick-minor" style="left: 56%;">00:14<small>INTERRUPT</small></span>
+                                <span class="ruler-tick tick-major" style="left: 70%;">00:20<small>MOTION</small></span>
+                                <span class="ruler-tick tick-minor" style="left: 84%;">00:26<small>CTA</small></span>
+                                <span class="ruler-tick tick-major" style="left: 98%;">00:30<small>EXPORT</small></span>
+                            </div>
+
+                            <!-- Animated Playhead Needle -->
+                            <div class="timeline-playhead-needle" id="timelinePlayhead">
+                                <div class="playhead-head">▼</div>
+                                <div class="playhead-line"></div>
+                            </div>
+                        </div>
+
+                        <!-- Central Timeline Track Line with 8 Pipeline Stage Clips -->
+                        <div class="timeline-clips-track" id="timelineClipsTrack">
+                            
+                            <!-- 01: RAW FOOTAGE -->
+                            <div class="timeline-clip-node clip-node-1" data-tc="00:00:00" data-stage="1">
+                                <div class="clip-timecode-badge">00:00</div>
+                                <div class="clip-paper-frame">
+                                    <div class="clip-mini-thumb">
+                                        <span class="clip-icon">📼</span>
+                                        <span class="thumb-badge">RAW LOG</span>
+                                    </div>
+                                    <div class="clip-meta">
+                                        <span class="clip-step-num">01</span>
+                                        <h4 class="clip-title">RAW FOOTAGE</h4>
+                                        <p class="clip-quote">"Find the strongest moment."</p>
+                                    </div>
+                                    <div class="clip-annotation annot-top">
+                                        <span class="annot-arrow">↗</span> Culling fluff
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="timeline-connector-bar"><span></span></div>
+
+                            <!-- 02: HOOK -->
+                            <div class="timeline-clip-node clip-node-2" data-tc="00:01:00" data-stage="2">
+                                <div class="clip-timecode-badge hook-badge">00:00 HOOK</div>
+                                <div class="clip-paper-frame clip-frame-highlight">
+                                    <div class="clip-mini-thumb thumb-hook">
+                                        <span class="clip-icon">⚡</span>
+                                        <span class="thumb-badge">0.8s IMPACT</span>
+                                    </div>
+                                    <div class="clip-meta">
+                                        <span class="clip-step-num">02</span>
+                                        <h4 class="clip-title">HOOK</h4>
+                                        <p class="clip-quote">"Stop the scroll."</p>
+                                    </div>
+                                    <div class="clip-annotation annot-bot">
+                                        <span class="annot-arrow">↘</span> Retention anchor
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="timeline-connector-bar"><span></span></div>
+
+                            <!-- 03: CUTS -->
+                            <div class="timeline-clip-node clip-node-3" data-tc="00:04:00" data-stage="3">
+                                <div class="clip-timecode-badge">00:04</div>
+                                <div class="clip-paper-frame">
+                                    <div class="clip-mini-thumb">
+                                        <span class="clip-icon">✂️</span>
+                                        <span class="thumb-badge">J-CUTS</span>
+                                    </div>
+                                    <div class="clip-meta">
+                                        <span class="clip-step-num">03</span>
+                                        <h4 class="clip-title">CUTS</h4>
+                                        <p class="clip-quote">"Remove the dead time."</p>
+                                    </div>
+                                    <div class="clip-annotation annot-top">
+                                        <span class="annot-arrow">↗</span> Zero dead air
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="timeline-connector-bar"><span></span></div>
+
+                            <!-- 04: CAPTIONS -->
+                            <div class="timeline-clip-node clip-node-4" data-tc="00:07:00" data-stage="4">
+                                <div class="clip-timecode-badge">00:07 CAPTION</div>
+                                <div class="clip-paper-frame">
+                                    <div class="clip-mini-thumb">
+                                        <span class="clip-icon">💬</span>
+                                        <span class="thumb-badge">KINETIC</span>
+                                    </div>
+                                    <div class="clip-meta">
+                                        <span class="clip-step-num">04</span>
+                                        <h4 class="clip-title">CAPTIONS</h4>
+                                        <p class="clip-quote">"Make every word land."</p>
+                                    </div>
+                                    <div class="clip-annotation annot-bot">
+                                        <span class="annot-arrow">↘</span> Keyword pop
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="timeline-connector-bar"><span></span></div>
+
+                            <!-- 05: INTERRUPTS -->
+                            <div class="timeline-clip-node clip-node-5" data-tc="00:14:00" data-stage="5">
+                                <div class="clip-timecode-badge">00:03 PATTERN INTERRUPT</div>
+                                <div class="clip-paper-frame">
+                                    <div class="clip-mini-thumb">
+                                        <span class="clip-icon">🔊</span>
+                                        <span class="thumb-badge">SFX &amp; ZOOMS</span>
+                                    </div>
+                                    <div class="clip-meta">
+                                        <span class="clip-step-num">05</span>
+                                        <h4 class="clip-title">INTERRUPTS</h4>
+                                        <p class="clip-quote">"Reset attention."</p>
+                                    </div>
+                                    <div class="clip-annotation annot-top">
+                                        <span class="annot-arrow">↗</span> Visual punch
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="timeline-connector-bar"><span></span></div>
+
+                            <!-- 06: MOTION -->
+                            <div class="timeline-clip-node clip-node-6" data-tc="00:20:00" data-stage="6">
+                                <div class="clip-timecode-badge">00:20</div>
+                                <div class="clip-paper-frame">
+                                    <div class="clip-mini-thumb">
+                                        <span class="clip-icon">🎨</span>
+                                        <span class="thumb-badge">2D GRAPHICS</span>
+                                    </div>
+                                    <div class="clip-meta">
+                                        <span class="clip-step-num">06</span>
+                                        <h4 class="clip-title">MOTION</h4>
+                                        <p class="clip-quote">"Make the idea visual."</p>
+                                    </div>
+                                    <div class="clip-annotation annot-bot">
+                                        <span class="annot-arrow">↘</span> Visual diagram
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="timeline-connector-bar"><span></span></div>
+
+                            <!-- 07: CTA -->
+                            <div class="timeline-clip-node clip-node-7" data-tc="00:26:00" data-stage="7">
+                                <div class="clip-timecode-badge">00:12 CTA</div>
+                                <div class="clip-paper-frame">
+                                    <div class="clip-mini-thumb">
+                                        <span class="clip-icon">🎯</span>
+                                        <span class="thumb-badge">CONVERSION</span>
+                                    </div>
+                                    <div class="clip-meta">
+                                        <span class="clip-step-num">07</span>
+                                        <h4 class="clip-title">CTA</h4>
+                                        <p class="clip-quote">"Give them a reason to act."</p>
+                                    </div>
+                                    <div class="clip-annotation annot-top">
+                                        <span class="annot-arrow">↗</span> Direct action
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="timeline-connector-bar"><span></span></div>
+
+                            <!-- 08: READY REEL -->
+                            <div class="timeline-clip-node clip-node-8 clip-node-master" data-tc="00:30:00" data-stage="8">
+                                <div class="clip-timecode-badge master-badge">00:30 MASTER</div>
+                                <div class="clip-paper-frame clip-frame-master">
+                                    <div class="clip-mini-thumb thumb-master">
+                                        <span class="clip-icon">🚀</span>
+                                        <span class="thumb-badge">READY REEL</span>
+                                    </div>
+                                    <div class="clip-meta">
+                                        <span class="clip-step-num step-master">08</span>
+                                        <h4 class="clip-title">READY REEL</h4>
+                                        <p class="clip-quote">"Built to hold attention."</p>
+                                    </div>
+                                    <div class="clip-annotation annot-master">
+                                        <span class="annot-star">★</span> High Retention
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
                     </div>
 
-                    <!-- Row 2: Steps 05 to 08 -->
-                    <div class="pipeline-row">
-                        <div class="pipeline-card">
-                            <div class="pipeline-num">05</div>
-                            <div class="pipeline-icon">🔊</div>
-                            <h4 class="pipeline-step-title">INTERRUPTS</h4>
-                            <p class="pipeline-step-desc">Sound design &amp; SFX</p>
-                        </div>
-
-                        <div class="pipeline-arrow" aria-hidden="true">→</div>
-
-                        <div class="pipeline-card">
-                            <div class="pipeline-num">06</div>
-                            <div class="pipeline-icon">🎨</div>
-                            <h4 class="pipeline-step-title">MOTION</h4>
-                            <p class="pipeline-step-desc">Diagrams &amp; graphics</p>
-                        </div>
-
-                        <div class="pipeline-arrow" aria-hidden="true">→</div>
-
-                        <div class="pipeline-card">
-                            <div class="pipeline-num">07</div>
-                            <div class="pipeline-icon">🎯</div>
-                            <h4 class="pipeline-step-title">CTA</h4>
-                            <p class="pipeline-step-desc">Conversion trigger</p>
-                        </div>
-
-                        <div class="pipeline-arrow" aria-hidden="true">→</div>
-
-                        <div class="pipeline-card pipeline-card-final">
-                            <div class="pipeline-num num-accent">08</div>
-                            <div class="pipeline-icon">🚀</div>
-                            <h4 class="pipeline-step-title">READY REEL</h4>
-                            <p class="pipeline-step-desc">High-retention 9:16 export</p>
-                        </div>
+                    <!-- Mini Track Legend Strip -->
+                    <div class="timeline-footer-legend">
+                        <div class="track-channel"><span class="ch-badge ch-v2">V2</span> Kinetic Captions &amp; Motion Graphics</div>
+                        <div class="track-channel"><span class="ch-badge ch-v1">V1</span> Primary Talking-Head &amp; B-Roll Cuts</div>
+                        <div class="track-channel"><span class="ch-badge ch-a1">A1</span> Sound Design, Whooshes &amp; SFX Pops</div>
                     </div>
-
                 </div>
             </div>
         </section>
@@ -684,145 +917,147 @@
                     <span class="handwritten-tag">work with me ✎</span>
                     <h2 class="boxed-title">Choose Your Content System</h2>
                     <p class="offers-lead-text">
-                        "Turn the content you already have into a consistent short-form engine."
+                        One offer. Consistent content. Built around your goals.
                     </p>
                 </div>
 
-                <!-- 3 Editorial Paper Offer Cards Grid -->
-                <div class="offers-cards-grid">
+                <!-- 3 Physical Offer Sheets Sitting on a Creative Desk -->
+                <div class="offers-cards-grid" id="pricingGrid">
                     
                     <!-- PACKAGE 01: 10-REEL CONTENT GROWTH SPRINT -->
-                    <div class="offer-card card-sprint" data-package="10-reels">
-                        <div class="offer-tape tape-tl"></div>
-                        <div class="offer-stage-pill stage-start">START →</div>
+                    <div class="offer-sheet-card sheet-sprint" data-package="10-reels">
+                        <!-- Scrapbook Accents -->
+                        <div class="sheet-tape tape-tl"></div>
+                        <div class="sheet-corner-tag tag-start">START →</div>
                         
-                        <div class="offer-header">
-                            <span class="offer-tier-num">PACKAGE 01</span>
-                            <h3 class="offer-package-title">10-REEL CONTENT GROWTH SPRINT</h3>
-                            <p class="offer-positioning">
-                                For coaches, consultants, founders &amp; personal brands who want consistent short-form content without spending hours editing.
-                            </p>
+                        <!-- Header & Tier -->
+                        <div class="sheet-header">
+                            <span class="sheet-pkg-badge">PACKAGE 01</span>
+                            <h3 class="sheet-pkg-name">10-REEL CONTENT<br>GROWTH SPRINT</h3>
+                            <p class="sheet-pkg-for">For coaches, consultants, founders &amp; personal brands.</p>
                         </div>
 
-                        <div class="offer-pricing-block">
-                            <div class="offer-price-row">
-                                <span class="price-currency">$</span>
-                                <span class="price-amount">599</span>
+                        <!-- Instant Scan Primary Hero Price & Reels Count -->
+                        <div class="sheet-pricing-hero">
+                            <div class="sheet-volume-badge">10 REELS</div>
+                            <div class="sheet-price-row">
+                                <span class="price-curr">$</span>
+                                <span class="price-val">599</span>
                             </div>
-                            <span class="offer-value-badge">Total Value: $1,550+</span>
+                            <div class="sheet-value-anchor">Total Value: $1,550+</div>
                         </div>
 
-                        <!-- Feature Checklist -->
-                        <ul class="offer-features-list">
-                            <li><span class="feat-icon">🎬</span> <span><strong>10</strong> Premium Short-Form Reels</span></li>
-                            <li><span class="feat-icon">✍️</span> <span><strong>10</strong> Hooks + Captions</span></li>
-                            <li><span class="feat-icon">🎨</span> <span>Custom Editing Style &amp; Brand System</span></li>
-                            <li><span class="feat-icon">🧠</span> <span>Retention-focused Editing</span></li>
-                            <li><span class="feat-icon">📱</span> <span>Instagram / TikTok / YouTube Shorts Ready</span></li>
-                            <li><span class="feat-icon">🔄</span> <span>1 Revision per Reel</span></li>
-                            <li><span class="feat-icon">📅</span> <span>7–10 Day Delivery</span></li>
-                            <li><span class="feat-icon">🎯</span> <span>Content Strategy Call</span></li>
+                        <!-- Compact High-Impact Features List -->
+                        <ul class="sheet-feat-list">
+                            <li><span class="feat-check">✓</span> <span><strong>10</strong> Premium Short-Form Reels</span></li>
+                            <li><span class="feat-check">✓</span> <span><strong>10</strong> Hooks + Captions</span></li>
+                            <li><span class="feat-check">✓</span> <span>Custom Editing Style</span></li>
+                            <li><span class="feat-check">✓</span> <span>Retention-Focused Editing</span></li>
+                            <li><span class="feat-check">✓</span> <span>Multi-Platform Ready</span></li>
+                            <li class="feat-highlight"><span class="feat-check-special">✓</span> <span><strong>Unlimited Revisions — Until You're Happy</strong></span></li>
+                            <li><span class="feat-check">✓</span> <span>7–10 Day Delivery</span></li>
+                            <li><span class="feat-check">✓</span> <span>Content Strategy Call</span></li>
                         </ul>
 
-                        <div class="offer-cta-wrapper">
-                            <a href="#contact" class="btn-offer-cta btn-cta-sprint" data-select-package="10 Reels">
-                                <span class="btn-tab-accent"></span>
-                                <span class="btn-text">START WITH 10 REELS <span class="arrow-ne">→</span></span>
+                        <!-- Physical Label CTA Button -->
+                        <div class="sheet-cta-zone">
+                            <a href="#contact" class="btn-offer-cta btn-sheet-cta cta-sprint" data-select-package="10 Reels">
+                                <span class="cta-tab-strip"></span>
+                                <span class="cta-label">START WITH 10 REELS <span class="cta-arrow">→</span></span>
                             </a>
                         </div>
                     </div>
 
-                    <!-- PACKAGE 02: 15-REEL CONTENT GROWTH SYSTEM (MOST POPULAR) -->
-                    <div class="offer-card card-system card-popular" data-package="15-reels">
-                        <!-- Most Popular Washi Badge -->
-                        <div class="popular-washi-badge">
-                            <span class="washi-pin">★</span> most popular
+                    <!-- PACKAGE 02: 15-REEL CONTENT GROWTH SYSTEM (MOST POPULAR FOCUS) -->
+                    <div class="offer-sheet-card sheet-system sheet-popular" data-package="15-reels">
+                        <!-- Most Popular Physical Tape / Washi Badge -->
+                        <div class="sheet-popular-badge">
+                            <span class="washi-star">★</span> MOST POPULAR
                         </div>
-                        <div class="offer-tape tape-center"></div>
-                        <div class="offer-stage-pill stage-build">BUILD →</div>
+                        <div class="sheet-tape tape-center"></div>
+                        <div class="sheet-corner-tag tag-focus">GROWTH →</div>
 
-                        <div class="offer-header">
-                            <span class="offer-tier-num tier-popular">PACKAGE 02</span>
-                            <h3 class="offer-package-title">15-REEL CONTENT GROWTH SYSTEM</h3>
-                            <p class="offer-positioning">
-                                For brands that want to publish consistently and build momentum with a reliable short-form content pipeline.
-                            </p>
+                        <!-- Header & Tier -->
+                        <div class="sheet-header">
+                            <span class="sheet-pkg-badge badge-popular">PACKAGE 02</span>
+                            <h3 class="sheet-pkg-name">15-REEL CONTENT<br>GROWTH SYSTEM</h3>
+                            <p class="sheet-pkg-for">For brands that want consistent short-form content.</p>
                         </div>
 
-                        <div class="offer-pricing-block">
-                            <div class="offer-price-row">
-                                <span class="price-currency">$</span>
-                                <span class="price-amount">799</span>
+                        <!-- Instant Scan Primary Hero Price & Reels Count -->
+                        <div class="sheet-pricing-hero">
+                            <div class="sheet-volume-badge volume-popular">15 REELS</div>
+                            <div class="sheet-price-row">
+                                <span class="price-curr">$</span>
+                                <span class="price-val">799</span>
                             </div>
-                            <div class="offer-savings-row">
-                                <span class="offer-value-badge">Total Value: $2,250+</span>
-                                <span class="offer-savings-pill">You save $1,451+ vs. individual value</span>
-                            </div>
+                            <div class="sheet-value-anchor">Total Value: $2,250+</div>
                         </div>
 
-                        <!-- Feature Checklist -->
-                        <ul class="offer-features-list">
-                            <li><span class="feat-icon">🎬</span> <span><strong>15</strong> Premium Short-Form Reels</span></li>
-                            <li><span class="feat-icon">✍️</span> <span><strong>15</strong> Hooks + Captions</span></li>
-                            <li><span class="feat-icon">🎨</span> <span>Custom Brand Editing System</span></li>
-                            <li><span class="feat-icon">🧠</span> <span>Retention-focused Editing</span></li>
-                            <li><span class="feat-icon">📱</span> <span>Multi-platform Optimized</span></li>
-                            <li><span class="feat-icon">🔄</span> <span>1 Revision per Reel</span></li>
-                            <li><span class="feat-icon">📅</span> <span>Priority Delivery</span></li>
-                            <li><span class="feat-icon">🎯</span> <span>Content Strategy Call</span></li>
-                            <li><span class="feat-icon">📊</span> <span>Monthly Content Direction</span></li>
+                        <!-- Compact High-Impact Features List -->
+                        <ul class="sheet-feat-list">
+                            <li><span class="feat-check">✓</span> <span><strong>15</strong> Premium Short-Form Reels</span></li>
+                            <li><span class="feat-check">✓</span> <span><strong>15</strong> Hooks + Captions</span></li>
+                            <li><span class="feat-check">✓</span> <span>Custom Brand Editing System</span></li>
+                            <li><span class="feat-check">✓</span> <span>Retention-Focused Editing</span></li>
+                            <li><span class="feat-check">✓</span> <span>Multi-Platform Ready</span></li>
+                            <li class="feat-highlight"><span class="feat-check-special">✓</span> <span><strong>Unlimited Revisions — Until You're Happy</strong></span></li>
+                            <li><span class="feat-check">✓</span> <span>Priority Delivery</span></li>
+                            <li><span class="feat-check">✓</span> <span>Content Strategy Call</span></li>
+                            <li><span class="feat-check">✓</span> <span>Monthly Content Direction</span></li>
                         </ul>
 
-                        <div class="offer-cta-wrapper">
-                            <a href="#contact" class="btn-offer-cta btn-cta-system" data-select-package="15 Reels">
-                                <span class="btn-tab-accent"></span>
-                                <span class="btn-text">BUILD MY CONTENT SYSTEM <span class="arrow-ne">→</span></span>
+                        <!-- Physical Label CTA Button -->
+                        <div class="sheet-cta-zone">
+                            <a href="#contact" class="btn-offer-cta btn-sheet-cta cta-system" data-select-package="15 Reels">
+                                <span class="cta-tab-strip"></span>
+                                <span class="cta-label">BUILD MY CONTENT SYSTEM <span class="cta-arrow">→</span></span>
                             </a>
                         </div>
                     </div>
 
                     <!-- PACKAGE 03: 20-REEL CONTENT GROWTH SYSTEM -->
-                    <div class="offer-card card-engine" data-package="20-reels">
-                        <div class="offer-tape tape-tr"></div>
-                        <div class="offer-stage-pill stage-scale">SCALE →</div>
+                    <div class="offer-sheet-card sheet-engine" data-package="20-reels">
+                        <!-- Scrapbook Accents -->
+                        <div class="sheet-tape tape-tr"></div>
+                        <div class="sheet-corner-tag tag-scale">SCALE →</div>
 
-                        <div class="offer-header">
-                            <span class="offer-tier-num">PACKAGE 03</span>
-                            <h3 class="offer-package-title">20-REEL CONTENT GROWTH SYSTEM</h3>
-                            <p class="offer-positioning">
-                                For personal brands that want a serious short-form content engine instead of occasional editing.
-                            </p>
+                        <!-- Header & Tier -->
+                        <div class="sheet-header">
+                            <span class="sheet-pkg-badge">PACKAGE 03</span>
+                            <h3 class="sheet-pkg-name">20-REEL CONTENT<br>GROWTH SYSTEM</h3>
+                            <p class="sheet-pkg-for">For brands that want a serious short-form content engine.</p>
                         </div>
 
-                        <div class="offer-pricing-block">
-                            <div class="offer-price-row">
-                                <span class="price-currency">$</span>
-                                <span class="price-amount">999</span>
+                        <!-- Instant Scan Primary Hero Price & Reels Count -->
+                        <div class="sheet-pricing-hero">
+                            <div class="sheet-volume-badge">20 REELS</div>
+                            <div class="sheet-price-row">
+                                <span class="price-curr">$</span>
+                                <span class="price-val">999</span>
                             </div>
-                            <div class="offer-savings-row">
-                                <span class="offer-value-badge">Total Value: $3,000+</span>
-                                <span class="offer-savings-pill">You save $2,001+ vs. individual value</span>
-                            </div>
+                            <div class="sheet-value-anchor">Total Value: $3,000+</div>
                         </div>
 
-                        <!-- Feature Checklist -->
-                        <ul class="offer-features-list">
-                            <li><span class="feat-icon">🎬</span> <span><strong>20</strong> Premium Short-Form Reels</span></li>
-                            <li><span class="feat-icon">✍️</span> <span><strong>20</strong> Hooks + Captions</span></li>
-                            <li><span class="feat-icon">🎨</span> <span>Complete Custom Brand Editing System</span></li>
-                            <li><span class="feat-icon">🧠</span> <span>Advanced Retention &amp; Pacing</span></li>
-                            <li><span class="feat-icon">📱</span> <span>Instagram / TikTok / YouTube Shorts</span></li>
-                            <li><span class="feat-icon">🔄</span> <span>1 Revision per Reel</span></li>
-                            <li><span class="feat-icon">⚡</span> <span>Priority Editing</span></li>
-                            <li><span class="feat-icon">🎯</span> <span>Content Strategy Call</span></li>
-                            <li><span class="feat-icon">📊</span> <span>Monthly Content Calendar</span></li>
-                            <li><span class="feat-icon">🔥</span> <span>Performance-based Recommendations</span></li>
+                        <!-- Compact High-Impact Features List -->
+                        <ul class="sheet-feat-list">
+                            <li><span class="feat-check">✓</span> <span><strong>20</strong> Premium Short-Form Reels</span></li>
+                            <li><span class="feat-check">✓</span> <span><strong>20</strong> Hooks + Captions</span></li>
+                            <li><span class="feat-check">✓</span> <span>Complete Brand Editing System</span></li>
+                            <li><span class="feat-check">✓</span> <span>Advanced Retention &amp; Pacing</span></li>
+                            <li><span class="feat-check">✓</span> <span>Multi-Platform Ready</span></li>
+                            <li class="feat-highlight"><span class="feat-check-special">✓</span> <span><strong>Unlimited Revisions — Until You're Happy</strong></span></li>
+                            <li><span class="feat-check">✓</span> <span>Priority Editing</span></li>
+                            <li><span class="feat-check">✓</span> <span>Content Strategy Call</span></li>
+                            <li><span class="feat-check">✓</span> <span>Monthly Content Calendar</span></li>
+                            <li><span class="feat-check">✓</span> <span>Performance-Based Content Recommendations</span></li>
                         </ul>
 
-                        <div class="offer-cta-wrapper">
-                            <a href="#contact" class="btn-offer-cta btn-cta-engine" data-select-package="20 Reels">
-                                <span class="btn-tab-accent"></span>
-                                <span class="btn-text">BUILD MY CONTENT ENGINE <span class="arrow-ne">→</span></span>
+                        <!-- Physical Label CTA Button -->
+                        <div class="sheet-cta-zone">
+                            <a href="#contact" class="btn-offer-cta btn-sheet-cta cta-engine" data-select-package="20 Reels">
+                                <span class="cta-tab-strip"></span>
+                                <span class="cta-label">BUILD MY CONTENT ENGINE <span class="cta-arrow">→</span></span>
                             </a>
                         </div>
                     </div>

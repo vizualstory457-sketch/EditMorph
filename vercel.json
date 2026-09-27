@@ -1,4 +1,7 @@
 {
-  "cleanUrls": true
+  "cleanUrls": true,
+  "rewrites": [
+    { "source": "/store/:slug*", "destination": "/store" }
+  ]
 }
 

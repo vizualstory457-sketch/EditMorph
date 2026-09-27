@@ -876,5 +876,176 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // ==================== 7. INTERACTIVE REDESIGNED SECTIONS ====================
+    
+    // --- A. Client Qualification Storyboard Motion ---
+    const qualSection = document.getElementById('services');
+    const qualStoryboard = document.getElementById('qualStoryboard');
+    const qualStickers = document.querySelectorAll('.qual-sticker');
+    const outcomeStamps = document.querySelectorAll('.outcome-stamp');
+
+    if (qualSection && qualStoryboard) {
+        let qualAnimated = false;
+        const qualObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !qualAnimated) {
+                    qualAnimated = true;
+                    qualStoryboard.classList.add('storyboard-in-view');
+                    
+                    // Stagger stickers
+                    qualStickers.forEach((st, idx) => {
+                        setTimeout(() => {
+                            st.classList.add('sticker-popped');
+                        }, 80 * idx);
+                    });
+
+                    // Stagger outcome stamps
+                    outcomeStamps.forEach((stamp, idx) => {
+                        setTimeout(() => {
+                            stamp.classList.add('stamp-illuminated');
+                        }, 700 + (180 * idx));
+                    });
+                }
+            });
+        }, { threshold: 0.2 });
+
+        qualObserver.observe(qualSection);
+    }
+
+    // --- B. NLE Editing Timeline Workspace Interaction & Scrubbing ---
+    const timelineWorkspace = document.getElementById('nleTimelineWorkspace');
+    const timelinePlayhead = document.getElementById('timelinePlayhead');
+    const timelineTcDisplay = document.getElementById('timelineTcDisplay');
+    const timelinePlayToggle = document.getElementById('timelinePlayToggle');
+    const timelineClips = document.querySelectorAll('.timeline-clip-node');
+    const timelineRulerTrack = document.getElementById('timelineRulerTrack');
+
+    if (timelineWorkspace && timelinePlayhead && timelineClips.length > 0) {
+        let currentStageIdx = 0;
+        let isScrubbing = false;
+        let scrubTimer = null;
+
+        // Position playhead over a specific clip
+        function setPlayhead(index) {
+            if (index < 0 || index >= timelineClips.length) return;
+            currentStageIdx = index;
+            const targetClip = timelineClips[index];
+
+            // Highlight active clip
+            timelineClips.forEach(c => c.classList.remove('active-scrub-clip'));
+            targetClip.classList.add('active-scrub-clip');
+
+            // Update Timecode
+            const tc = targetClip.getAttribute('data-tc') || '00:00:30:00';
+            if (timelineTcDisplay) {
+                timelineTcDisplay.textContent = tc;
+            }
+
+            // Calculate horizontal offset
+            if (timelineRulerTrack) {
+                const rulerWidth = timelineRulerTrack.offsetWidth;
+                const clipLeft = targetClip.offsetLeft;
+                const clipWidth = targetClip.offsetWidth;
+                const centerPos = clipLeft + (clipWidth / 2);
+                const percent = Math.min(Math.max((centerPos / rulerWidth) * 100, 2), 98);
+                timelinePlayhead.style.left = `${percent}%`;
+            }
+        }
+
+        // Clip hover interaction
+        timelineClips.forEach((clip, idx) => {
+            clip.addEventListener('mouseenter', () => {
+                if (!isScrubbing) {
+                    setPlayhead(idx);
+                }
+            });
+        });
+
+        // Automated playback demo
+        function startTimelinePlayback() {
+            if (isScrubbing) {
+                stopTimelinePlayback();
+                return;
+            }
+
+            isScrubbing = true;
+            if (timelinePlayToggle) {
+                timelinePlayToggle.textContent = '⏸';
+                timelinePlayToggle.setAttribute('title', 'Pause Timeline');
+            }
+
+            let stage = 0;
+            setPlayhead(stage);
+
+            scrubTimer = setInterval(() => {
+                stage++;
+                if (stage >= timelineClips.length) {
+                    stopTimelinePlayback();
+                } else {
+                    setPlayhead(stage);
+                }
+            }, 550);
+        }
+
+        function stopTimelinePlayback() {
+            isScrubbing = false;
+            if (scrubTimer) {
+                clearInterval(scrubTimer);
+                scrubTimer = null;
+            }
+            if (timelinePlayToggle) {
+                timelinePlayToggle.textContent = '▶';
+                timelinePlayToggle.setAttribute('title', 'Scrub Timeline');
+            }
+        }
+
+        if (timelinePlayToggle) {
+            timelinePlayToggle.addEventListener('click', (e) => {
+                e.preventDefault();
+                startTimelinePlayback();
+            });
+        }
+
+        // Scroll observer: initial quick scrub animation when first visible
+        let timelineAutoRun = false;
+        const timelineObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !timelineAutoRun) {
+                    timelineAutoRun = true;
+                    // Initial set to HOOK or start
+                    setPlayhead(1);
+                    // Quick preview scrub to show off the system
+                    setTimeout(() => {
+                        startTimelinePlayback();
+                    }, 400);
+                }
+            });
+        }, { threshold: 0.25 });
+
+        timelineObserver.observe(timelineWorkspace);
+    }
+
+    // --- C. Pricing Offer Sheets Scroll-Triggered Entrance ---
+    const pricingGrid = document.getElementById('pricingGrid');
+    const offerSheets = document.querySelectorAll('.offer-sheet-card');
+
+    if (pricingGrid && offerSheets.length > 0) {
+        let pricingAnimated = false;
+        const pricingObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !pricingAnimated) {
+                    pricingAnimated = true;
+                    offerSheets.forEach((sheet, idx) => {
+                        setTimeout(() => {
+                            sheet.classList.add('sheet-entered');
+                        }, 120 * idx);
+                    });
+                }
+            });
+        }, { threshold: 0.15 });
+
+        pricingObserver.observe(pricingGrid);
+    }
+
 });
 

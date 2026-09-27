@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dibendu Das — Digital Store | Tools for Creators Who Take Editing Seriously</title>
+    <meta name="description" content="Premium plugins, presets, templates and creative assets built to make your video editing workflow faster. Designed by Dibendu Das.">
+    <meta name="keywords" content="video editing plugins, After Effects presets, Premiere Pro templates, sound design, creator store, kinetic typography">
+    <meta name="author" content="Dibendu Das">
+
+    <!-- Fonts: Outfit (modern SaaS heading), Inter (clean UI), Space Mono (monospace details) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="/store/store.css?v=1">
+</head>
+<body class="store-body">
+
+    <!-- Centered Modern SaaS Dashboard Shell -->
+    <div class="store-shell">
+
+        <!-- ==================== TOP NAVIGATION BAR ==================== -->
+        <header class="store-topbar">
+            <!-- Brand & Return Link -->
+            <a href="/store" class="store-brand-link">
+                <div class="store-logo-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                        <polyline points="2 17 12 22 22 17"></polyline>
+                        <polyline points="2 12 12 17 22 12"></polyline>
+                    </svg>
+                </div>
+                <div class="store-brand-text">
+                    <span class="store-brand-title">DIBENDU STORE</span>
+                    <span class="store-brand-sub">Digital Assets</span>
+                </div>
+            </a>
+
+            <!-- Search Bar -->
+            <div class="store-search-wrapper">
+                <span class="search-icon-left">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                </span>
+                <input type="text" id="searchInput" class="search-input-field" placeholder="Search plugins, presets, templates... (Press '/' to focus)" autocomplete="off">
+                <button type="button" class="search-clear-btn" id="searchClearBtn" title="Clear search">✕</button>
+                <span class="search-kbd-shortcut">/</span>
+            </div>
+
+            <!-- Right Actions -->
+            <div class="store-topbar-actions">
+                <!-- Return to Portfolio Button -->
+                <a href="/" class="btn-back-portfolio">
+                    <span>←</span> Portfolio
+                </a>
+
+                <!-- Wishlist Toggle -->
+                <button type="button" class="store-action-btn" id="wishlistToggleBtn" title="View Wishlist" aria-label="View wishlist">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                    <span class="action-badge" id="wishlistBadge" style="display:none;">0</span>
+                </button>
+
+                <!-- Cart Toggle -->
+                <button type="button" class="store-action-btn" id="cartToggleBtn" title="View Cart" aria-label="View cart">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+                    <span class="action-badge" id="cartBadge" style="display:none;">0</span>
+                </button>
+
+                <!-- Avatar Profile -->
+                <img src="/images/avatar.jpg" alt="Dibendu Das" class="creator-avatar" title="Dibendu Das">
+            </div>
+        </header>
+
+        <!-- ==================== MAIN STORE WORKSPACE ==================== -->
+        <div class="store-layout">
+
+            <!-- LEFT SIDEBAR: CATEGORIES & FILTERS -->
+            <aside class="store-sidebar">
+                <div>
+                    <h2 class="sidebar-title">Categories</h2>
+                    <nav class="sidebar-categories-nav">
+                        <button type="button" class="cat-item-btn active" data-cat="all">
+                            <span>All Products</span>
+                            <span class="cat-badge">8</span>
+                        </button>
+                        <button type="button" class="cat-item-btn" data-cat="plugins">
+                            <span>Plugins</span>
+                            <span class="cat-badge">2</span>
+                        </button>
+                        <button type="button" class="cat-item-btn" data-cat="presets">
+                            <span>Presets</span>
+                            <span class="cat-badge">2</span>
+                        </button>
+                        <button type="button" class="cat-item-btn" data-cat="templates">
+                            <span>Templates</span>
+                            <span class="cat-badge">2</span>
+                        </button>
+                        <button type="button" class="cat-item-btn" data-cat="motion-graphics">
+                            <span>Motion Graphics</span>
+                            <span class="cat-badge">1</span>
+                        </button>
+                        <button type="button" class="cat-item-btn" data-cat="creative-assets">
+                            <span>Creative Assets</span>
+                            <span class="cat-badge">1</span>
+                        </button>
+                        <button type="button" class="cat-item-btn" data-cat="freebies">
+                            <span>Freebies</span>
+                            <span class="cat-badge">1</span>
+                        </button>
+                    </nav>
+                </div>
+
+                <!-- Software Platform Filter -->
+                <div>
+                    <h2 class="sidebar-title">Platform</h2>
+                    <div class="sidebar-platform-group">
+                        <label class="platform-chip">
+                            <input type="checkbox" value="After Effects">
+                            <span>After Effects</span>
+                        </label>
+                        <label class="platform-chip">
+                            <input type="checkbox" value="Premiere Pro">
+                            <span>Premiere Pro</span>
+                        </label>
+                        <label class="platform-chip">
+                            <input type="checkbox" value="All Editors">
+                            <span>Universal / WAV</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Sidebar Custom Editing Offer Callout -->
+                <div class="sidebar-service-box">
+                    <span class="service-box-title">Need Custom Video Editing?</span>
+                    <p class="service-box-desc">I edit high-retention content systems for founders, coaches &amp; brands.</p>
+                    <a href="/#offers" class="service-box-link">Explore Editing Offers →</a>
+                </div>
+            </aside>
+
+            <!-- RIGHT CONTENT AREA -->
+            <main class="store-content">
+
+                <!-- Mobile Horizontal Category Scroll -->
+                <div class="mobile-categories-scroll">
+                    <button type="button" class="mobile-cat-pill active" data-cat="all">All</button>
+                    <button type="button" class="mobile-cat-pill" data-cat="plugins">Plugins</button>
+                    <button type="button" class="mobile-cat-pill" data-cat="presets">Presets</button>
+                    <button type="button" class="mobile-cat-pill" data-cat="templates">Templates</button>
+                    <button type="button" class="mobile-cat-pill" data-cat="motion-graphics">Motion</button>
+                    <button type="button" class="mobile-cat-pill" data-cat="creative-assets">Assets</button>
+                    <button type="button" class="mobile-cat-pill" data-cat="freebies">Freebies</button>
+                </div>
+
+                <!-- FEATURED PRODUCT HERO BANNER (BIG SALE / SHOWCASE CARD) -->
+                <section class="store-hero-banner" id="heroBanner">
+                    <div class="hero-left-content">
+                        <span class="hero-featured-pill">★ FEATURED TOOLKIT</span>
+                        <h1 class="hero-title">TextMorph Pro</h1>
+                        <p class="hero-tagline">"Build faster. Animate better."</p>
+                        <p class="hero-desc">
+                            120+ retention-focused kinetic typography presets for After Effects. Zero manual keyframing. 1-click in/out eases and live real-time previews.
+                        </p>
+                        <div class="hero-benefits-row">
+                            <span class="hero-benefit-tag">⚡ Zero Keyframes</span>
+                            <span class="hero-benefit-tag">🎨 120+ Presets</span>
+                            <span class="hero-benefit-tag">🎬 Commercial License</span>
+                        </div>
+                        <div class="hero-actions-row">
+                            <div class="hero-price-wrap">
+                                <span class="hero-price-now">$49</span>
+                                <span class="hero-price-was">$79</span>
+                            </div>
+                            <button type="button" class="btn-hero-primary" id="heroViewBtn">
+                                VIEW PRODUCT →
+                            </button>
+                            <a href="#catalogSection" class="btn-hero-secondary">
+                                EXPLORE ALL
+                            </a>
+                        </div>
+                    </div>
+                    <div class="hero-visual-frame">
+                        <img src="/images/store/textmorph-pro.jpg" alt="TextMorph Pro After Effects Plugin" class="hero-product-img">
+                        <div class="hero-floating-badge">
+                            <span>★</span> 4.9 Verified Creator Rating
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 2 COMPACT SIDE PROMOS (Discount & Freebies) -->
+                <div class="store-promos-grid" id="promosGrid">
+                    <a href="/store?category=presets" class="promo-card promo-card-warm">
+                        <div class="promo-info-col">
+                            <h3 class="promo-heading">Retention Cut Presets</h3>
+                            <p class="promo-sub">Remove dead air &amp; stop drop-offs</p>
+                            <span class="promo-cta-link">Shop Presets →</span>
+                        </div>
+                        <img src="/images/store/retention-presets.jpg" alt="Retention Cut Presets" class="promo-thumbnail">
+                    </a>
+
+                    <a href="/store?category=freebies" class="promo-card promo-card-cool">
+                        <div class="promo-info-col">
+                            <h3 class="promo-heading">Free Creator Starter Kit</h3>
+                            <p class="promo-sub">20 SFX, 5 presets &amp; retention PDF</p>
+                            <span class="promo-cta-link">Download Free →</span>
+                        </div>
+                        <img src="/images/store/sound-vault.jpg" alt="Free Creator Starter Kit" class="promo-thumbnail">
+                    </a>
+                </div>
+
+                <!-- MAIN PRODUCT CATALOG SECTION -->
+                <section class="store-catalog-section" id="catalogSection">
+                    <div class="catalog-header-bar">
+                        <div class="catalog-title-wrap">
+                            <h2 class="catalog-title" id="catalogTitle">Explore Products</h2>
+                            <span class="catalog-count-badge" id="catalogCountBadge">8 products</span>
+                        </div>
+                        <div class="catalog-controls">
+                            <select id="sortSelect" class="sort-select" aria-label="Sort products">
+                                <option value="featured">Featured First</option>
+                                <option value="price-asc">Price: Low to High</option>
+                                <option value="price-desc">Price: High to Low</option>
+                                <option value="rating">Top Rated</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Products Grid -->
+                    <div class="products-grid" id="productsGrid">
+                        <!-- Populated dynamically via store.js -->
+                    </div>
+                </section>
+
+                <!-- DEDICATED PRODUCT DETAIL VIEW (Rendered dynamically) -->
+                <section class="product-detail-view" id="productDetailView">
+                    <!-- Populated dynamically via store.js -->
+                </section>
+
+            </main>
+        </div>
+    </div>
+
+    <!-- ==================== CART SLIDE-OVER DRAWER ==================== -->
+    <div class="cart-drawer-overlay" id="cartOverlay"></div>
+    <aside class="cart-drawer" id="cartDrawer" aria-label="Shopping Cart">
+        <div class="cart-drawer-header">
+            <h2 class="cart-drawer-title">Shopping Cart</h2>
+            <button type="button" class="modal-close-btn" id="closeCartBtn" aria-label="Close cart">✕</button>
+        </div>
+        <div class="cart-drawer-items" id="cartItemsList">
+            <!-- Items rendered via store.js -->
+        </div>
+        <div class="cart-drawer-footer">
+            <div class="cart-subtotal-row">
+                <span>Subtotal:</span>
+                <span id="cartSubtotal">$0</span>
+            </div>
+            <button type="button" class="btn-cart-checkout" id="btnCartCheckout">
+                PROCEED TO CHECKOUT →
+            </button>
+        </div>
+    </aside>
+
+    <!-- ==================== CHECKOUT ARCHITECTURE MODAL ==================== -->
+    <div class="checkout-modal-overlay" id="checkoutModal">
+        <div class="checkout-modal-card" role="dialog" aria-modal="true" aria-labelledby="modalHeading">
+            <div class="checkout-modal-header">
+                <h3 class="modal-header-title" id="modalHeading">Digital Product Checkout</h3>
+                <button type="button" class="modal-close-btn" id="closeCheckoutBtn" aria-label="Close checkout">✕</button>
+            </div>
+            <div class="checkout-modal-body">
+                <div class="checkout-summary-box">
+                    <div>
+                        <strong id="checkoutItemTitle">Product Name</strong>
+                        <div style="font-size: 0.76rem; color: var(--store-text-muted);">Commercial License • Instant Digital Access</div>
+                    </div>
+                    <span style="font-size: 1.3rem; font-weight: 900; color: var(--store-text-main);" id="checkoutItemPrice">$49</span>
+                </div>
+
+                <div class="checkout-notice-box">
+                    <strong>Payment Architecture Notice:</strong><br>
+                    This digital store is architected for instant integration with Stripe Checkout, Lemon Squeezy, Gumroad, or Razorpay. No live payment credentials are hardcoded in frontend code.
+                </div>
+
+                <div class="gateway-selector">
+                    <label class="gateway-option selected">
+                        <span>💳 Credit Card / Apple Pay (Stripe Gateway Ready)</span>
+                        <input type="radio" name="gateway" checked>
+                    </label>
+                    <label class="gateway-option">
+                        <span>🍋 Lemon Squeezy / PayPal Checkout</span>
+                        <input type="radio" name="gateway">
+                    </label>
+                </div>
+
+                <button type="button" class="btn-confirm-checkout" id="checkoutConfirmBtn">
+                    COMPLETE ORDER &amp; GET DOWNLOAD KEY →
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script -->
+    <script src="/store/store.js?v=1"></script>
+<script>window.addEventListener('DOMContentLoaded', () => { if (typeof openProductDetail === 'function') openProductDetail('textmorph-pro', false); });</script></body>
+</html>
