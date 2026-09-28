@@ -6,311 +6,398 @@
 (function () {
     'use strict';
 
+    // Helper to resolve asset paths across dev server and file:// protocol
+    function resolveAsset(path) {
+        if (!path) return '';
+        if (window.location.protocol === 'file:' && path.startsWith('/')) {
+            return (window.location.pathname.includes('/store/') ? '..' : '.') + path;
+        }
+        return path;
+    }
+
     // ==================== 1. REUSABLE PRODUCT DATA STORE ====================
     const PRODUCTS = [
         {
             id: 'textmorph-pro',
             slug: 'textmorph-pro',
-            name: 'TextMorph Pro',
+            name: 'TextMorph Pro 2.0',
             category: 'plugins',
             categoryLabel: 'After Effects Plugin',
             software: ['After Effects'],
-            softwareBadge: 'Ae 2020–2026',
-            price: 49,
-            salePrice: 79,
+            softwareBadge: 'Ae 2023–2026',
+            price: 99,
+            salePrice: 199,
             rating: 4.9,
-            reviewsCount: 54,
+            reviewsCount: '539+',
             badge: 'Best Seller',
             badgeClass: 'badge-bestseller',
-            thumbnail: '../images/store/textmorph-pro.jpg',
+            thumbnail: '/images/store/textmorph-pro.jpg',
+            gallery: [
+                {
+                    type: 'video',
+                    title: 'Watch Intro',
+                    videoUrl: 'https://www.youtube.com/embed/AuKz7l4qT5A',
+                    image: '/images/store/textmorph-pro.jpg'
+                },
+                {
+                    type: 'image',
+                    title: 'Apex Toolkit',
+                    image: '/images/store/textmorph-home.png'
+                },
+                {
+                    type: 'image',
+                    title: 'Script & SRT',
+                    image: '/images/store/textmorph-script-srt.png'
+                },
+                {
+                    type: 'image',
+                    title: '19 Text Animations',
+                    image: '/images/store/textmorph-animation.png'
+                },
+                {
+                    type: 'image',
+                    title: '10 Text Effects',
+                    image: '/images/store/textmorph-effects.png'
+                },
+                {
+                    type: 'image',
+                    title: 'Magic Reveal',
+                    image: '/images/store/textmorph-magic-reveal.png'
+                },
+                {
+                    type: 'image',
+                    title: 'Icon Presets',
+                    image: '/images/store/textmorph-icon-presets.png'
+                }
+            ],
+            features: [
+                {
+                    id: 'apex-toolkit',
+                    number: '01',
+                    title: 'Apex Toolkit',
+                    badge: 'Workflow Suite',
+                    image: '/images/store/textmorph-home.png',
+                    explanation: 'Your professional After Effects workflow toolkit for faster layer management, alignment, graph control, editing, and motion-design workflows.',
+                    functions: [
+                        'Anchor & Align',
+                        'Value Graph / Speed Graph',
+                        'Quick Cut',
+                        'Pro Editor Tools',
+                        'Null Object',
+                        'Adjustment Layer',
+                        'Solid Layer',
+                        'Gradient Lock',
+                        'Font Replacer',
+                        'Precomp / Decomp',
+                        'Multi Comp',
+                        'Expressions'
+                    ],
+                    benefit: 'Speed up repetitive After Effects workflow tasks from one powerful interface.'
+                },
+                {
+                    id: 'script-srt',
+                    number: '02',
+                    title: 'Script & SRT / Caption Studio',
+                    badge: 'Caption Studio',
+                    image: '/images/store/textmorph-script-srt.png',
+                    explanation: 'Transcribe speech, import and export SRT subtitles, and align captions directly with your After Effects composition.',
+                    functions: [
+                        'AI Speech-to-Text Transcription',
+                        'Auto-Detect Language',
+                        'SRT Import',
+                        'SRT Export',
+                        'Caption Studio',
+                        'Composition Alignment',
+                        'Caption Settings'
+                    ],
+                    benefit: 'Create and manage captions without leaving your After Effects workflow.'
+                },
+                {
+                    id: 'text-animation',
+                    number: '03',
+                    title: '19 Text Animations',
+                    badge: 'Motion Animators',
+                    image: '/images/store/textmorph-animation.png',
+                    explanation: 'Apply professional text animations instantly instead of manually creating complex text animator keyframes.',
+                    functions: [
+                        '1by1',
+                        '3D Flip In',
+                        'Apple Bouncing',
+                        'Blur In',
+                        'Bounce Text',
+                        'Character Cascade',
+                        'Character Down',
+                        'Character Right',
+                        'Right to Left'
+                    ],
+                    extraNote: 'Adjust animation duration directly from the interface.',
+                    benefit: 'Create polished typography animations much faster.'
+                },
+                {
+                    id: 'text-effects',
+                    number: '04',
+                    title: '10 Text Effects',
+                    badge: 'Typography Styles',
+                    image: '/images/store/textmorph-effects.png',
+                    explanation: 'Apply premium ready-made text effects instantly instead of manually building complex typography effects.',
+                    functions: [
+                        'Reveal Glow',
+                        'Text Break',
+                        'TMP DJ Orange',
+                        'TMP DJ Purple',
+                        'TMP DJ White',
+                        'TMP TF Blue',
+                        'TMP TF Devin',
+                        'TMP TF Shadow',
+                        'TMP TF Shadow 2',
+                        'TMP TF Yellow'
+                    ],
+                    benefit: 'Create styled typography effects in seconds.'
+                },
+                {
+                    id: 'magic-reveal',
+                    number: '05',
+                    title: 'Magic Reveal',
+                    badge: 'Reveal Engine',
+                    image: '/images/store/textmorph-magic-reveal.png',
+                    explanation: 'Create customizable text-reveal animations with controls for reveal color, direction, duration, glow, blur, and feather.',
+                    functions: [
+                        'Reveal Color',
+                        'Direction',
+                        'Duration',
+                        'Glow Size',
+                        'Glow Blur',
+                        'Reveal Feather',
+                        'Advanced Settings'
+                    ],
+                    benefit: 'Create polished text-reveal animations with adjustable controls from one interface.'
+                },
+                {
+                    id: 'icon-presets',
+                    number: '06',
+                    title: 'Icon Presets',
+                    badge: 'Glowing Icons',
+                    image: '/images/store/textmorph-icon-presets.png',
+                    explanation: 'Apply ready-made glowing icon styles instantly to create polished motion graphics without manually building the effect.',
+                    functions: [
+                        'Break Anything',
+                        'TMP IC Blue',
+                        'TMP IC Green',
+                        'TMP IC Orange',
+                        'TMP IC Purple',
+                        'TMP ICF Premium'
+                    ],
+                    benefit: 'Create glowing icon animations quickly using ready-made presets.'
+                }
+            ],
             featured: true,
-            headline: 'Kinetic Typography & Text Animation Plugin for After Effects',
-            description: 'Stop wasting hours manually keyframing text. TextMorph Pro brings 120+ retention-focused kinetic typography presets, customizable overshoot curves, and 1-click in/out animations designed specifically for high-retention short-form video editors.',
+            headline: 'Kinetic Typography & Workflow Suite for After Effects',
+            description: 'TextMorph Pro 2.0 is an all-in-one After Effects toolkit designed to speed up motion design, typography, captioning, and editing workflows with powerful ready-to-use tools.',
             benefits: [
-                '120+ Kinetic Typography Presets',
-                'Zero Keyframes Required',
-                'Live Real-time Preview Panel',
-                'Multi-Language Unicode Support'
+                '6 Integrated Production Modules in One Product (Apex Toolkit, Script & SRT / Caption Studio, Text Animation, Text Effects, Magic Reveal, Icon Presets)',
+                'Zero Manual Keyframes Required for High-Impact Typography',
+                'Native AI Speech-to-Text Transcription & SRT Ingestion',
+                'Adjust Animation Duration & Easing Directly from the Interface',
+                'Ready-Made Glowing Icon Presets & Stylized Text Effects'
             ],
             included: [
-                '120+ Kinetic Text Presets (.ffx)',
-                'Custom AE Script UI Panel (.jsxbin)',
-                'Step-by-Step 4K Video Tutorial (45 mins)',
+                'Full TextMorph Pro 2.0 After Effects Plugin (.zxp / .jsxbin)',
+                'Apex Toolkit: Anchor/Align, Graph Control, Layer Tools & Cutters',
+                'Script & SRT / Caption Studio with Speech-to-Text AI',
+                '19 Premium Text Animation Presets & Duration Slider',
+                '10 Stylized Typography Text Effects (Reveal Glow, Text Break, Shadows)',
+                'Customizable Magic Reveal Engine with Feather, Glow & Direction Controls',
+                '6 Glowing Motion Icon Presets',
+                'Complete 16:9 Step-by-Step Walkthrough Video Tutorial',
                 'Commercial Client License (Lifetime)',
                 'Free Future Version Updates'
             ],
-            compatibility: 'Adobe After Effects 2020 through 2026 on macOS (Intel & Apple Silicon) and Windows 10/11.',
-            requirements: 'No third-party plugins required. Uses native After Effects shape engine.',
+            compatibility: 'After Effects 2023–2026 on Windows + macOS.',
+            requirements: 'No third-party plugins required. Uses native After Effects expressions and shape vector pipelines.',
             faqs: [
                 {
                     q: 'Can I use this for paid client reels and commercial projects?',
                     a: 'Yes! Every purchase comes with a full Commercial Client License permitting unlimited commercial and personal video projects.'
                 },
                 {
+                    q: 'Which After Effects versions and operating systems are supported?',
+                    a: 'TextMorph Pro 2.0 is fully tested and compatible with Adobe After Effects 2023–2026 on both Windows + macOS.'
+                },
+                {
+                    q: 'Are all 6 modules included in this purchase?',
+                    a: 'Yes! Apex Toolkit, Script & SRT / Caption Studio, Text Animation, Text Effects, Magic Reveal, and Icon Presets are all included inside TextMorph Pro 2.0 as one single unified plugin.'
+                },
+                {
                     q: 'Do I need extra plugins like Element 3D or Trapcode?',
-                    a: 'None at all. TextMorph Pro operates 100% natively using standard After Effects expression and shape vector pipelines.'
+                    a: 'None at all. TextMorph Pro 2.0 operates 100% natively using standard After Effects expression and shape vector pipelines.'
                 },
                 {
-                    q: 'How do I receive updates when new presets are added?',
-                    a: 'All customers receive instant download notification emails and lifetime access to future preset releases.'
+                    q: 'How do I receive updates when new features are added?',
+                    a: 'All customers receive instant download notification emails and lifetime access to future version updates.'
                 }
             ]
-        },
-        {
-            id: 'retention-cut-presets',
-            slug: 'retention-cut-presets',
-            name: 'Retention Cut Presets',
-            category: 'presets',
-            categoryLabel: 'Premiere Pro Presets',
-            software: ['Premiere Pro'],
-            softwareBadge: 'Pr 2021+',
-            price: 39,
-            salePrice: 59,
-            rating: 4.9,
-            reviewsCount: 39,
-            badge: 'Popular',
-            badgeClass: 'badge-popular',
-            thumbnail: '../images/store/retention-presets.jpg',
-            featured: false,
-            headline: 'Pacing, Dead-Air Trimmer & Fast Cut Presets for Premiere Pro',
-            description: 'Engineered around viewer psychology to hold attention across the critical 3-second drop-off window. Includes punch-in zooms, dynamic whip transitions, rhythm cuts, and silence elimination markers.',
-            benefits: [
-                'Psychology-backed pacing cuts',
-                'Smooth optical flow zoom bursts',
-                '1-click drag and drop onto timeline',
-                'Compatible with 4K and 1080p footage'
-            ],
-            included: [
-                '45 Custom Premiere Pro Effect Presets (.prfpset)',
-                'Pacing Marker Timeline Project (.prproj)',
-                'Keyboard Shortcut Rapid Editing Cheat Sheet',
-                'Installation & Quick-Start Video Guide'
-            ],
-            compatibility: 'Adobe Premiere Pro 2021 through 2026 (macOS & Windows).',
-            requirements: 'Standard Premiere Pro install with GPU acceleration recommended.',
-            faqs: [
-                {
-                    q: 'Are these drag-and-drop presets?',
-                    a: 'Yes, simply import the .prfpset file into your Premiere Pro Effects window and drag onto any adjustment layer or clip.'
-                },
-                {
-                    q: 'Does it work with 9:16 vertical reels as well as 16:9?',
-                    a: 'Yes, presets automatically adapt to whatever sequence aspect ratio you have configured in Premiere.'
-                }
-            ]
-        },
-        {
-            id: 'creator-sound-vault',
-            slug: 'creator-sound-vault',
-            name: 'Creator Sound Vault',
-            category: 'creative-assets',
-            categoryLabel: 'Sound Design Asset',
-            software: ['All Editors'],
-            softwareBadge: 'Universal WAV',
-            price: 29,
-            salePrice: 49,
-            rating: 4.8,
-            reviewsCount: 27,
-            badge: 'New',
-            badgeClass: 'badge-new',
-            thumbnail: '../images/store/sound-vault.jpg',
-            featured: false,
-            headline: '350+ Retention Sound Effects, Whooshes & Impact Hits',
-            description: 'Sound design is 50% of retention. Mastered 24-bit WAV library designed specifically for talking-head reels, YouTube shorts, and commercials. Whooshes, risers, bass drops, tech clicks, pop hits, and subtle UI notifications.',
-            benefits: [
-                'Mastered at -14 LUFS for modern social platforms',
-                'Organized by pacing function & emotion',
-                '100% Royalty-Free commercial clearance',
-                'Instant drag-and-drop into any NLE'
-            ],
-            included: [
-                '350+ High-Definition 24-bit/48kHz WAV Files',
-                '8 Categorized Subfolders (Whooshes, Risers, Hits, UI, Transitions)',
-                'Metadata-tagged for Soundly, Soundminer & Finder',
-                'Commercial Royalty-Free License Agreement'
-            ],
-            compatibility: 'Universal — Works in Premiere Pro, DaVinci Resolve, Final Cut Pro, CapCut, Audition, Reaper, Logic, etc.',
-            requirements: 'Any audio or video editor that accepts WAV/MP3 files.',
-            faqs: [
-                {
-                    q: 'Will my YouTube videos get copyright claims?',
-                    a: 'Never. These sound effects were custom recorded and synthesized by Dibendu and are 100% copyright-safe and royalty-free.'
-                }
-            ]
-        },
-        {
-            id: 'viral-reels-templates',
-            slug: 'viral-reels-templates',
-            name: 'Viral Reels Template Kit',
-            category: 'templates',
-            categoryLabel: 'Premiere & AE MOGRT',
-            software: ['Premiere Pro', 'After Effects'],
-            softwareBadge: 'MOGRT + AE',
-            price: 34,
-            salePrice: 59,
-            rating: 4.9,
-            reviewsCount: 42,
-            badge: 'Hot',
-            badgeClass: 'badge-hot',
-            thumbnail: '../images/store/reels-templates.jpg',
-            featured: false,
-            headline: '25 Modern 9:16 Editorial Reel Templates & Layouts',
-            description: 'Modern editorial layouts designed to repurpose podcasts, talking-head videos, and client clips into engaging vertical videos. Includes split-screens, quote cards, progress bars, and minimal subtitle badges.',
-            benefits: [
-                '25 Responsive 9:16 vertical layouts',
-                'Customizable colors, fonts & borders in Essential Graphics',
-                'Podcast split-screen auto-framing',
-                'Minimalist documentary aesthetics'
-            ],
-            included: [
-                '25 Motion Graphics Template Files (.mogrt)',
-                '25 After Effects Project Files (.aep)',
-                'Figma Layout & Typography Components',
-                'Installation & Customization Video Walkthrough'
-            ],
-            compatibility: 'Adobe Premiere Pro 2022+ & After Effects 2022+ (macOS & Windows).',
-            requirements: 'No third-party plugins required.',
-            faqs: [
-                {
-                    q: 'Can I edit the text directly in Premiere Pro without opening After Effects?',
-                    a: 'Yes, all parameters (text, fonts, colors, border radiuses) can be adjusted straight inside the Premiere Pro Essential Graphics panel.'
-                }
-            ]
-        },
-        {
-            id: 'kinetic-captions-pack',
-            slug: 'kinetic-captions-pack',
-            name: 'Kinetic Captions & Subtitles',
-            category: 'presets',
-            categoryLabel: 'Subtitle Presets',
-            software: ['Premiere Pro'],
-            softwareBadge: 'Pr Auto-Cap',
-            price: 24,
-            salePrice: 39,
-            rating: 4.8,
-            reviewsCount: 31,
-            badge: 'Trending',
-            badgeClass: 'badge-popular',
-            thumbnail: '../images/store/textmorph-pro.jpg',
-            headline: 'Modern Creator Caption Styles, Text Animations & Color Presets',
-            description: 'The exact caption styles used by top 1% content creators. Features active word color pop, bounce easing, box highlights, and multi-line kinetic typography.',
-            benefits: [
-                'Compatible with Premiere built-in Auto-Captions',
-                'Word-by-word active highlight pop',
-                '10 High-converting creator color themes',
-                'Zero rendering lag'
-            ],
-            included: [
-                '20 Premiere Pro Subtitle Track Styles',
-                '10 Animated Headline MOGRT Overlays',
-                'Curated Creator Google Fonts Bundle',
-                'Video Guide for 1-Click Application'
-            ],
-            compatibility: 'Adobe Premiere Pro 2023 through 2026.',
-            requirements: 'Works with Premiere Pro native caption transcription tools.',
-            faqs: [
-                {
-                    q: 'Does this work with auto-generated captions?',
-                    a: 'Yes! You can auto-transcribe in Premiere Pro and apply these styles with one click to the entire subtitle track.'
-                }
-            ]
-        },
-        {
-            id: 'pattern-interrupts-fx',
-            slug: 'pattern-interrupts-fx',
-            name: 'Pattern Interrupts & Glitch FX',
-            category: 'motion-graphics',
-            categoryLabel: 'Motion Graphics Assets',
-            software: ['All Editors'],
-            softwareBadge: '4K ProRes 4444',
-            price: 29,
-            salePrice: 45,
-            rating: 4.7,
-            reviewsCount: 19,
-            badge: 'New',
-            badgeClass: 'badge-new',
-            thumbnail: '../images/store/retention-presets.jpg',
-            headline: '40 Visual Disruptors, Quick Flashes & Retention Resets',
-            description: 'Keep viewers glued past 15 seconds. Subtle RGB split glitches, tape rewinds, strobe hits, frame blinks, and paper tear transitions.',
-            benefits: [
-                'Pre-keyed alpha channel ProRes 4444 files',
-                'Subtle, non-distracting visual pacing resets',
-                'Syncs perfectly with audio sound design whooshes',
-                'Drag and drop over any video layer'
-            ],
-            included: [
-                '40 Alpha Channel Video Overlays (4K 60FPS ProRes 4444)',
-                'Sync Audio FX for every transition',
-                'Premiere Pro Timeline drag-and-drop presets',
-                'Commercial Clearance License'
-            ],
-            compatibility: 'Universal — Works in Premiere, After Effects, DaVinci Resolve, Final Cut, CapCut.',
-            requirements: 'Supports any editor that handles ProRes 4444 or blending modes.'
-        },
-        {
-            id: 'clean-editorial-titles',
-            slug: 'clean-editorial-titles',
-            name: 'Clean Editorial Titles',
-            category: 'templates',
-            categoryLabel: 'Typography Templates',
-            software: ['Premiere Pro'],
-            softwareBadge: 'Pr MOGRT',
-            price: 25,
-            salePrice: 40,
-            rating: 4.9,
-            reviewsCount: 23,
-            badge: 'Minimal',
-            badgeClass: 'badge-popular',
-            thumbnail: '../images/store/reels-templates.jpg',
-            headline: 'Minimalist Editorial Typography & Studio Lower Thirds',
-            description: 'Sophisticated, high-end editorial titles for documentary style reels, founder stories, and premium brand edits. Minimalist aesthetic, smooth bezier motion.',
-            benefits: [
-                'Clean Swiss & brutalist typography layouts',
-                'Responsive auto-resizing text boxes',
-                'Smooth organic in/out motion easing',
-                'No plugins needed'
-            ],
-            included: [
-                '18 Minimal Title Templates (.mogrt)',
-                '12 Lower Third Overlays',
-                'Typography Styling Guide',
-                'Tutorial on matching client brand aesthetics'
-            ],
-            compatibility: 'Premiere Pro 2022+ (macOS & Windows).'
-        },
-        {
-            id: 'free-creator-starter-kit',
-            slug: 'free-creator-starter-kit',
-            name: 'Free Creator Starter Kit',
-            category: 'freebies',
-            categoryLabel: 'Starter Asset Pack',
-            software: ['All Editors'],
-            softwareBadge: 'Free Download',
-            price: 0,
-            salePrice: 0,
-            rating: 5.0,
-            reviewsCount: 112,
-            badge: 'Free',
-            badgeClass: 'badge-free',
-            thumbnail: '../images/store/sound-vault.jpg',
-            headline: 'Essential Starter Presets, SFX & Video Editing Cheatsheet',
-            description: 'Everything you need to test Dibendu\'s editing system. 5 Retention zoom presets, 20 essential creator sound effects, 2 kinetic title templates, and the Video Retention Psychology Guide.',
-            benefits: [
-                '100% Free instant download',
-                'Taste test of the full product ecosystem',
-                'Includes Video Retention Psychology PDF',
-                'Commercial license included'
-            ],
-            included: [
-                '5 Premiere Pro Retention Zoom Presets',
-                '20 Essential WAV Sound Effects',
-                '2 Kinetic Typography MOGRTs',
-                'PDF Guide: Psychology of Video Retention',
-                'Free Commercial License'
-            ],
-            compatibility: 'Universal across Premiere Pro and standard video editors.'
         }
     ];
+
+    // ==================== 1.1 CURRENCY & LOCALIZATION SERVICE ====================
+    const CurrencyService = {
+        baseInrPrice: 99,
+        baseInrRegular: 199,
+        cachedData: null,
+
+        // Standard fallback exchange rates against 1 INR
+        fallbackRates: {
+            INR: { rate: 1, symbol: '₹', code: 'INR' },
+            USD: { rate: 0.0118, symbol: '$', code: 'USD' },
+            EUR: { rate: 0.0108, symbol: '€', code: 'EUR' },
+            GBP: { rate: 0.0092, symbol: '£', code: 'GBP' },
+            CAD: { rate: 0.0162, symbol: 'CA$', code: 'CAD' },
+            AUD: { rate: 0.0182, symbol: 'AU$', code: 'AUD' },
+            AED: { rate: 0.0433, symbol: 'AED ', code: 'AED' },
+            SGD: { rate: 0.0155, symbol: 'SG$', code: 'SGD' },
+            JPY: { rate: 1.78, symbol: '¥', code: 'JPY' },
+            NZD: { rate: 0.0195, symbol: 'NZ$', code: 'NZD' }
+        },
+
+        countryToCurrency: {
+            IN: 'INR',
+            US: 'USD',
+            GB: 'GBP',
+            CA: 'CAD',
+            AU: 'AUD',
+            DE: 'EUR', FR: 'EUR', IT: 'EUR', ES: 'EUR', NL: 'EUR', BE: 'EUR', AT: 'EUR', IE: 'EUR', PT: 'EUR',
+            AE: 'AED',
+            SG: 'SGD',
+            JP: 'JPY',
+            NZ: 'NZD'
+        },
+
+        async getLocalizedPrice() {
+            if (this.cachedData) return this.cachedData;
+
+            try {
+                const stored = sessionStorage.getItem('tmp_currency_data');
+                if (stored) {
+                    this.cachedData = JSON.parse(stored);
+                    return this.cachedData;
+                }
+            } catch (e) {}
+
+            let country = null;
+            let currency = 'INR';
+
+            // 1. Check Indian Timezone Heuristic
+            try {
+                const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || '';
+                if (tz.includes('Kolkata') || tz.includes('Calcutta') || tz === 'Asia/Colombo') {
+                    country = 'IN';
+                    currency = 'INR';
+                }
+            } catch (e) {}
+
+            // 2. If not detected as India, attempt IP Geolocation with short timeout
+            if (!country) {
+                try {
+                    const controller = new AbortController();
+                    const timeoutId = setTimeout(() => controller.abort(), 1800);
+                    const res = await fetch('https://ipapi.co/json/', { signal: controller.signal });
+                    clearTimeout(timeoutId);
+                    if (res.ok) {
+                        const data = await res.json();
+                        if (data && data.country_code) {
+                            country = data.country_code.toUpperCase();
+                            currency = data.currency || this.countryToCurrency[country] || 'USD';
+                        }
+                    }
+                } catch (e) {
+                    // Fallback timezone heuristics
+                    const tz = (Intl.DateTimeFormat().resolvedOptions().timeZone || '').toLowerCase();
+                    if (tz.includes('europe') || tz.includes('london')) {
+                        currency = tz.includes('london') ? 'GBP' : 'EUR';
+                    } else if (tz.includes('america') || tz.includes('us')) {
+                        currency = 'USD';
+                    } else if (tz.includes('australia')) {
+                        currency = 'AUD';
+                    } else if (tz.includes('asia/dubai')) {
+                        currency = 'AED';
+                    } else {
+                        currency = 'INR';
+                    }
+                }
+            }
+
+            // Always enforce exact ₹99 for India
+            if (country === 'IN' || currency === 'INR') {
+                this.cachedData = {
+                    country: 'IN',
+                    currency: 'INR',
+                    symbol: '₹',
+                    priceText: '₹99',
+                    regularText: '₹199',
+                    savingsText: 'Save 50%'
+                };
+                try { sessionStorage.setItem('tmp_currency_data', JSON.stringify(this.cachedData)); } catch(e) {}
+                return this.cachedData;
+            }
+
+            // For foreign visitors: fetch live rate or fallback
+            let rate = this.fallbackRates[currency]?.rate;
+            let symbol = this.fallbackRates[currency]?.symbol || '$';
+
+            try {
+                const controller = new AbortController();
+                const timeoutId = setTimeout(() => controller.abort(), 1800);
+                const rateRes = await fetch('https://open.er-api.com/v6/latest/INR', { signal: controller.signal });
+                clearTimeout(timeoutId);
+                if (rateRes.ok) {
+                    const rateJson = await rateRes.json();
+                    if (rateJson && rateJson.rates && rateJson.rates[currency]) {
+                        rate = rateJson.rates[currency];
+                    }
+                }
+            } catch (e) {}
+
+            if (!rate && this.fallbackRates[currency]) {
+                rate = this.fallbackRates[currency].rate;
+            } else if (!rate) {
+                currency = 'USD';
+                rate = this.fallbackRates.USD.rate;
+                symbol = '$';
+            }
+
+            const rawPrice = this.baseInrPrice * rate;
+            const rawRegular = this.baseInrRegular * rate;
+            const roundedPrice = (currency === 'JPY') ? Math.round(rawPrice) : rawPrice.toFixed(2);
+            const roundedRegular = (currency === 'JPY') ? Math.round(rawRegular) : rawRegular.toFixed(2);
+            const savings = (currency === 'JPY') ? Math.round(rawRegular - rawPrice) : (rawRegular - rawPrice).toFixed(2);
+
+            this.cachedData = {
+                country: country || 'US',
+                currency: currency,
+                symbol: symbol,
+                priceText: `${symbol}${roundedPrice}`,
+                regularText: `${symbol}${roundedRegular}`,
+                savingsText: `Save ${symbol}${savings}`,
+                converted: true
+            };
+
+            try { sessionStorage.setItem('tmp_currency_data', JSON.stringify(this.cachedData)); } catch(e) {}
+            return this.cachedData;
+        },
+
+        updateAllPriceTargets(data) {
+            if (!data) return;
+            document.querySelectorAll('.price-val-target').forEach(el => {
+                el.textContent = data.priceText;
+            });
+            document.querySelectorAll('.price-regular-target').forEach(el => {
+                el.textContent = data.regularText;
+            });
+            document.querySelectorAll('.price-save-target').forEach(el => {
+                el.textContent = data.savingsText;
+            });
+        }
+    };
 
     // ==================== 2. APPLICATION STATE ====================
     const state = {
@@ -551,9 +638,12 @@
         productsGrid.innerHTML = filtered.map(p => {
             const isWish = state.wishlist.includes(p.id);
             const isFree = p.price === 0;
-            const priceHtml = isFree 
-                ? `<span class="price-free">FREE</span>` 
-                : `<span class="price-current">$${p.price}</span>${p.salePrice ? `<span class="price-was">$${p.salePrice}</span>` : ''}`;
+            const isTextMorph = p.id === 'textmorph-pro';
+            const priceHtml = isTextMorph
+                ? `<span class="price-current price-val-target">₹99</span><span class="price-was price-regular-target">₹199</span>`
+                : (isFree 
+                    ? `<span class="price-free">FREE</span>` 
+                    : `<span class="price-current">$${p.price}</span>${p.salePrice ? `<span class="price-was">$${p.salePrice}</span>` : ''}`);
 
             return `
                 <div class="product-card" data-slug="${p.slug}">
@@ -562,7 +652,7 @@
                         <button type="button" class="btn-card-wishlist ${isWish ? 'active' : ''}" data-wishlist-id="${p.id}" title="Add to Wishlist" aria-label="Add to wishlist">
                             <svg width="15" height="15" viewBox="0 0 24 24" fill="${isWish ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
                         </button>
-                        <img src="${p.thumbnail}" alt="${p.name}" class="product-card-img" loading="lazy">
+                        <img src="${resolveAsset(p.thumbnail)}" alt="${p.name}" class="product-card-img" loading="lazy">
                     </div>
                     <div class="card-content-box">
                         <div class="card-category-row">
@@ -574,7 +664,7 @@
                         <div class="card-rating-row">
                             <span>★</span>
                             <span>${p.rating.toFixed(1)}</span>
-                            <span class="rating-count">(${p.reviewsCount})</span>
+                            <span class="rating-count">(${p.id === 'textmorph-pro' ? '539+ Users' : p.reviewsCount})</span>
                         </div>
                         <div class="card-footer-row">
                             <div class="card-price-group">
@@ -588,6 +678,11 @@
                 </div>
             `;
         }).join('');
+
+        // Apply localized prices if detected
+        CurrencyService.getLocalizedPrice().then(data => {
+            CurrencyService.updateAllPriceTargets(data);
+        });
 
         // Attach Card Click and Wishlist Events
         productsGrid.querySelectorAll('.product-card').forEach(card => {
@@ -650,8 +745,492 @@
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
+        // ==================== 5.1 TEXTMORPH PRO 2.0 FULL-WIDTH LANDING ====================
+    function renderTextMorphLanding(product) {
+        if (!productDetailView) return;
+
+        productDetailView.innerHTML = `
+            <div class="product-landing-fullwidth" id="textmorphLanding">
+                <!-- Nav Bar -->
+                <div class="landing-nav-bar">
+                    <div class="detail-breadcrumbs">
+                        Store / <span class="crumb-cat">After Effects Plugins</span> / <span>${product.name}</span>
+                    </div>
+                </div>
+
+                <!-- 1. UNIFIED PRODUCT SHOWCASE (SINGLE SECTION) -->
+                <section class="tm-unified-showcase" id="tmShowcaseSection">
+                    <div class="tm-unified-radial-glow"></div>
+
+                    <!-- Header Block -->
+                    <div class="tm-unified-header">
+                        <div class="tm-unified-eyebrow-row">
+                            <span class="tm-eyebrow-badge">
+                                <span class="tm-eyebrow-dot"></span>
+                                TEXTMORPH PRO 2.0
+                            </span>
+                            <span class="tm-badge-bestseller">Best Seller</span>
+                        </div>
+                        <h1 class="tm-unified-title">${product.name}</h1>
+                        <p class="tm-unified-tagline">${product.headline}</p>
+                    </div>
+
+                    <!-- Main Grid: Left Stage (9:16 Video / Images) & Right Info Card -->
+                    <div class="tm-unified-main-grid">
+                        <!-- LEFT: Media Stage (Intro Video / Screenshot) -->
+                        <div class="tm-stage-wrapper">
+                            <!-- 9:16 Video Container (Starts Active) -->
+                            <div class="tm-video-frame" id="stageVideoWrap">
+                                <iframe 
+                                    src="https://www.youtube.com/embed/AuKz7l4qT5A" 
+                                    title="TextMorph Pro 2.0 — Watch Intro" 
+                                    frameborder="0" 
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                                    allowfullscreen>
+                                </iframe>
+                                <div class="tm-video-active-pill">
+                                    <span class="tm-pulse-dot"></span> 9:16 INTRO REEL
+                                </div>
+                            </div>
+
+                            <!-- Screenshot Frame (For Images) -->
+                            <div class="tm-image-frame" id="stageImgWrap" style="display: none;">
+                                <img src="" alt="TextMorph Pro Preview" class="tm-stage-image" id="stageMainImg">
+                            </div>
+                        </div>
+
+                        <!-- RIGHT: Concise Product Info & Purchase -->
+                        <div class="tm-info-card">
+                            <div class="tm-info-top">
+                                <!-- Social proof -->
+                                <div class="tm-rating-block">
+                                    <div class="tm-stars-row">
+                                        <span class="tm-stars">★★★★★</span>
+                                        <span class="tm-rating-score">4.9 / 5.0</span>
+                                    </div>
+                                    <span class="tm-trust-count">Trusted by 539+ creators</span>
+                                </div>
+
+                                <!-- Compatibility -->
+                                <div class="tm-compat-block">
+                                    <span class="tm-compat-pill">💾 After Effects 2023–2026</span>
+                                    <span class="tm-compat-pill">💻 Windows + macOS</span>
+                                    <span class="tm-compat-pill">⚡ Instant Digital Download</span>
+                                    <span class="tm-compat-pill">🛡️ Commercial License</span>
+                                </div>
+                            </div>
+
+                            <!-- Pricing & Buy CTA -->
+                            <div class="tm-pricing-block">
+                                <div class="tm-price-row">
+                                    <span class="tm-price-now price-val-target">₹99</span>
+                                    <span class="tm-price-was price-regular-target">₹199</span>
+                                    <span class="tm-price-discount price-save-target">SAVE 50%</span>
+                                </div>
+
+                                <a href="https://rzp.io/rzp/textmorphpro" target="_blank" rel="noopener noreferrer" class="tm-primary-buy-btn" id="btnLandingHeroBuy">
+                                    <span>BUY NOW — <span class="price-val-target">₹99</span></span>
+                                    <span class="tm-btn-arrow">→</span>
+                                </a>
+
+                                <div class="tm-guarantee-note">
+                                    <span>🛡️</span> 14-Day Money-Back Guarantee &nbsp;•&nbsp; Clean Commercial License &nbsp;•&nbsp; Free Future Updates
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Below: 7 Media Thumbnails Rail -->
+                    <div class="tm-thumbs-track-wrap">
+                        <div class="tm-thumbs-grid" id="landingThumbnailsGrid">
+                            <!-- 01: Watch Intro (VIDEO) -->
+                            <button type="button" class="tm-thumb-card active" data-type="video" data-idx="0" title="01 — Watch Intro">
+                                <div class="tm-thumb-media">
+                                    <img src="${resolveAsset('/images/store/textmorph-pro.jpg')}" alt="01 Watch Intro" class="tm-thumb-img">
+                                    <div class="tm-thumb-video-badge">
+                                        <span class="tm-play-glyph">▶</span>
+                                        <span>VIDEO</span>
+                                    </div>
+                                </div>
+                                <div class="tm-thumb-meta">
+                                    <span class="tm-thumb-num">01</span>
+                                    <span class="tm-thumb-name">WATCH INTRO</span>
+                                </div>
+                            </button>
+
+                            <!-- 02: Apex Toolkit -->
+                            <button type="button" class="tm-thumb-card" data-type="image" data-src="${resolveAsset('/images/store/textmorph-home.png')}" data-idx="1" title="02 — Apex Toolkit">
+                                <div class="tm-thumb-media">
+                                    <img src="${resolveAsset('/images/store/textmorph-home.png')}" alt="02 Apex Toolkit" class="tm-thumb-img">
+                                </div>
+                                <div class="tm-thumb-meta">
+                                    <span class="tm-thumb-num">02</span>
+                                    <span class="tm-thumb-name">APEX TOOLKIT</span>
+                                </div>
+                            </button>
+
+                            <!-- 03: Script & SRT -->
+                            <button type="button" class="tm-thumb-card" data-type="image" data-src="${resolveAsset('/images/store/textmorph-script-srt.png')}" data-idx="2" title="03 — Script & SRT">
+                                <div class="tm-thumb-media">
+                                    <img src="${resolveAsset('/images/store/textmorph-script-srt.png')}" alt="03 Script & SRT" class="tm-thumb-img">
+                                </div>
+                                <div class="tm-thumb-meta">
+                                    <span class="tm-thumb-num">03</span>
+                                    <span class="tm-thumb-name">SCRIPT &amp; SRT</span>
+                                </div>
+                            </button>
+
+                            <!-- 04: 19 Text Animations -->
+                            <button type="button" class="tm-thumb-card" data-type="image" data-src="${resolveAsset('/images/store/textmorph-animation.png')}" data-idx="3" title="04 — 19 Text Animations">
+                                <div class="tm-thumb-media">
+                                    <img src="${resolveAsset('/images/store/textmorph-animation.png')}" alt="04 19 Text Animations" class="tm-thumb-img">
+                                </div>
+                                <div class="tm-thumb-meta">
+                                    <span class="tm-thumb-num">04</span>
+                                    <span class="tm-thumb-name">19 ANIMATIONS</span>
+                                </div>
+                            </button>
+
+                            <!-- 05: 10 Text Effects -->
+                            <button type="button" class="tm-thumb-card" data-type="image" data-src="${resolveAsset('/images/store/textmorph-effects.png')}" data-idx="4" title="05 — 10 Text Effects">
+                                <div class="tm-thumb-media">
+                                    <img src="${resolveAsset('/images/store/textmorph-effects.png')}" alt="05 10 Text Effects" class="tm-thumb-img">
+                                </div>
+                                <div class="tm-thumb-meta">
+                                    <span class="tm-thumb-num">05</span>
+                                    <span class="tm-thumb-name">10 EFFECTS</span>
+                                </div>
+                            </button>
+
+                            <!-- 06: Magic Reveal -->
+                            <button type="button" class="tm-thumb-card" data-type="image" data-src="${resolveAsset('/images/store/textmorph-magic-reveal.png')}" data-idx="5" title="06 — Magic Reveal">
+                                <div class="tm-thumb-media">
+                                    <img src="${resolveAsset('/images/store/textmorph-magic-reveal.png')}" alt="06 Magic Reveal" class="tm-thumb-img">
+                                </div>
+                                <div class="tm-thumb-meta">
+                                    <span class="tm-thumb-num">06</span>
+                                    <span class="tm-thumb-name">MAGIC REVEAL</span>
+                                </div>
+                            </button>
+
+                            <!-- 07: Icon Presets -->
+                            <button type="button" class="tm-thumb-card" data-type="image" data-src="${resolveAsset('/images/store/textmorph-icon-presets.png')}" data-idx="6" title="07 — Icon Presets">
+                                <div class="tm-thumb-media">
+                                    <img src="${resolveAsset('/images/store/textmorph-icon-presets.png')}" alt="07 Icon Presets" class="tm-thumb-img">
+                                </div>
+                                <div class="tm-thumb-meta">
+                                    <span class="tm-thumb-num">07</span>
+                                    <span class="tm-thumb-name">ICON PRESETS</span>
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 2. BUILT-IN MODULES (FULL WIDTH ALTERNATING SECTIONS) -->
+                <section class="landing-features-section">
+                    <div style="margin-bottom: 24px;">
+                        <span class="landing-section-kicker">INSIDE THE TOOLKIT</span>
+                        <h2 class="landing-section-title">Inside TextMorph Pro 2.0 — 6 Built-in Modules</h2>
+                        <p class="landing-section-subtitle">Speed up repetitive After Effects motion design, typography, captioning, and editing workflows with dedicated built-in tools.</p>
+                    </div>
+
+                    <div class="landing-features-list">
+                        <!-- 01: Apex Toolkit (Image Left, Text Right) -->
+                        <div class="landing-feature-row" id="feat-apex-toolkit">
+                            <div class="feature-img-column" title="Click to view in gallery">
+                                <img src="${resolveAsset('/images/store/textmorph-home.png')}" alt="Apex Toolkit" class="landing-feature-clickable-img" data-thumb-idx="1">
+                            </div>
+                            <div class="feature-info-column">
+                                <div class="feature-module-header">
+                                    <span class="feature-module-num">01</span>
+                                    <span class="feature-module-badge">Workflow Suite</span>
+                                </div>
+                                <h3 class="feature-module-title">Apex Toolkit</h3>
+                                <p class="feature-module-desc">"Your professional After Effects workflow toolkit for faster layer management, alignment, graph control, editing, and motion-design workflows."</p>
+                                
+                                <div class="feature-tools-label">Main Tools &amp; Functions:</div>
+                                <div class="feature-tools-tags">
+                                    <span class="feature-tool-tag">• Anchor &amp; Align</span>
+                                    <span class="feature-tool-tag">• Value Graph / Speed Graph</span>
+                                    <span class="feature-tool-tag">• Quick Cut</span>
+                                    <span class="feature-tool-tag">• Pro Editor Tools</span>
+                                    <span class="feature-tool-tag">• Null Object</span>
+                                    <span class="feature-tool-tag">• Adjustment Layer</span>
+                                    <span class="feature-tool-tag">• Solid Layer</span>
+                                    <span class="feature-tool-tag">• Gradient Lock</span>
+                                    <span class="feature-tool-tag">• Font Replacer</span>
+                                    <span class="feature-tool-tag">• Precomp / Decomp</span>
+                                    <span class="feature-tool-tag">• Multi Comp</span>
+                                    <span class="feature-tool-tag">• Expressions</span>
+                                </div>
+
+                                <div class="feature-benefit-box">
+                                    <strong>Main Benefit:</strong> "Speed up repetitive After Effects workflow tasks from one powerful interface."
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 02: Script & SRT / Caption Studio (Text Left, Image Right) -->
+                        <div class="landing-feature-row reverse" id="feat-script-srt">
+                            <div class="feature-img-column" title="Click to view in gallery">
+                                <img src="${resolveAsset('/images/store/textmorph-script-srt.png')}" alt="Script & SRT / Caption Studio" class="landing-feature-clickable-img" data-thumb-idx="2">
+                            </div>
+                            <div class="feature-info-column">
+                                <div class="feature-module-header">
+                                    <span class="feature-module-num">02</span>
+                                    <span class="feature-module-badge">Caption Studio</span>
+                                </div>
+                                <h3 class="feature-module-title">Script &amp; SRT / Caption Studio</h3>
+                                <p class="feature-module-desc">"Transcribe speech, import and export SRT subtitles, and align captions directly with your After Effects composition."</p>
+                                
+                                <div class="feature-tools-label">Main Functions &amp; Controls:</div>
+                                <div class="feature-tools-tags">
+                                    <span class="feature-tool-tag">• AI Speech-to-Text Transcription</span>
+                                    <span class="feature-tool-tag">• Auto-Detect Language</span>
+                                    <span class="feature-tool-tag">• SRT Import</span>
+                                    <span class="feature-tool-tag">• SRT Export</span>
+                                    <span class="feature-tool-tag">• Caption Studio</span>
+                                    <span class="feature-tool-tag">• Composition Alignment</span>
+                                    <span class="feature-tool-tag">• Caption Settings</span>
+                                </div>
+
+                                <div class="feature-benefit-box">
+                                    <strong>Main Benefit:</strong> "Create and manage captions without leaving your After Effects workflow."
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 03: 19 Text Animations (Image Left, Text Right) -->
+                        <div class="landing-feature-row" id="feat-text-animation">
+                            <div class="feature-img-column" title="Click to view in gallery">
+                                <img src="${resolveAsset('/images/store/textmorph-animation.png')}" alt="19 Text Animations" class="landing-feature-clickable-img" data-thumb-idx="3">
+                            </div>
+                            <div class="feature-info-column">
+                                <div class="feature-module-header">
+                                    <span class="feature-module-num">03</span>
+                                    <span class="feature-module-badge">Motion Animators</span>
+                                </div>
+                                <h3 class="feature-module-title">19 Text Animations</h3>
+                                <p class="feature-module-desc">"Apply professional text animations instantly instead of manually creating complex text animator keyframes."</p>
+                                
+                                <div class="feature-tools-label">Examples Visible in Panel:</div>
+                                <div class="feature-tools-tags">
+                                    <span class="feature-tool-tag">• 1by1</span>
+                                    <span class="feature-tool-tag">• 3D Flip In</span>
+                                    <span class="feature-tool-tag">• Apple Bouncing</span>
+                                    <span class="feature-tool-tag">• Blur In</span>
+                                    <span class="feature-tool-tag">• Bounce Text</span>
+                                    <span class="feature-tool-tag">• Character Cascade</span>
+                                    <span class="feature-tool-tag">• Character Down</span>
+                                    <span class="feature-tool-tag">• Character Right</span>
+                                    <span class="feature-tool-tag">• Right to Left</span>
+                                </div>
+
+                                <div style="font-size: 0.8rem; font-weight: 600; color: #0369a1; background: #e0f2fe; padding: 6px 12px; border-radius: 6px; display: inline-block;">
+                                    ℹ️ Adjust animation duration directly from the interface.
+                                </div>
+
+                                <div class="feature-benefit-box">
+                                    <strong>Main Benefit:</strong> "Create polished typography animations much faster."
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 04: 10 Text Effects (Text Left, Image Right) -->
+                        <div class="landing-feature-row reverse" id="feat-text-effects">
+                            <div class="feature-img-column" title="Click to view in gallery">
+                                <img src="${resolveAsset('/images/store/textmorph-effects.png')}" alt="10 Text Effects" class="landing-feature-clickable-img" data-thumb-idx="4">
+                            </div>
+                            <div class="feature-info-column">
+                                <div class="feature-module-header">
+                                    <span class="feature-module-num">04</span>
+                                    <span class="feature-module-badge">Typography Styles</span>
+                                </div>
+                                <h3 class="feature-module-title">10 Text Effects</h3>
+                                <p class="feature-module-desc">"Apply premium ready-made text effects instantly instead of manually building complex typography effects."</p>
+                                
+                                <div class="feature-tools-label">Ready-Made Effects:</div>
+                                <div class="feature-tools-tags">
+                                    <span class="feature-tool-tag">• Reveal Glow</span>
+                                    <span class="feature-tool-tag">• Text Break</span>
+                                    <span class="feature-tool-tag">• TMP DJ Orange</span>
+                                    <span class="feature-tool-tag">• TMP DJ Purple</span>
+                                    <span class="feature-tool-tag">• TMP DJ White</span>
+                                    <span class="feature-tool-tag">• TMP TF Blue</span>
+                                    <span class="feature-tool-tag">• TMP TF Devin</span>
+                                    <span class="feature-tool-tag">• TMP TF Shadow</span>
+                                    <span class="feature-tool-tag">• TMP TF Shadow 2</span>
+                                    <span class="feature-tool-tag">• TMP TF Yellow</span>
+                                </div>
+
+                                <div class="feature-benefit-box">
+                                    <strong>Main Benefit:</strong> "Create styled typography effects in seconds."
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 05: Magic Reveal (Image Left, Text Right) -->
+                        <div class="landing-feature-row" id="feat-magic-reveal">
+                            <div class="feature-img-column" title="Click to view in gallery">
+                                <img src="${resolveAsset('/images/store/textmorph-magic-reveal.png')}" alt="Magic Reveal" class="landing-feature-clickable-img" data-thumb-idx="5">
+                            </div>
+                            <div class="feature-info-column">
+                                <div class="feature-module-header">
+                                    <span class="feature-module-num">05</span>
+                                    <span class="feature-module-badge">Reveal Engine</span>
+                                </div>
+                                <h3 class="feature-module-title">Magic Reveal</h3>
+                                <p class="feature-module-desc">"Create customizable text-reveal animations with controls for reveal color, direction, duration, glow, blur, and feather."</p>
+                                
+                                <div class="feature-tools-label">Main Controls:</div>
+                                <div class="feature-tools-tags">
+                                    <span class="feature-tool-tag">• Reveal Color</span>
+                                    <span class="feature-tool-tag">• Direction</span>
+                                    <span class="feature-tool-tag">• Duration</span>
+                                    <span class="feature-tool-tag">• Glow Size</span>
+                                    <span class="feature-tool-tag">• Glow Blur</span>
+                                    <span class="feature-tool-tag">• Reveal Feather</span>
+                                    <span class="feature-tool-tag">• Advanced Settings</span>
+                                </div>
+
+                                <div class="feature-benefit-box">
+                                    <strong>Main Benefit:</strong> "Create polished text-reveal animations with adjustable controls from one interface."
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 06: Icon Presets (Text Left, Image Right) -->
+                        <div class="landing-feature-row reverse" id="feat-icon-presets">
+                            <div class="feature-img-column" title="Click to view in gallery">
+                                <img src="${resolveAsset('/images/store/textmorph-icon-presets.png')}" alt="Icon Presets" class="landing-feature-clickable-img" data-thumb-idx="6">
+                            </div>
+                            <div class="feature-info-column">
+                                <div class="feature-module-header">
+                                    <span class="feature-module-num">06</span>
+                                    <span class="feature-module-badge">Glowing Icons</span>
+                                </div>
+                                <h3 class="feature-module-title">Icon Presets</h3>
+                                <p class="feature-module-desc">"Apply ready-made glowing icon styles instantly to create polished motion graphics without manually building the effect."</p>
+                                
+                                <div class="feature-tools-label">Presets Included:</div>
+                                <div class="feature-tools-tags">
+                                    <span class="feature-tool-tag">• Break Anything</span>
+                                    <span class="feature-tool-tag">• TMP IC Blue</span>
+                                    <span class="feature-tool-tag">• TMP IC Green</span>
+                                    <span class="feature-tool-tag">• TMP IC Orange</span>
+                                    <span class="feature-tool-tag">• TMP IC Purple</span>
+                                    <span class="feature-tool-tag">• TMP ICF Premium</span>
+                                </div>
+
+                                <div class="feature-benefit-box">
+                                    <strong>Main Benefit:</strong> "Create glowing icon animations quickly using ready-made presets."
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 3. FULL TUTORIAL VIDEO (DEDICATED 16:9 SECTION) -->
+                <section class="landing-tutorial-card">
+                    <span class="landing-section-kicker" style="color: #ea580c;">MASTER THE SUITE</span>
+                    <h2 class="landing-section-title" style="color: #ffffff;">TextMorph Pro 2.0 — Full Tutorial</h2>
+                    <p class="landing-section-subtitle" style="color: #94a3b8;">
+                        Watch the complete walkthrough to learn how to use the TextMorph Pro 2.0 tools inside After Effects.
+                    </p>
+
+                    <div class="tutorial-video-container">
+                        <iframe 
+                            src="https://www.youtube.com/embed/3v8oMst-BRQ" 
+                            title="TextMorph Pro 2.0 — Full Tutorial" 
+                            frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                </section>
+
+                <!-- 4. FAQS ACCORDION -->
+                <section class="landing-overview-card" style="margin-top: 10px;">
+                    <div class="overview-card-title"><span>❓</span> Frequently Asked Questions</div>
+                    <div class="faq-accordion">
+                        ${(product.faqs || []).map((faq, i) => `
+                            <div class="faq-item ${i === 0 ? 'open' : ''}">
+                                <button type="button" class="faq-question-btn">
+                                    <span>${faq.q}</span>
+                                    <span class="faq-icon-arrow">▼</span>
+                                </button>
+                                <div class="faq-answer">${faq.a}</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </section>
+            </div>
+        `;
+
+        const stageVideoWrap = document.getElementById('stageVideoWrap');
+        const stageImgWrap = document.getElementById('stageImgWrap');
+        const stageMainImg = document.getElementById('stageMainImg');
+        const thumbs = productDetailView.querySelectorAll('.tm-thumb-card');
+
+        thumbs.forEach(thumb => {
+            thumb.addEventListener('click', () => {
+                const type = thumb.getAttribute('data-type');
+                thumbs.forEach(t => t.classList.remove('active'));
+                thumb.classList.add('active');
+
+                if (type === 'video') {
+                    if (stageVideoWrap) stageVideoWrap.style.display = 'flex';
+                    if (stageImgWrap) stageImgWrap.style.display = 'none';
+                } else {
+                    const src = thumb.getAttribute('data-src');
+                    if (stageMainImg && src) {
+                        stageMainImg.src = src;
+                        stageMainImg.alt = thumb.getAttribute('title') || 'TextMorph Pro 2.0';
+                    }
+                    if (stageVideoWrap) stageVideoWrap.style.display = 'none';
+                    if (stageImgWrap) stageImgWrap.style.display = 'flex';
+                }
+            });
+        });
+
+        // Feature Clickable Images Switch Showcase
+        productDetailView.querySelectorAll('.landing-feature-clickable-img').forEach(img => {
+            img.addEventListener('click', () => {
+                const thumbIdx = img.getAttribute('data-thumb-idx');
+                const targetThumb = productDetailView.querySelector(`.tm-thumb-card[data-idx="${thumbIdx}"]`);
+                if (targetThumb) {
+                    targetThumb.click();
+                    const stage = document.getElementById('tmShowcaseSection');
+                    if (stage) {
+                        stage.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                }
+            });
+        });
+
+        // FAQ Accordion Toggle
+        productDetailView.querySelectorAll('.faq-question-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const item = btn.closest('.faq-item');
+                item.classList.toggle('open');
+            });
+        });
+
+        // Dynamic Localized Currency Update
+        CurrencyService.getLocalizedPrice().then(data => {
+            CurrencyService.updateAllPriceTargets(data);
+        });
+    }
+
     function renderDetailView(product) {
         if (!productDetailView) return;
+
+        // For TextMorph Pro 2.0, render full-width landing page
+        if (product.id === 'textmorph-pro') {
+            renderTextMorphLanding(product);
+            return;
+        }
 
         const isFree = product.price === 0;
         const priceDisplay = isFree ? 'FREE' : `$${product.price}`;
@@ -670,10 +1249,21 @@
                 <!-- Left Image Gallery -->
                 <div class="detail-gallery-box">
                     <div class="detail-main-img-wrap">
-                        <img src="${product.thumbnail}" alt="${product.name}" class="detail-main-img">
+                        <img src="${resolveAsset(product.thumbnail)}" alt="${product.name}" class="detail-main-img" id="detailMainImg">
                     </div>
+                    ${product.gallery && product.gallery.length > 0 ? `
+                        <div class="detail-thumbnails-row">
+                            ${product.gallery.map((g, idx) => `
+                                <button type="button" class="detail-thumb-btn ${idx === 0 ? 'active' : ''}" data-img="${resolveAsset(g.image)}" data-idx="${idx}" title="${g.title}">
+                                    <img src="${resolveAsset(g.image)}" alt="${g.title}" class="detail-thumb-img">
+                                    <span class="detail-thumb-label">${g.title}</span>
+                                </button>
+                            `).join('')}
+                        </div>
+                    ` : ''}
                     <div class="detail-compatibility-badges">
-                        <span class="compat-badge">💾 ${product.softwareBadge}</span>
+                        <span class="compat-badge">💾 ${product.id === 'textmorph-pro' ? 'After Effects 2023–2026' : product.softwareBadge}</span>
+                        ${product.id === 'textmorph-pro' ? `<span class="compat-badge">💻 Windows + macOS</span>` : ''}
                         <span class="compat-badge">⚡ Instant Digital Download</span>
                         <span class="compat-badge">🛡️ Commercial License</span>
                     </div>
@@ -692,7 +1282,7 @@
                     <div class="detail-rating-row">
                         <span>★★★★★</span>
                         <span>${product.rating.toFixed(1)} / 5.0</span>
-                        <span style="color: var(--store-text-muted);">(${product.reviewsCount} verified reviews)</span>
+                        <span style="color: var(--store-text-muted);">• ${product.id === 'textmorph-pro' ? 'Trusted by 539+ creators' : `(${product.reviewsCount} verified reviews)`}</span>
                     </div>
 
                     <p style="font-size: 0.92rem; line-height: 1.5; color: var(--store-text-muted);">${product.description}</p>
@@ -704,9 +1294,15 @@
                             ${product.salePrice ? `<div style="font-size: 0.8rem; color: var(--store-text-subtle);">Regular price: <span style="text-decoration: line-through;">$${product.salePrice}</span> (Save $${product.salePrice - product.price})</div>` : ''}
                         </div>
                         <div class="detail-cta-row">
-                            <button type="button" class="btn-detail-buy" id="btnDetailCheckout">
-                                ${isFree ? 'DOWNLOAD FREE' : `BUY NOW — $${product.price}`} →
-                            </button>
+                            ${product.id === 'textmorph-pro' ? `
+                                <a href="https://rzp.io/rzp/textmorphpro" target="_blank" rel="noopener noreferrer" class="btn-detail-buy" id="btnDetailCheckout">
+                                    BUY NOW — $${product.price} →
+                                </a>
+                            ` : `
+                                <button type="button" class="btn-detail-buy" id="btnDetailCheckout">
+                                    ${isFree ? 'DOWNLOAD FREE' : `BUY NOW — $${product.price}`} →
+                                </button>
+                            `}
                             ${!isFree ? `<button type="button" class="btn-detail-add-cart" id="btnDetailAddCart">Add to Cart</button>` : ''}
                         </div>
                     </div>
@@ -714,6 +1310,107 @@
                     <div class="detail-guarantee-note">
                         <span>🛡️</span> 14-Day Money-Back Guarantee • Clean commercial license • Free future updates
                     </div>
+
+                    <!-- 1. INTRO VIDEO (9:16 VERTICAL) — FIRST -->
+                    ${product.id === 'textmorph-pro' ? `
+                        <div class="detail-section-block detail-intro-video-section">
+                            <span class="detail-video-kicker">MEET THE SUITE</span>
+                            <h3 class="section-block-title" style="margin-top: 4px;">Meet TextMorph Pro 2.0</h3>
+                            <p style="font-size: 0.88rem; color: var(--store-text-muted); margin-bottom: 14px; line-height: 1.5;">
+                                See what TextMorph Pro can do and how it can speed up your After Effects workflow.
+                            </p>
+                            <div class="video-container-9-16-wrapper">
+                                <div class="video-container-9-16">
+                                    <iframe 
+                                        src="https://www.youtube.com/embed/AuKz7l4qT5A" 
+                                        title="Meet TextMorph Pro 2.0" 
+                                        frameborder="0" 
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                                        allowfullscreen
+                                        loading="lazy">
+                                    </iframe>
+                                </div>
+                            </div>
+                        </div>
+                    ` : ''}
+
+                    <!-- 2. FEATURE MODULES BREAKDOWN (6 BUILT-IN MODULES) -->
+                    ${product.features && product.features.length > 0 ? `
+                        <div class="detail-section-block">
+                            <h3 class="section-block-title">Inside ${product.name} — 6 Built-in Modules</h3>
+                            <p style="font-size: 0.84rem; color: var(--store-text-muted); margin-bottom: 16px;">
+                                Explore each production module included directly inside the TextMorph Pro 2.0 After Effects panel:
+                            </p>
+                            <div class="features-module-list">
+                                ${product.features.map(feat => `
+                                    <div class="feature-module-card" id="feat-${feat.id}">
+                                        <div class="feature-img-frame" title="Click to view full preview">
+                                            <img src="${resolveAsset(feat.image)}" alt="${feat.title} - TextMorph Pro 2.0" class="feature-card-screenshot" data-full="${resolveAsset(feat.image)}">
+                                        </div>
+                                        <div class="feature-content-col">
+                                            <div class="feature-header-line">
+                                                <h4 class="feature-title">${feat.title}</h4>
+                                                <span class="feature-badge-pill">${feat.badge}</span>
+                                            </div>
+                                            <p class="feature-explanation">"${feat.explanation}"</p>
+                                            
+                                            <div class="feature-functions-label">Main Functions &amp; Controls:</div>
+                                            <div class="feature-tags-cloud">
+                                                ${feat.functions.map(fn => `
+                                                    <span class="feature-function-tag">• ${fn}</span>
+                                                `).join('')}
+                                            </div>
+
+                                            ${feat.extraNote ? `
+                                                <div class="feature-extra-note">
+                                                    ℹ️ ${feat.extraNote}
+                                                </div>
+                                            ` : ''}
+
+                                            <div class="feature-benefit-callout">
+                                                <strong>Main Benefit:</strong> "${feat.benefit}"
+                                            </div>
+                                        </div>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                    ` : ''}
+
+                    <!-- 3. FULL TUTORIAL (16:9 HORIZONTAL) — AFTER FEATURES -->
+                    ${product.id === 'textmorph-pro' ? `
+                        <div class="detail-section-block detail-video-section">
+                            <span class="detail-video-kicker">LEARN TEXTMORPH PRO 2.0</span>
+                            <h3 class="section-block-title" style="margin-top: 4px;">TextMorph Pro 2.0 — Full Tutorial</h3>
+                            <p style="font-size: 0.88rem; color: var(--store-text-muted); margin-bottom: 14px; line-height: 1.5;">
+                                Watch the complete walkthrough to learn how to use the TextMorph Pro 2.0 tools inside After Effects.
+                            </p>
+                            
+                            <div class="video-container-16-9">
+                                <iframe 
+                                    src="https://www.youtube.com/embed/3v8oMst-BRQ" 
+                                    title="TextMorph Pro 2.0 — Full Tutorial" 
+                                    frameborder="0" 
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                                    allowfullscreen
+                                    loading="lazy">
+                                </iframe>
+                            </div>
+
+                            <!-- 4. FINAL BUY NOW CTA -->
+                            <div class="detail-pricing-box post-video-cta" style="margin-top: 24px;">
+                                <div>
+                                    <div class="detail-price-main">${priceDisplay}</div>
+                                    ${product.salePrice ? `<div style="font-size: 0.8rem; color: var(--store-text-subtle);">Regular price: <span style="text-decoration: line-through;">$${product.salePrice}</span> (Save $${product.salePrice - product.price})</div>` : ''}
+                                </div>
+                                <div class="detail-cta-row">
+                                    <a href="https://rzp.io/rzp/textmorphpro" target="_blank" rel="noopener noreferrer" class="btn-detail-buy">
+                                        BUY NOW — $${product.price} →
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    ` : ''}
 
                     <!-- What's Included -->
                     <div class="detail-section-block">
@@ -785,7 +1482,7 @@
 
         // Attach Checkout button
         const buyBtn = document.getElementById('btnDetailCheckout');
-        if (buyBtn) {
+        if (buyBtn && buyBtn.tagName === 'BUTTON') {
             buyBtn.addEventListener('click', () => {
                 openCheckoutModal(product);
             });
@@ -806,23 +1503,50 @@
                 item.classList.toggle('open');
             });
         });
+
+        // Attach Gallery Thumbnail Switcher Handlers
+        const detailMainImg = document.getElementById('detailMainImg');
+        const thumbButtons = productDetailView.querySelectorAll('.detail-thumb-btn');
+        thumbButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const targetImg = btn.getAttribute('data-img');
+                if (detailMainImg && targetImg) {
+                    detailMainImg.src = targetImg;
+                }
+                thumbButtons.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+            });
+        });
+
+        // Clicking a screenshot in feature card switches top preview and highlights thumb
+        productDetailView.querySelectorAll('.feature-card-screenshot').forEach(img => {
+            img.addEventListener('click', () => {
+                const fullSrc = img.getAttribute('data-full');
+                if (detailMainImg && fullSrc) {
+                    detailMainImg.src = fullSrc;
+                    thumbButtons.forEach(b => {
+                        if (b.getAttribute('data-img') === fullSrc) {
+                            b.classList.add('active');
+                        } else {
+                            b.classList.remove('active');
+                        }
+                    });
+                    const galleryWrap = productDetailView.querySelector('.detail-gallery-box');
+                    if (galleryWrap) {
+                        galleryWrap.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                    }
+                }
+            });
+        });
     }
 
     function closeProductDetail(updateHistory = true) {
-        state.activeProductSlug = null;
-        if (productDetailView) productDetailView.style.display = 'none';
-        if (heroBanner) heroBanner.style.display = 'grid';
-        if (promosGrid) promosGrid.style.display = 'grid';
-        if (catalogSection) catalogSection.style.display = 'flex';
-
-        if (updateHistory) {
-            const url = state.activeCategory !== 'all' 
-                ? `/store?category=${state.activeCategory}` 
-                : '/store';
-            window.history.pushState({}, '', url);
-        }
-
-        renderProducts();
+        state.activeProductSlug = 'textmorph-pro';
+        if (heroBanner) heroBanner.style.display = 'none';
+        if (promosGrid) promosGrid.style.display = 'none';
+        if (catalogSection) catalogSection.style.display = 'none';
+        if (productDetailView) productDetailView.style.display = 'flex';
+        renderTextMorphLanding(PRODUCTS[0]);
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
@@ -852,7 +1576,7 @@
             state.activeCategory = btn.getAttribute('data-cat') || 'all';
             updateActiveNav();
             if (state.activeProductSlug) {
-                closeProductDetail(false);
+                openProductDetail('textmorph-pro', false);
             }
             const url = state.activeCategory !== 'all' ? `/store?category=${state.activeCategory}` : '/store';
             window.history.pushState({ category: state.activeCategory }, '', url);

@@ -81,30 +81,10 @@
                     <nav class="sidebar-categories-nav">
                         <button type="button" class="cat-item-btn active" data-cat="all">
                             <span>All Products</span>
-                            <span class="cat-badge">8</span>
+                            <span class="cat-badge">1</span>
                         </button>
                         <button type="button" class="cat-item-btn" data-cat="plugins">
                             <span>Plugins</span>
-                            <span class="cat-badge">2</span>
-                        </button>
-                        <button type="button" class="cat-item-btn" data-cat="presets">
-                            <span>Presets</span>
-                            <span class="cat-badge">2</span>
-                        </button>
-                        <button type="button" class="cat-item-btn" data-cat="templates">
-                            <span>Templates</span>
-                            <span class="cat-badge">2</span>
-                        </button>
-                        <button type="button" class="cat-item-btn" data-cat="motion-graphics">
-                            <span>Motion Graphics</span>
-                            <span class="cat-badge">1</span>
-                        </button>
-                        <button type="button" class="cat-item-btn" data-cat="creative-assets">
-                            <span>Creative Assets</span>
-                            <span class="cat-badge">1</span>
-                        </button>
-                        <button type="button" class="cat-item-btn" data-cat="freebies">
-                            <span>Freebies</span>
                             <span class="cat-badge">1</span>
                         </button>
                     </nav>
@@ -114,17 +94,9 @@
                 <div>
                     <h2 class="sidebar-title">Platform</h2>
                     <div class="sidebar-platform-group">
-                        <label class="platform-chip">
-                            <input type="checkbox" value="After Effects">
-                            <span>After Effects</span>
-                        </label>
-                        <label class="platform-chip">
-                            <input type="checkbox" value="Premiere Pro">
-                            <span>Premiere Pro</span>
-                        </label>
-                        <label class="platform-chip">
-                            <input type="checkbox" value="All Editors">
-                            <span>Universal / WAV</span>
+                        <label class="platform-chip active">
+                            <input type="checkbox" value="After Effects" checked>
+                            <span>After Effects (1)</span>
                         </label>
                     </div>
                 </div>
@@ -142,96 +114,12 @@
 
                 <!-- Mobile Horizontal Category Scroll -->
                 <div class="mobile-categories-scroll">
-                    <button type="button" class="mobile-cat-pill active" data-cat="all">All</button>
-                    <button type="button" class="mobile-cat-pill" data-cat="plugins">Plugins</button>
-                    <button type="button" class="mobile-cat-pill" data-cat="presets">Presets</button>
-                    <button type="button" class="mobile-cat-pill" data-cat="templates">Templates</button>
-                    <button type="button" class="mobile-cat-pill" data-cat="motion-graphics">Motion</button>
-                    <button type="button" class="mobile-cat-pill" data-cat="creative-assets">Assets</button>
-                    <button type="button" class="mobile-cat-pill" data-cat="freebies">Freebies</button>
+                    <button type="button" class="mobile-cat-pill active" data-cat="all">All (1)</button>
+                    <button type="button" class="mobile-cat-pill" data-cat="plugins">Plugins (1)</button>
                 </div>
-
-                <!-- FEATURED PRODUCT HERO BANNER (BIG SALE / SHOWCASE CARD) -->
-                <section class="store-hero-banner" id="heroBanner">
-                    <div class="hero-left-content">
-                        <span class="hero-featured-pill">★ FEATURED TOOLKIT</span>
-                        <h1 class="hero-title">TextMorph Pro</h1>
-                        <p class="hero-tagline">"Build faster. Animate better."</p>
-                        <p class="hero-desc">
-                            120+ retention-focused kinetic typography presets for After Effects. Zero manual keyframing. 1-click in/out eases and live real-time previews.
-                        </p>
-                        <div class="hero-benefits-row">
-                            <span class="hero-benefit-tag">⚡ Zero Keyframes</span>
-                            <span class="hero-benefit-tag">🎨 120+ Presets</span>
-                            <span class="hero-benefit-tag">🎬 Commercial License</span>
-                        </div>
-                        <div class="hero-actions-row">
-                            <div class="hero-price-wrap">
-                                <span class="hero-price-now">$49</span>
-                                <span class="hero-price-was">$79</span>
-                            </div>
-                            <button type="button" class="btn-hero-primary" id="heroViewBtn">
-                                VIEW PRODUCT →
-                            </button>
-                            <a href="#catalogSection" class="btn-hero-secondary">
-                                EXPLORE ALL
-                            </a>
-                        </div>
-                    </div>
-                    <div class="hero-visual-frame">
-                        <img src="../images/store/textmorph-pro.jpg" alt="TextMorph Pro After Effects Plugin" class="hero-product-img">
-                        <div class="hero-floating-badge">
-                            <span>★</span> 4.9 Verified Creator Rating
-                        </div>
-                    </div>
-                </section>
-
-                <!-- 2 COMPACT SIDE PROMOS (Discount & Freebies) -->
-                <div class="store-promos-grid" id="promosGrid">
-                    <a href="/store?category=presets" class="promo-card promo-card-warm">
-                        <div class="promo-info-col">
-                            <h3 class="promo-heading">Retention Cut Presets</h3>
-                            <p class="promo-sub">Remove dead air &amp; stop drop-offs</p>
-                            <span class="promo-cta-link">Shop Presets →</span>
-                        </div>
-                        <img src="../images/store/retention-presets.jpg" alt="Retention Cut Presets" class="promo-thumbnail">
-                    </a>
-
-                    <a href="/store?category=freebies" class="promo-card promo-card-cool">
-                        <div class="promo-info-col">
-                            <h3 class="promo-heading">Free Creator Starter Kit</h3>
-                            <p class="promo-sub">20 SFX, 5 presets &amp; retention PDF</p>
-                            <span class="promo-cta-link">Download Free →</span>
-                        </div>
-                        <img src="../images/store/sound-vault.jpg" alt="Free Creator Starter Kit" class="promo-thumbnail">
-                    </a>
-                </div>
-
-                <!-- MAIN PRODUCT CATALOG SECTION -->
-                <section class="store-catalog-section" id="catalogSection">
-                    <div class="catalog-header-bar">
-                        <div class="catalog-title-wrap">
-                            <h2 class="catalog-title" id="catalogTitle">Explore Products</h2>
-                            <span class="catalog-count-badge" id="catalogCountBadge">8 products</span>
-                        </div>
-                        <div class="catalog-controls">
-                            <select id="sortSelect" class="sort-select" aria-label="Sort products">
-                                <option value="featured">Featured First</option>
-                                <option value="price-asc">Price: Low to High</option>
-                                <option value="price-desc">Price: High to Low</option>
-                                <option value="rating">Top Rated</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <!-- Products Grid -->
-                    <div class="products-grid" id="productsGrid">
-                        <!-- Populated dynamically via store.js -->
-                    </div>
-                </section>
 
                 <!-- DEDICATED PRODUCT DETAIL VIEW (Rendered dynamically) -->
-                <section class="product-detail-view" id="productDetailView">
+                <section class="product-detail-view" id="productDetailView" style="display: flex;">
                     <!-- Populated dynamically via store.js -->
                 </section>
 
