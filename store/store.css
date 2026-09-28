@@ -441,6 +441,9 @@ body.store-body {
     display: flex;
     flex-direction: column;
     gap: 32px;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    min-width: 0;
 }
 
 /* ---------- 6. FEATURED HERO BANNER (INSPIRED BY REFERENCE BIG SALE CARD) ---------- */
@@ -1921,6 +1924,8 @@ body.store-body {
 }
 
 /* ---------- 13. RESPONSIVE MEDIA QUERIES ---------- */
+
+/* ===== 1100px: Tablet landscape / small desktop ===== */
 @media (max-width: 1100px) {
     .store-hero-banner {
         grid-template-columns: 1fr 280px;
@@ -1932,15 +1937,17 @@ body.store-body {
     }
 }
 
+/* ===== 900px: Tablet portrait — sidebar disappears, single column ===== */
 @media (max-width: 900px) {
     body.store-body {
-        padding: 12px 10px 32px;
+        padding: 8px 6px 24px;
     }
     .store-shell {
         border-radius: var(--store-radius-md);
     }
     .store-topbar {
-        padding: 14px 20px;
+        padding: 14px 16px;
+        gap: 10px;
     }
     .store-layout {
         grid-template-columns: 1fr;
@@ -1952,7 +1959,7 @@ body.store-body {
         display: flex;
     }
     .store-content {
-        padding: 20px 18px 32px;
+        padding: 16px 14px 28px;
     }
     .store-hero-banner {
         grid-template-columns: 1fr;
@@ -1974,19 +1981,75 @@ body.store-body {
     }
 }
 
+/* ===== 768px: Large phone / small tablet ===== */
+@media (max-width: 768px) {
+    .feature-module-card {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+    .feature-img-frame {
+        max-width: 260px;
+        margin: 0 auto;
+    }
+    .detail-thumbnails-row {
+        gap: 6px;
+    }
+}
+
+/* ===== 600px: Phone ===== */
 @media (max-width: 600px) {
+    body.store-body {
+        padding: 4px 0 16px;
+    }
+    .store-shell {
+        border-radius: 16px;
+        border: none;
+    }
     .store-topbar {
-        padding: 12px 14px;
-        gap: 10px;
+        padding: 10px 12px;
+        gap: 8px 10px;
+        flex-wrap: wrap;
+    }
+    .store-brand-link {
+        flex: 0 0 auto;
     }
     .store-brand-title {
         display: none;
     }
+    .store-search-wrapper {
+        order: 3;
+        flex: 1 1 100%;
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+    }
+    .search-input-field {
+        font-size: 0.82rem;
+        padding: 8px 36px 8px 36px;
+    }
     .search-kbd-shortcut {
         display: none;
     }
+    .btn-back-portfolio {
+        padding: 6px 10px;
+        font-size: 0.72rem;
+    }
     .btn-back-portfolio span {
         display: none;
+    }
+    .store-action-btn {
+        width: 36px;
+        height: 36px;
+    }
+    .creator-avatar {
+        width: 32px;
+        height: 32px;
+    }
+    .store-topbar-actions {
+        gap: 8px;
+    }
+    .store-content {
+        padding: 12px 10px 24px;
     }
     .products-grid {
         grid-template-columns: repeat(2, 1fr);
@@ -2005,8 +2068,21 @@ body.store-body {
         padding: 5px 8px;
         font-size: 0.7rem;
     }
+    /* Cart drawer full width on phone */
+    .cart-drawer {
+        max-width: 100%;
+        right: -100%;
+    }
+    .checkout-modal-overlay {
+        padding: 12px;
+    }
+    .checkout-modal-card {
+        max-width: 100%;
+        border-radius: 16px;
+    }
 }
 
+/* ===== 400px: Small phone ===== */
 @media (max-width: 400px) {
     .products-grid {
         grid-template-columns: 1fr;
@@ -2019,6 +2095,8 @@ body.store-body {
     display: flex;
     flex-direction: column;
     gap: 36px;
+    overflow: hidden;
+    min-width: 0;
 }
 
 /* Nav & Breadcrumbs */
@@ -2566,6 +2644,8 @@ body.store-body {
     align-items: center;
     box-shadow: var(--store-shadow-card);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
+    overflow: hidden;
+    min-width: 0;
 }
 
 .landing-feature-row:hover {
@@ -2613,6 +2693,9 @@ body.store-body {
     display: flex;
     flex-direction: column;
     gap: 12px;
+    min-width: 0;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
 }
 
 .feature-module-header {
@@ -2689,6 +2772,8 @@ body.store-body {
     padding: 10px 16px;
     border-radius: 0 8px 8px 0;
     margin-top: 6px;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
 }
 
 /* ==================== FULL TUTORIAL SECTION (16:9) ==================== */
@@ -2753,7 +2838,12 @@ body.store-body {
     margin: 0;
 }
 
-/* Responsive Breakpoints */
+
+/* ==========================================================================
+   TEXTMORPH PRO 2.0 — RESPONSIVE BREAKPOINTS (PRODUCT LANDING PAGE)
+   ========================================================================== */
+
+/* ===== 1100px: Stacks feature rows, overview cards, thumbnail grid ===== */
 @media (max-width: 1100px) {
     .tm-viewer-grid {
         grid-template-columns: 310px 1fr;
@@ -2765,7 +2855,8 @@ body.store-body {
     .landing-overview-grid {
         grid-template-columns: 1fr;
     }
-    .landing-feature-row, .landing-feature-row.reverse {
+    .landing-feature-row,
+    .landing-feature-row.reverse {
         grid-template-columns: 1fr;
         gap: 20px;
         padding: 24px;
@@ -2777,19 +2868,21 @@ body.store-body {
         order: 2;
     }
     .feature-img-column {
-        max-width: 320px;
+        max-width: 380px;
         margin: 0 auto;
     }
 }
 
+/* ===== 860px: Showcase grid → single column, thumbnails → horizontal scroll ===== */
 @media (max-width: 860px) {
     .tm-unified-main-grid {
         grid-template-columns: 1fr;
         gap: 22px;
     }
     .tm-stage-wrapper {
-        min-height: 480px;
-        max-height: 500px;
+        min-height: auto;
+        max-height: none;
+        padding: 20px;
     }
     .tm-video-frame {
         width: 270px;
@@ -2798,6 +2891,7 @@ body.store-body {
     .tm-info-card {
         padding: 26px 22px;
     }
+    /* Thumbnail rail becomes horizontally scrollable */
     .tm-thumbs-track-wrap {
         overflow-x: auto;
         padding-bottom: 8px;
@@ -2813,33 +2907,398 @@ body.store-body {
         gap: 10px;
     }
     .tm-thumb-card {
-        width: 124px;
+        width: 120px;
         flex-shrink: 0;
     }
 }
 
+/* ===== 768px: Showcase padding reduction, tutorial padding ===== */
 @media (max-width: 768px) {
+    .product-landing-fullwidth {
+        gap: 24px;
+    }
     .tm-unified-showcase {
-        padding: 28px 20px;
+        padding: 24px 16px;
+        border-radius: 14px;
+        gap: 20px;
+    }
+    .tm-unified-radial-glow {
+        width: 400px;
+        height: 220px;
+        top: -50px;
     }
     .tm-primary-buy-btn {
         width: 100%;
         justify-content: center;
+        padding: 16px 24px;
+        font-size: 1.05rem;
+    }
+    .tm-guarantee-note {
+        font-size: 0.76rem;
+        flex-wrap: wrap;
+    }
+    .landing-nav-bar {
+        flex-wrap: wrap;
+        gap: 8px;
     }
     .landing-tutorial-card {
-        padding: 24px 20px;
+        padding: 20px 16px;
+        border-radius: 14px;
+    }
+    .landing-final-cta-card {
+        padding: 28px 16px;
+        border-radius: 14px;
+    }
+    .landing-feature-row,
+    .landing-feature-row.reverse {
+        padding: 20px 16px;
+        gap: 16px;
+        border-radius: 14px;
+    }
+    .feature-img-column {
+        max-width: 100%;
+        padding: 8px;
+    }
+    .feature-benefit-box {
+        font-size: 0.82rem;
+        padding: 8px 12px;
+    }
+    .feature-tool-tag {
+        font-size: 0.72rem;
+        padding: 3px 8px;
+    }
+    .landing-overview-card {
+        padding: 18px;
+    }
+    .faq-question-btn {
+        font-size: 0.82rem;
+        padding: 10px 14px;
+    }
+    .faq-answer {
+        font-size: 0.78rem;
+        padding: 0 14px 10px;
     }
 }
 
-@media (max-width: 480px) {
+/* ===== 600px: Deep phone — video frame scales down, all padding tighter ===== */
+@media (max-width: 600px) {
     .tm-unified-showcase {
-        padding: 22px 16px;
+        padding: 18px 12px;
+        border-radius: 12px;
+        gap: 16px;
     }
-    .tm-unified-title {
-        font-size: 2.1rem;
+    .tm-unified-eyebrow-row {
+        gap: 8px;
+    }
+    .tm-eyebrow-badge {
+        font-size: 0.65rem;
+        padding: 4px 10px;
+    }
+    .tm-badge-bestseller {
+        font-size: 0.62rem;
+        padding: 3px 8px;
+    }
+    .tm-stage-wrapper {
+        padding: 14px 10px;
+        border-radius: 12px;
+    }
+    .tm-video-frame {
+        width: min(240px, 85vw);
+        height: auto;
+        aspect-ratio: 9 / 16;
+    }
+    .tm-video-active-pill {
+        top: 8px;
+        left: 8px;
+        font-size: 0.58rem;
+        padding: 3px 8px;
+    }
+    .tm-stage-image {
+        max-height: 400px;
+    }
+    .tm-info-card {
+        padding: 20px 14px;
+        border-radius: 14px;
+        gap: 18px;
+    }
+    .tm-stars {
+        font-size: 1.1rem;
+    }
+    .tm-rating-score {
+        font-size: 1rem;
+    }
+    .tm-trust-count {
+        font-size: 0.84rem;
+    }
+    .tm-compat-pill {
+        font-size: 0.78rem;
+        padding: 6px 10px;
     }
     .tm-price-now {
-        font-size: 2.3rem;
+        font-size: 2.2rem;
+    }
+    .tm-price-was {
+        font-size: 1.1rem;
+    }
+    .tm-primary-buy-btn {
+        font-size: 0.98rem;
+        padding: 14px 18px;
+        min-height: 52px;
+    }
+    /* Thumbnails: narrower cards */
+    .tm-thumb-card {
+        width: 100px;
+        padding: 6px;
+        border-radius: 10px;
+    }
+    .tm-thumb-media {
+        border-radius: 8px;
+    }
+    .tm-thumb-num {
+        font-size: 0.58rem;
+    }
+    .tm-thumb-name {
+        font-size: 0.6rem;
+    }
+    .tm-play-glyph {
+        width: 22px;
+        height: 22px;
+        font-size: 0.6rem;
+    }
+    /* Feature rows */
+    .feature-module-title {
+        font-size: 1.2rem;
+    }
+    .feature-module-desc {
+        font-size: 0.86rem;
+    }
+    .feature-tools-tags {
+        gap: 6px;
+    }
+    .feature-tool-tag {
+        font-size: 0.68rem;
+        padding: 3px 7px;
+    }
+    /* Tutorial */
+    .landing-tutorial-card {
+        padding: 16px 12px;
+        border-radius: 12px;
+    }
+    .tutorial-video-container {
+        border-radius: 8px;
+    }
+    /* Final CTA */
+    .landing-final-cta-card {
+        padding: 22px 12px;
+        border-radius: 12px;
+        gap: 14px;
+    }
+    .final-cta-title {
+        font-size: 1.5rem;
+    }
+    .final-cta-sub {
+        font-size: 0.88rem;
+    }
+    /* Breadcrumb bar */
+    .landing-nav-bar {
+        font-size: 0.78rem;
+        padding-bottom: 6px;
+    }
+    .detail-breadcrumbs {
+        font-size: 0.74rem;
+    }
+    /* Video sections */
+    .video-container-9-16 {
+        max-width: 260px;
     }
 }
+
+/* ===== 430px: Tight phone ===== */
+@media (max-width: 430px) {
+    .tm-unified-showcase {
+        padding: 14px 10px;
+    }
+    .tm-unified-title {
+        font-size: 1.75rem;
+    }
+    .tm-unified-tagline {
+        font-size: 0.92rem;
+    }
+    .tm-video-frame {
+        width: min(220px, 80vw);
+    }
+    .tm-thumb-card {
+        width: 90px;
+    }
+    .tm-info-card {
+        padding: 16px 12px;
+    }
+    .tm-compat-pill {
+        font-size: 0.74rem;
+        padding: 5px 8px;
+        gap: 6px;
+    }
+    .tm-guarantee-note {
+        font-size: 0.72rem;
+    }
+    .landing-feature-row,
+    .landing-feature-row.reverse {
+        padding: 14px 12px;
+        gap: 14px;
+    }
+    .landing-final-cta-card {
+        padding: 18px 10px;
+    }
+}
+
+/* ===== 360px: Narrow phone ===== */
+@media (max-width: 360px) {
+    body.store-body {
+        padding: 2px 0 12px;
+    }
+    .store-shell {
+        border-radius: 10px;
+    }
+    .store-topbar {
+        padding: 8px 8px;
+        gap: 6px;
+    }
+    .store-brand-sub {
+        display: none;
+    }
+    .store-content {
+        padding: 10px 6px 18px;
+    }
+    .tm-unified-showcase {
+        padding: 12px 8px;
+        border-radius: 10px;
+    }
+    .tm-unified-title {
+        font-size: 1.55rem;
+    }
+    .tm-video-frame {
+        width: min(200px, 78vw);
+    }
+    .tm-info-card {
+        padding: 14px 10px;
+    }
+    .tm-primary-buy-btn {
+        padding: 12px 14px;
+        font-size: 0.9rem;
+        min-height: 48px;
+    }
+    .tm-thumb-card {
+        width: 80px;
+        padding: 4px;
+        border-radius: 8px;
+    }
+    .tm-thumb-name {
+        font-size: 0.55rem;
+    }
+    .feature-module-title {
+        font-size: 1.1rem;
+    }
+    .feature-img-column {
+        padding: 6px;
+    }
+    .landing-tutorial-card {
+        padding: 12px 8px;
+    }
+    .landing-final-cta-card {
+        padding: 16px 8px;
+    }
+    .final-cta-title {
+        font-size: 1.35rem;
+    }
+    .final-cta-sub {
+        font-size: 0.82rem;
+    }
+}
+
+/* ===== 320px: Ultra-narrow mobile (e.g. iPhone SE 1st gen) ===== */
+@media (max-width: 320px) {
+    body.store-body {
+        padding: 0 0 10px;
+    }
+    .store-shell {
+        border-radius: 8px;
+    }
+    .store-topbar {
+        padding: 6px 6px;
+        gap: 6px;
+    }
+    .store-brand-title {
+        display: none;
+    }
+    .store-logo-icon {
+        width: 28px;
+        height: 28px;
+    }
+    .store-logo-icon svg {
+        width: 16px;
+        height: 16px;
+    }
+    .btn-back-portfolio {
+        padding: 4px 6px;
+        font-size: 0.7rem;
+    }
+    .store-action-btn {
+        width: 30px;
+        height: 30px;
+    }
+    .creator-avatar {
+        width: 28px;
+        height: 28px;
+    }
+    .search-input-field {
+        font-size: 0.78rem;
+        padding: 6px 28px 6px 28px;
+    }
+    .store-content {
+        padding: 6px 4px 14px;
+    }
+    .tm-unified-showcase {
+        padding: 10px 6px;
+        border-radius: 8px;
+        gap: 12px;
+    }
+    .tm-unified-title {
+        font-size: 1.35rem;
+    }
+    .tm-video-frame {
+        width: min(180px, 76vw);
+    }
+    .tm-info-card {
+        padding: 12px 6px;
+        gap: 12px;
+    }
+    .tm-price-now {
+        font-size: 1.85rem;
+    }
+    .tm-price-was {
+        font-size: 0.95rem;
+    }
+    .tm-primary-buy-btn {
+        padding: 10px 12px;
+        font-size: 0.84rem;
+        min-height: 44px;
+    }
+    .tm-thumb-card {
+        width: 70px;
+        padding: 3px;
+        border-radius: 6px;
+    }
+    .feature-module-title {
+        font-size: 1rem;
+    }
+    .feature-img-column {
+        padding: 4px;
+    }
+    .landing-tutorial-card,
+    .landing-final-cta-card {
+        padding: 12px 6px;
+    }
+}
+
+
 
