@@ -87,8 +87,8 @@
 
             const updateUI = () => {
                 const rem = this.getRemainingTime();
-                const timerWrap = document.getElementById('tmSaleTimerWrap');
-                const clockEl = document.getElementById('tmCountdownClock');
+                const saleBanner = document.getElementById('storeSaleBanner');
+                const topClockEl = document.getElementById('topCountdownClock');
                 const priceNowEl = document.querySelector('.sale-price, .tm-price-now.price-val-target');
                 const priceWasEl = document.querySelector('.original-price, .tm-price-was.price-regular-target');
                 const priceSaveEl = document.querySelector('.discount-badge, .tm-price-discount.price-save-target');
@@ -97,9 +97,9 @@
 
                 if (!this.isSaleActive() || rem.isExpired) {
                     // Sale Expired
-                    if (timerWrap) {
-                        timerWrap.className = 'tm-sale-timer-wrap expired';
-                        timerWrap.innerHTML = `<span class="tm-sale-ended-notice">${SALE_CONFIG.ENDED_NOTICE_TEXT}</span>`;
+                    if (saleBanner) {
+                        saleBanner.classList.add('expired');
+                        saleBanner.innerHTML = `<div class="store-sale-banner-content"><span class="sale-banner-flame">🔥</span> <span>${SALE_CONFIG.ENDED_NOTICE_TEXT}</span></div>`;
                     }
                     if (priceNowEl) priceNowEl.textContent = `₹${SALE_CONFIG.REGULAR_PRICE_INR}`;
                     if (priceWasEl) priceWasEl.style.display = 'none';
@@ -116,15 +116,21 @@
                     }
                 } else {
                     // Sale Active
-                    if (clockEl) {
-                        clockEl.textContent = `${rem.formatted} LEFT`;
+                    if (saleBanner) {
+                        saleBanner.classList.remove('expired');
+                    }
+                    if (topClockEl) {
+                        topClockEl.textContent = `ENDS IN ${rem.formatted}`;
                     }
                     if (priceNowEl) priceNowEl.textContent = `₹${SALE_CONFIG.PROMO_PRICE_INR}`;
                     if (priceWasEl) {
                         priceWasEl.textContent = `₹${SALE_CONFIG.REGULAR_PRICE_INR}`;
                         priceWasEl.style.display = '';
                     }
-                    if (priceSaveEl) priceSaveEl.style.display = '';
+                    if (priceSaveEl) {
+                        priceSaveEl.textContent = 'SAVE 89%';
+                        priceSaveEl.style.display = '';
+                    }
                     if (buyBtnPrice) buyBtnPrice.textContent = `₹${SALE_CONFIG.PROMO_PRICE_INR}`;
                     if (buyBtn) {
                         buyBtn.href = SALE_CONFIG.PROMO_PAYMENT_URL;
@@ -185,7 +191,7 @@
             toast.innerHTML = `
                 <div class="tm-toast-icon">✓</div>
                 <div class="tm-toast-content">
-                    <div class="tm-toast-title" id="tmToastTitle">Someone just purchased</div>
+                    <div class="tm-toast-title" id="tmToastTitle"><strong>A creator in India</strong> just purchased</div>
                     <div class="tm-toast-meta" id="tmToastMeta">TextMorph Pro 2.0 &bull; India</div>
                 </div>
             `;
@@ -205,7 +211,7 @@
             const name = DEMO_INDIAN_NAMES[nextIndex];
 
             this.showToast({
-                displayName: `DEMO — ${name}`,
+                displayName: name,
                 location: 'India',
                 productName: 'TextMorph Pro 2.0',
                 isDemo: true
@@ -245,16 +251,16 @@
             const titleEl = document.getElementById('tmToastTitle');
             const metaEl = document.getElementById('tmToastMeta');
 
-            const name = purchase.displayName || 'Someone';
+            const rawName = (purchase.displayName || '').trim();
             const location = purchase.location || 'India';
             const product = purchase.productName || 'TextMorph Pro 2.0';
 
+            const name = (!rawName || rawName.toLowerCase() === 'someone' || rawName.toLowerCase() === 'customer')
+                ? 'A creator in India'
+                : rawName;
+
             if (titleEl) {
-                if (purchase.isDemo) {
-                    titleEl.innerHTML = `<span class="tm-demo-tag">DEMO</span> <strong>${this.escapeHtml(name.replace(/^DEMO — /, ''))}</strong> purchased`;
-                } else {
-                    titleEl.innerHTML = `<strong>${this.escapeHtml(name)}</strong> just purchased`;
-                }
+                titleEl.innerHTML = `<strong>${this.escapeHtml(name)}</strong> just purchased`;
             }
             if (metaEl) {
                 metaEl.innerHTML = `${this.escapeHtml(product)} &bull; ${this.escapeHtml(location)}`;
@@ -595,7 +601,7 @@
                     symbol: '₹',
                     priceText: '₹99',
                     regularText: '₹899',
-                    savingsText: 'Save 50%'
+                    savingsText: 'SAVE 89%'
                 };
                 try { sessionStorage.setItem('tmp_currency_data', JSON.stringify(this.cachedData)); } catch(e) {}
                 return this.cachedData;
@@ -638,7 +644,7 @@
                 symbol: symbol,
                 priceText: `${symbol}${roundedPrice}`,
                 regularText: `${symbol}${roundedRegular}`,
-                savingsText: `Save ${symbol}${savings}`,
+                savingsText: 'SAVE 89%',
                 converted: true
             };
 
@@ -901,7 +907,7 @@
             const isFree = p.price === 0;
             const isTextMorph = p.id === 'textmorph-pro';
             const priceHtml = isTextMorph
-                ? `<div class="price-row tm-card-price-row"><span class="sale-price price-current price-val-target">₹99</span><span class="original-price price-was price-regular-target">₹899</span><span class="discount-badge tm-price-discount price-save-target">SAVE 50%</span></div>`
+                ? `<div class="price-row tm-card-price-row"><span class="sale-price price-current price-val-target">₹99</span><span class="original-price price-was price-regular-target">₹899</span><span class="discount-badge tm-price-discount price-save-target">SAVE 89%</span></div>`
                 : (isFree 
                     ? `<span class="price-free">FREE</span>` 
                     : `<span class="price-current">$${p.price}</span>${p.salePrice ? `<span class="price-was">$${p.salePrice}</span>` : ''}`);
@@ -1083,19 +1089,10 @@
 
                             <!-- Pricing & Buy CTA -->
                             <div class="tm-pricing-block">
-                                <!-- Real Limited-Time Sale Timer Box -->
-                                <div class="tm-sale-timer-wrap" id="tmSaleTimerWrap">
-                                    <div class="tm-sale-timer-badge">
-                                        <span class="tm-sale-pulse"></span>
-                                        <span class="tm-sale-label">🔥 INTRODUCTORY OFFER</span>
-                                    </div>
-                                    <div class="tm-countdown-clock" id="tmCountdownClock">00:29:42 LEFT</div>
-                                </div>
-
                                 <div class="price-row tm-price-row" id="tmPriceRow">
                                     <span class="sale-price tm-price-now price-val-target">₹99</span>
                                     <span class="original-price tm-price-was price-regular-target">₹899</span>
-                                    <span class="discount-badge tm-price-discount price-save-target">SAVE 50%</span>
+                                    <span class="discount-badge tm-price-discount price-save-target">SAVE 89%</span>
                                 </div>
 
                                 <a href="https://rzp.io/rzp/textmorphpro" target="_blank" rel="noopener noreferrer" class="tm-primary-buy-btn" id="btnLandingHeroBuy">
@@ -2003,6 +2000,7 @@
     updateActiveNav();
     parseUrlRoute();
     renderProducts();
+    SaleService.initCountdownUI();
     PurchaseNotificationService.init();
 
 })();

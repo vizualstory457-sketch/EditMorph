@@ -3395,90 +3395,101 @@ body.store-body {
 }
 
 /* ==========================================================================
-   TextMorph Pro - Real Sale Timer & Verified Purchase Notification Toast
+   TextMorph Pro - Top Sale Banner & Verified Purchase Notification Toast
    ========================================================================== */
 
-.tm-sale-timer-wrap {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    padding: 10px 14px;
-    background: linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(5, 150, 105, 0.03) 100%);
-    border: 1px solid rgba(16, 185, 129, 0.28);
-    border-radius: 10px;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.05);
-    margin-bottom: 6px;
+/* Top Full-Width Sale Announcement Bar (Above Header) */
+.store-sale-banner {
+    width: 100%;
+    background: linear-gradient(90deg, rgba(16, 185, 129, 0.14) 0%, rgba(5, 150, 105, 0.08) 50%, rgba(16, 185, 129, 0.14) 100%);
+    border-bottom: 1px solid rgba(16, 185, 129, 0.28);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    padding: 9px 16px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+    z-index: 100;
     transition: all 0.3s ease;
 }
 
-.tm-sale-timer-wrap.expired {
+.store-sale-banner.expired {
     background: rgba(255, 255, 255, 0.02);
-    border-color: rgba(255, 255, 255, 0.08);
+    border-bottom-color: rgba(255, 255, 255, 0.08);
 }
 
-.tm-sale-timer-badge {
-    display: inline-flex;
+.store-sale-banner-content {
+    max-width: 1360px;
+    margin: 0 auto;
+    display: flex;
     align-items: center;
-    gap: 8px;
-    font-size: 0.72rem;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    text-align: center;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: #e2e8f0;
+}
+
+.sale-banner-flame {
+    font-size: 0.95rem;
+    line-height: 1;
+}
+
+.sale-banner-tag {
+    font-size: 0.74rem;
     font-weight: 800;
     text-transform: uppercase;
     letter-spacing: 0.8px;
     color: #34d399;
 }
 
-.tm-sale-pulse {
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    background: #10b981;
-    box-shadow: 0 0 8px #10b981;
-    animation: tmPulse 1.8s infinite ease-in-out;
+.sale-banner-divider {
+    color: rgba(255, 255, 255, 0.25);
+    font-weight: 300;
 }
 
-@keyframes tmPulse {
-    0%, 100% {
-        transform: scale(1);
-        opacity: 1;
-    }
-    50% {
-        transform: scale(1.4);
-        opacity: 0.4;
-    }
-}
-
-.tm-countdown-clock {
+.sale-banner-countdown {
     font-family: var(--store-font-mono, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace);
-    font-size: 1.15rem;
+    font-size: 0.88rem;
     font-weight: 800;
     color: #ffffff;
-    letter-spacing: 1px;
-    text-shadow: 0 0 12px rgba(16, 185, 129, 0.3);
+    letter-spacing: 0.8px;
+    text-shadow: 0 0 12px rgba(16, 185, 129, 0.4);
 }
 
-.tm-sale-ended-notice {
-    font-size: 0.84rem;
-    font-weight: 600;
-    color: #94a3b8;
-    line-height: 1.4;
+.sale-banner-cta {
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: #34d399;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    transition: color 0.2s ease, transform 0.2s ease;
 }
 
-/* Purchase Notification Toast */
+.sale-banner-cta:hover {
+    color: #6ee7b7;
+    transform: translateX(2px);
+}
+
+/* Purchase Notification Toast — Premium Dark Glass & Green Glow */
 .tm-purchase-toast {
     position: fixed;
     bottom: 24px;
-    left: 24px;
+    right: 24px;
+    left: auto;
     z-index: 99999;
     display: flex;
     align-items: center;
     gap: 12px;
-    background: rgba(12, 17, 14, 0.94);
+    background: rgba(12, 17, 14, 0.95);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(16, 185, 129, 0.3);
+    border: 1px solid rgba(16, 185, 129, 0.32);
     border-radius: 12px;
     padding: 10px 16px 10px 12px;
-    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.6), 0 0 20px rgba(16, 185, 129, 0.15);
+    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.65), 0 0 20px rgba(16, 185, 129, 0.15);
     max-width: 360px;
     opacity: 0;
     transform: translateY(20px) scale(0.96);
@@ -3493,8 +3504,8 @@ body.store-body {
 }
 
 .tm-toast-icon {
-    width: 30px;
-    height: 30px;
+    width: 28px;
+    height: 28px;
     border-radius: 50%;
     background: rgba(16, 185, 129, 0.15);
     border: 1px solid rgba(16, 185, 129, 0.4);
@@ -3516,12 +3527,17 @@ body.store-body {
 
 .tm-toast-title {
     font-size: 0.82rem;
-    font-weight: 700;
+    font-weight: 600;
     color: #ffffff;
     line-height: 1.3;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+.tm-toast-title strong {
+    font-weight: 800;
+    color: #34d399;
 }
 
 .tm-toast-meta {
@@ -3532,10 +3548,26 @@ body.store-body {
 }
 
 @media (max-width: 600px) {
+    .store-sale-banner {
+        padding: 7px 10px;
+    }
+    .store-sale-banner-content {
+        gap: 6px;
+        font-size: 0.74rem;
+    }
+    .sale-banner-tag {
+        font-size: 0.68rem;
+    }
+    .sale-banner-countdown {
+        font-size: 0.8rem;
+    }
+    .sale-banner-cta {
+        font-size: 0.72rem;
+    }
     .tm-purchase-toast {
         left: 12px;
         right: 12px;
-        bottom: 14px;
+        bottom: 16px;
         max-width: none;
         padding: 8px 12px;
     }
@@ -3547,25 +3579,6 @@ body.store-body {
     }
 }
 
-.tm-demo-tag {
-    display: inline-block;
-    background: rgba(234, 179, 8, 0.18);
-    border: 1px solid rgba(234, 179, 8, 0.45);
-    color: #fde047;
-    font-size: 0.62rem;
-    font-weight: 800;
-    letter-spacing: 0.5px;
-    padding: 1px 5px;
-    border-radius: 4px;
-    text-transform: uppercase;
-    margin-right: 4px;
-    vertical-align: middle;
-}
-
-.tm-sale-flame {
-    font-size: 0.85rem;
-    display: inline-block;
-}
 
 
 
