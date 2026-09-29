@@ -30,9 +30,8 @@
     };
 
     // ==================== 0.1 DEVELOPMENT DEMO NOTIFICATION FLAG ====================
-    // Set to true for local testing. In production, this flag is false, so notifications
-    // strictly use verified real purchases from the backend.
-    const DEMO_PURCHASE_NOTIFICATIONS = true;
+    // Disabled for production. In production, notifications strictly use verified real purchases from the backend.
+    const DEMO_PURCHASE_NOTIFICATIONS = false;
 
     const DEMO_INDIAN_NAMES = [
         'Aarav', 'Arjun', 'Aditya', 'Rahul', 'Rohan',
