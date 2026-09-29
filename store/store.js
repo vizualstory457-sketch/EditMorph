@@ -26,7 +26,7 @@
             software: ['After Effects'],
             softwareBadge: 'Ae 2023–2026',
             price: 99,
-            salePrice: 199,
+            salePrice: 899,
             rating: 4.9,
             reviewsCount: '539+',
             badge: 'Best Seller',
@@ -242,7 +242,7 @@
     // ==================== 1.1 CURRENCY & LOCALIZATION SERVICE ====================
     const CurrencyService = {
         baseInrPrice: 99,
-        baseInrRegular: 199,
+        baseInrRegular: 899,
         cachedData: null,
 
         // Standard fallback exchange rates against 1 INR
@@ -333,7 +333,7 @@
                     currency: 'INR',
                     symbol: '₹',
                     priceText: '₹99',
-                    regularText: '₹199',
+                    regularText: '₹899',
                     savingsText: 'Save 50%'
                 };
                 try { sessionStorage.setItem('tmp_currency_data', JSON.stringify(this.cachedData)); } catch(e) {}
@@ -640,7 +640,7 @@
             const isFree = p.price === 0;
             const isTextMorph = p.id === 'textmorph-pro';
             const priceHtml = isTextMorph
-                ? `<span class="price-current price-val-target">₹99</span><span class="price-was price-regular-target">₹199</span>`
+                ? `<span class="price-current price-val-target">₹99</span><span class="price-was price-regular-target">₹899</span>`
                 : (isFree 
                     ? `<span class="price-free">FREE</span>` 
                     : `<span class="price-current">$${p.price}</span>${p.salePrice ? `<span class="price-was">$${p.salePrice}</span>` : ''}`);
@@ -824,7 +824,7 @@
                             <div class="tm-pricing-block">
                                 <div class="tm-price-row">
                                     <span class="tm-price-now price-val-target">₹99</span>
-                                    <span class="tm-price-was price-regular-target">₹199</span>
+                                    <span class="tm-price-was price-regular-target">₹899</span>
                                     <span class="tm-price-discount price-save-target">SAVE 50%</span>
                                 </div>
 

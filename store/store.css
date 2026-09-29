@@ -2875,29 +2875,39 @@ body.store-body {
 
 /* ===== 860px: Showcase grid → single column, thumbnails → horizontal scroll ===== */
 @media (max-width: 860px) {
+    /* Flatten the main grid so its children participate in the showcase flex layout */
     .tm-unified-main-grid {
-        grid-template-columns: 1fr;
-        gap: 22px;
+        display: contents;
+    }
+    /* Order the showcase children for mobile: header → video → thumbnails → info card */
+    .tm-unified-header {
+        order: 1;
     }
     .tm-stage-wrapper {
+        order: 2;
         min-height: auto;
         max-height: none;
         padding: 20px;
     }
-    .tm-video-frame {
-        width: 270px;
-        height: 480px;
-    }
-    .tm-info-card {
-        padding: 26px 22px;
-    }
-    /* Thumbnail rail becomes horizontally scrollable */
     .tm-thumbs-track-wrap {
+        order: 3;
         overflow-x: auto;
         padding-bottom: 8px;
         -webkit-overflow-scrolling: touch;
         scrollbar-width: none;
     }
+    .tm-info-card {
+        order: 4;
+        padding: 26px 22px;
+    }
+    .tm-unified-radial-glow {
+        order: 0;
+    }
+    .tm-video-frame {
+        width: 270px;
+        height: 480px;
+    }
+    /* Thumbnail rail becomes horizontally scrollable */
     .tm-thumbs-track-wrap::-webkit-scrollbar {
         display: none;
     }
