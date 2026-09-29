@@ -13,12 +13,26 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
     
-    <link rel="stylesheet" href="/store/store.css?v=6">
+    <link rel="stylesheet" href="/store/store.css?v=7">
 </head>
 <body class="store-body">
 
     <!-- Centered Modern SaaS Dashboard Shell -->
     <div class="store-shell">
+
+        <!-- ==================== TOP SALE ANNOUNCEMENT BAR ==================== -->
+        <div class="store-sale-banner" id="storeSaleBanner">
+            <div class="store-sale-banner-content">
+                <span class="sale-banner-flame">🔥</span>
+                <span class="sale-banner-tag">INTRODUCTORY OFFER</span>
+                <span class="sale-banner-divider">•</span>
+                <span class="sale-banner-countdown" id="topCountdownClock">ENDS IN 00:29:42</span>
+                <span class="sale-banner-divider">•</span>
+                <a href="#productDetailView" class="sale-banner-cta" id="saleBannerCtaLink">
+                    GET TEXTMORPH PRO FOR <span class="price-val-target">₹99</span> →
+                </a>
+            </div>
+        </div>
 
         <!-- ==================== TOP NAVIGATION BAR ==================== -->
         <header class="store-topbar">
@@ -62,7 +76,7 @@
                 </button>
 
                 <!-- Avatar Profile -->
-                <img src="/images/avatar.jpg" alt="Dibendu Das" class="creator-avatar" title="Dibendu Das">
+                <img src="../images/avatar.jpg" alt="Dibendu Das" class="creator-avatar" title="Dibendu Das">
             </div>
         </header>
 
@@ -183,6 +197,6 @@
     </div>
 
     <!-- Script -->
-    <script src="/store/store.js?v=5"></script>
+    <script src="/store/store.js?v=7"></script>
 </body>
 </html>
