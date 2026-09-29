@@ -29,7 +29,19 @@
         ENDED_NOTICE_TEXT: 'The introductory offer has ended.'
     };
 
-    // ==================== 0.1 SALE SERVICE ====================
+    // ==================== 0.1 DEVELOPMENT DEMO NOTIFICATION FLAG ====================
+    // Set to true for local testing. In production, this flag is false, so notifications
+    // strictly use verified real purchases from the backend.
+    const DEMO_PURCHASE_NOTIFICATIONS = true;
+
+    const DEMO_INDIAN_NAMES = [
+        'Aarav', 'Arjun', 'Aditya', 'Rahul', 'Rohan',
+        'Karan', 'Akash', 'Rohit', 'Ankit', 'Vivek',
+        'Abhishek', 'Aman', 'Yash', 'Raj', 'Saurabh',
+        'Varun', 'Nikhil', 'Harsh', 'Pranav'
+    ];
+
+    // ==================== 0.2 SALE SERVICE ====================
     const SaleService = {
         timerInterval: null,
 
@@ -77,9 +89,9 @@
                 const rem = this.getRemainingTime();
                 const timerWrap = document.getElementById('tmSaleTimerWrap');
                 const clockEl = document.getElementById('tmCountdownClock');
-                const priceNowEl = document.querySelector('.tm-price-now.price-val-target');
-                const priceWasEl = document.querySelector('.tm-price-was.price-regular-target');
-                const priceSaveEl = document.querySelector('.tm-price-discount.price-save-target');
+                const priceNowEl = document.querySelector('.sale-price, .tm-price-now.price-val-target');
+                const priceWasEl = document.querySelector('.original-price, .tm-price-was.price-regular-target');
+                const priceSaveEl = document.querySelector('.discount-badge, .tm-price-discount.price-save-target');
                 const buyBtn = document.getElementById('btnLandingHeroBuy');
                 const buyBtnPrice = buyBtn ? buyBtn.querySelector('.price-val-target') : null;
 
@@ -127,17 +139,38 @@
         }
     };
 
-    // ==================== 0.2 REAL PURCHASE NOTIFICATION SERVICE ====================
+    // ==================== 0.3 PURCHASE NOTIFICATION SERVICE ====================
     const PurchaseNotificationService = {
         pollIntervalMs: 25000,
+        demoIntervalMs: 30000,
         timerId: null,
         toastEl: null,
+        lastDemoIndex: -1,
+
+        isLocalDev() {
+            const host = window.location.hostname;
+            return host === 'localhost' || host === '127.0.0.1' || host.startsWith('192.168.') || host.endsWith('.local');
+        },
+
+        isDemoEnabled() {
+            return DEMO_PURCHASE_NOTIFICATIONS && this.isLocalDev();
+        },
 
         init() {
             this.createToastElement();
-            this.checkForNewPurchases();
-            if (!this.timerId) {
-                this.timerId = setInterval(() => this.checkForNewPurchases(), this.pollIntervalMs);
+
+            if (this.isDemoEnabled()) {
+                // Development Demo Mode: show first toast after 3s, then recurring every ~30s
+                setTimeout(() => this.triggerDemoNotification(), 3000);
+                if (!this.timerId) {
+                    this.timerId = setInterval(() => this.triggerDemoNotification(), this.demoIntervalMs);
+                }
+            } else {
+                // Production Mode: Only poll verified real purchases
+                this.checkForNewPurchases();
+                if (!this.timerId) {
+                    this.timerId = setInterval(() => this.checkForNewPurchases(), this.pollIntervalMs);
+                }
             }
         },
 
@@ -158,6 +191,25 @@
             `;
             document.body.appendChild(toast);
             this.toastEl = toast;
+        },
+
+        triggerDemoNotification() {
+            if (!this.isDemoEnabled()) return;
+
+            // Pick a random Indian name distinct from the last one
+            let nextIndex = Math.floor(Math.random() * DEMO_INDIAN_NAMES.length);
+            if (nextIndex === this.lastDemoIndex) {
+                nextIndex = (nextIndex + 1) % DEMO_INDIAN_NAMES.length;
+            }
+            this.lastDemoIndex = nextIndex;
+            const name = DEMO_INDIAN_NAMES[nextIndex];
+
+            this.showToast({
+                displayName: `DEMO — ${name}`,
+                location: 'India',
+                productName: 'TextMorph Pro 2.0',
+                isDemo: true
+            });
         },
 
         async checkForNewPurchases() {
@@ -198,7 +250,11 @@
             const product = purchase.productName || 'TextMorph Pro 2.0';
 
             if (titleEl) {
-                titleEl.innerHTML = `<strong>${this.escapeHtml(name)}</strong> just purchased`;
+                if (purchase.isDemo) {
+                    titleEl.innerHTML = `<span class="tm-demo-tag">DEMO</span> <strong>${this.escapeHtml(name.replace(/^DEMO — /, ''))}</strong> purchased`;
+                } else {
+                    titleEl.innerHTML = `<strong>${this.escapeHtml(name)}</strong> just purchased`;
+                }
             }
             if (metaEl) {
                 metaEl.innerHTML = `${this.escapeHtml(product)} &bull; ${this.escapeHtml(location)}`;
@@ -845,7 +901,7 @@
             const isFree = p.price === 0;
             const isTextMorph = p.id === 'textmorph-pro';
             const priceHtml = isTextMorph
-                ? `<span class="price-current price-val-target">₹99</span><span class="price-was price-regular-target">₹899</span>`
+                ? `<div class="price-row tm-card-price-row"><span class="sale-price price-current price-val-target">₹99</span><span class="original-price price-was price-regular-target">₹899</span><span class="discount-badge tm-price-discount price-save-target">SAVE 50%</span></div>`
                 : (isFree 
                     ? `<span class="price-free">FREE</span>` 
                     : `<span class="price-current">$${p.price}</span>${p.salePrice ? `<span class="price-was">$${p.salePrice}</span>` : ''}`);
@@ -1031,15 +1087,15 @@
                                 <div class="tm-sale-timer-wrap" id="tmSaleTimerWrap">
                                     <div class="tm-sale-timer-badge">
                                         <span class="tm-sale-pulse"></span>
-                                        <span class="tm-sale-label">LIMITED-TIME OFFER</span>
+                                        <span class="tm-sale-label">🔥 INTRODUCTORY OFFER</span>
                                     </div>
-                                    <div class="tm-countdown-clock" id="tmCountdownClock">00:29:47 LEFT</div>
+                                    <div class="tm-countdown-clock" id="tmCountdownClock">00:29:42 LEFT</div>
                                 </div>
 
-                                <div class="tm-price-row" id="tmPriceRow">
-                                    <span class="tm-price-now price-val-target">₹99</span>
-                                    <span class="tm-price-was price-regular-target">₹899</span>
-                                    <span class="tm-price-discount price-save-target">SAVE 50%</span>
+                                <div class="price-row tm-price-row" id="tmPriceRow">
+                                    <span class="sale-price tm-price-now price-val-target">₹99</span>
+                                    <span class="original-price tm-price-was price-regular-target">₹899</span>
+                                    <span class="discount-badge tm-price-discount price-save-target">SAVE 50%</span>
                                 </div>
 
                                 <a href="https://rzp.io/rzp/textmorphpro" target="_blank" rel="noopener noreferrer" class="tm-primary-buy-btn" id="btnLandingHeroBuy">

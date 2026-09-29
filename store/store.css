@@ -2415,39 +2415,72 @@ body.store-body {
     border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
+.price-row,
 .tm-price-row {
     display: flex;
     align-items: baseline;
-    gap: 14px;
+    gap: 16px;
     flex-wrap: wrap;
+    margin: 4px 0 2px 0;
 }
 
+.sale-price,
 .tm-price-now {
-    font-size: clamp(2.4rem, 3.5vw, 3rem);
+    font-size: clamp(2.3rem, 3.5vw, 3rem);
     font-weight: 900;
     color: #ffffff;
     letter-spacing: -1px;
     line-height: 1;
+    display: inline-block;
 }
 
+.original-price,
 .tm-price-was {
     font-size: 1.35rem;
     color: #64748b;
     text-decoration: line-through;
+    text-decoration-thickness: 2px;
     font-weight: 600;
+    display: inline-block;
+    opacity: 0.85;
 }
 
+.discount-badge,
 .tm-price-discount {
-    font-family: var(--store-font-mono);
+    display: inline-flex;
+    align-items: center;
+    font-family: var(--store-font-mono, monospace);
     font-size: 0.8rem;
     font-weight: 800;
     color: #10b981;
     background: rgba(16, 185, 129, 0.12);
-    border: 1px solid rgba(16, 185, 129, 0.3);
+    border: 1px solid rgba(16, 185, 129, 0.35);
     padding: 4px 10px;
     border-radius: 6px;
     letter-spacing: 0.5px;
     text-transform: uppercase;
+    line-height: 1.2;
+}
+
+.tm-card-price-row {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.tm-card-price-row .sale-price {
+    font-size: 1.35rem;
+    font-weight: 900;
+}
+
+.tm-card-price-row .original-price {
+    font-size: 0.95rem;
+}
+
+.tm-card-price-row .discount-badge {
+    font-size: 0.7rem;
+    padding: 2px 6px;
 }
 
 .tm-primary-buy-btn {
@@ -3513,6 +3546,27 @@ body.store-body {
         font-size: 0.68rem;
     }
 }
+
+.tm-demo-tag {
+    display: inline-block;
+    background: rgba(234, 179, 8, 0.18);
+    border: 1px solid rgba(234, 179, 8, 0.45);
+    color: #fde047;
+    font-size: 0.62rem;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    padding: 1px 5px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    margin-right: 4px;
+    vertical-align: middle;
+}
+
+.tm-sale-flame {
+    font-size: 0.85rem;
+    display: inline-block;
+}
+
 
 
 
