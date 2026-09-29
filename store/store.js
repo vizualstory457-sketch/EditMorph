@@ -15,6 +15,211 @@
         return path;
     }
 
+    // ==================== 0. GLOBAL REAL SALE CONFIGURATION ====================
+    // Centralized sale configuration. Change settings here in one place.
+    const SALE_CONFIG = {
+        SALE_ENABLED: true,
+        // Global fixed sale end timestamp (ISO 8601 string)
+        // 30-minute introductory offer window from current launch:
+        SALE_END_TIME: '2026-09-29T12:30:00+05:30',
+        PROMO_PRICE_INR: 99,
+        REGULAR_PRICE_INR: 899,
+        PROMO_PAYMENT_URL: 'https://rzp.io/rzp/textmorphpro',
+        REGULAR_PAYMENT_URL: 'https://rzp.io/rzp/textmorphpro', // Payment URL for regular price
+        ENDED_NOTICE_TEXT: 'The introductory offer has ended.'
+    };
+
+    // ==================== 0.1 SALE SERVICE ====================
+    const SaleService = {
+        timerInterval: null,
+
+        isSaleActive() {
+            if (!SALE_CONFIG.SALE_ENABLED) return false;
+            return Date.now() < this.getEndTime();
+        },
+
+        getEndTime() {
+            let endMs = new Date(SALE_CONFIG.SALE_END_TIME).getTime();
+            if (isNaN(endMs) || endMs <= 0) {
+                let stored = localStorage.getItem('tmp_global_sale_end');
+                if (!stored) {
+                    stored = new Date(Date.now() + 30 * 60 * 1000).toISOString();
+                    localStorage.setItem('tmp_global_sale_end', stored);
+                }
+                endMs = new Date(stored).getTime();
+            }
+            return endMs;
+        },
+
+        getRemainingTime() {
+            const remaining = Math.max(0, this.getEndTime() - Date.now());
+            const totalSecs = Math.floor(remaining / 1000);
+            const hours = Math.floor(totalSecs / 3600);
+            const mins = Math.floor((totalSecs % 3600) / 60);
+            const secs = totalSecs % 60;
+            return {
+                totalMs: remaining,
+                isExpired: remaining <= 0,
+                hours,
+                mins,
+                secs,
+                formatted: `${String(hours).padStart(2, '0')}:${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`
+            };
+        },
+
+        initCountdownUI() {
+            if (this.timerInterval) {
+                clearInterval(this.timerInterval);
+                this.timerInterval = null;
+            }
+
+            const updateUI = () => {
+                const rem = this.getRemainingTime();
+                const timerWrap = document.getElementById('tmSaleTimerWrap');
+                const clockEl = document.getElementById('tmCountdownClock');
+                const priceNowEl = document.querySelector('.tm-price-now.price-val-target');
+                const priceWasEl = document.querySelector('.tm-price-was.price-regular-target');
+                const priceSaveEl = document.querySelector('.tm-price-discount.price-save-target');
+                const buyBtn = document.getElementById('btnLandingHeroBuy');
+                const buyBtnPrice = buyBtn ? buyBtn.querySelector('.price-val-target') : null;
+
+                if (!this.isSaleActive() || rem.isExpired) {
+                    // Sale Expired
+                    if (timerWrap) {
+                        timerWrap.className = 'tm-sale-timer-wrap expired';
+                        timerWrap.innerHTML = `<span class="tm-sale-ended-notice">${SALE_CONFIG.ENDED_NOTICE_TEXT}</span>`;
+                    }
+                    if (priceNowEl) priceNowEl.textContent = `₹${SALE_CONFIG.REGULAR_PRICE_INR}`;
+                    if (priceWasEl) priceWasEl.style.display = 'none';
+                    if (priceSaveEl) priceSaveEl.style.display = 'none';
+                    if (buyBtnPrice) buyBtnPrice.textContent = `₹${SALE_CONFIG.REGULAR_PRICE_INR}`;
+                    if (buyBtn) {
+                        buyBtn.href = SALE_CONFIG.REGULAR_PAYMENT_URL;
+                        const spanEl = buyBtn.querySelector('span:first-child');
+                        if (spanEl) spanEl.textContent = `BUY NOW — ₹${SALE_CONFIG.REGULAR_PRICE_INR}`;
+                    }
+                    if (this.timerInterval) {
+                        clearInterval(this.timerInterval);
+                        this.timerInterval = null;
+                    }
+                } else {
+                    // Sale Active
+                    if (clockEl) {
+                        clockEl.textContent = `${rem.formatted} LEFT`;
+                    }
+                    if (priceNowEl) priceNowEl.textContent = `₹${SALE_CONFIG.PROMO_PRICE_INR}`;
+                    if (priceWasEl) {
+                        priceWasEl.textContent = `₹${SALE_CONFIG.REGULAR_PRICE_INR}`;
+                        priceWasEl.style.display = '';
+                    }
+                    if (priceSaveEl) priceSaveEl.style.display = '';
+                    if (buyBtnPrice) buyBtnPrice.textContent = `₹${SALE_CONFIG.PROMO_PRICE_INR}`;
+                    if (buyBtn) {
+                        buyBtn.href = SALE_CONFIG.PROMO_PAYMENT_URL;
+                    }
+                }
+            };
+
+            updateUI();
+            if (this.isSaleActive()) {
+                this.timerInterval = setInterval(updateUI, 1000);
+            }
+        }
+    };
+
+    // ==================== 0.2 REAL PURCHASE NOTIFICATION SERVICE ====================
+    const PurchaseNotificationService = {
+        pollIntervalMs: 25000,
+        timerId: null,
+        toastEl: null,
+
+        init() {
+            this.createToastElement();
+            this.checkForNewPurchases();
+            if (!this.timerId) {
+                this.timerId = setInterval(() => this.checkForNewPurchases(), this.pollIntervalMs);
+            }
+        },
+
+        createToastElement() {
+            if (document.getElementById('tmPurchaseToast')) {
+                this.toastEl = document.getElementById('tmPurchaseToast');
+                return;
+            }
+            const toast = document.createElement('div');
+            toast.id = 'tmPurchaseToast';
+            toast.className = 'tm-purchase-toast';
+            toast.innerHTML = `
+                <div class="tm-toast-icon">✓</div>
+                <div class="tm-toast-content">
+                    <div class="tm-toast-title" id="tmToastTitle">Someone just purchased</div>
+                    <div class="tm-toast-meta" id="tmToastMeta">TextMorph Pro 2.0 &bull; India</div>
+                </div>
+            `;
+            document.body.appendChild(toast);
+            this.toastEl = toast;
+        },
+
+        async checkForNewPurchases() {
+            try {
+                const res = await fetch('/api/purchases');
+                if (!res.ok) return;
+                const data = await res.json();
+                if (!data || !Array.isArray(data.purchases) || data.purchases.length === 0) return;
+
+                let seen = [];
+                try {
+                    seen = JSON.parse(sessionStorage.getItem('tmp_seen_purchases') || '[]');
+                } catch (e) {}
+
+                // Filter for real purchases not yet displayed in this session
+                const unseen = data.purchases.filter(p => !seen.includes(p.id));
+                if (unseen.length === 0) return;
+
+                const latest = unseen[0];
+                seen.push(latest.id);
+                try {
+                    sessionStorage.setItem('tmp_seen_purchases', JSON.stringify(seen));
+                } catch (e) {}
+
+                this.showToast(latest);
+            } catch (err) {
+                // Ignore network errors
+            }
+        },
+
+        showToast(purchase) {
+            if (!this.toastEl) this.createToastElement();
+            const titleEl = document.getElementById('tmToastTitle');
+            const metaEl = document.getElementById('tmToastMeta');
+
+            const name = purchase.displayName || 'Someone';
+            const location = purchase.location || 'India';
+            const product = purchase.productName || 'TextMorph Pro 2.0';
+
+            if (titleEl) {
+                titleEl.innerHTML = `<strong>${this.escapeHtml(name)}</strong> just purchased`;
+            }
+            if (metaEl) {
+                metaEl.innerHTML = `${this.escapeHtml(product)} &bull; ${this.escapeHtml(location)}`;
+            }
+
+            this.toastEl.classList.add('visible');
+
+            setTimeout(() => {
+                if (this.toastEl) {
+                    this.toastEl.classList.remove('visible');
+                }
+            }, 6000);
+        },
+
+        escapeHtml(str) {
+            const div = document.createElement('div');
+            div.textContent = str;
+            return div.innerHTML;
+        }
+    };
+
     // ==================== 1. REUSABLE PRODUCT DATA STORE ====================
     const PRODUCTS = [
         {
@@ -822,7 +1027,16 @@
 
                             <!-- Pricing & Buy CTA -->
                             <div class="tm-pricing-block">
-                                <div class="tm-price-row">
+                                <!-- Real Limited-Time Sale Timer Box -->
+                                <div class="tm-sale-timer-wrap" id="tmSaleTimerWrap">
+                                    <div class="tm-sale-timer-badge">
+                                        <span class="tm-sale-pulse"></span>
+                                        <span class="tm-sale-label">LIMITED-TIME OFFER</span>
+                                    </div>
+                                    <div class="tm-countdown-clock" id="tmCountdownClock">00:29:47 LEFT</div>
+                                </div>
+
+                                <div class="tm-price-row" id="tmPriceRow">
                                     <span class="tm-price-now price-val-target">₹99</span>
                                     <span class="tm-price-was price-regular-target">₹899</span>
                                     <span class="tm-price-discount price-save-target">SAVE 50%</span>
@@ -1217,10 +1431,8 @@
             });
         });
 
-        // Dynamic Localized Currency Update
-        CurrencyService.getLocalizedPrice().then(data => {
-            CurrencyService.updateAllPriceTargets(data);
-        });
+        // Initialize Real Sale Countdown UI
+        SaleService.initCountdownUI();
     }
 
     function renderDetailView(product) {
@@ -1735,5 +1947,6 @@
     updateActiveNav();
     parseUrlRoute();
     renderProducts();
+    PurchaseNotificationService.init();
 
 })();

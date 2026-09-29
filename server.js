@@ -33,6 +33,73 @@ const server = http.createServer((req, res) => {
 
     let filePath = path.join(ROOT, reqUrl);
 
+    // ==================== API ENDPOINTS ====================
+    if (reqUrl === '/api/purchases' || reqUrl === '/api/recent-purchases') {
+        res.writeHead(200, {
+            'Content-Type': 'application/json',
+            'Cache-Control': 'no-cache',
+            'Access-Control-Allow-Origin': '*'
+        });
+
+        const purchasesFile = path.join(ROOT, 'purchases.json');
+        let purchases = [];
+        try {
+            if (fs.existsSync(purchasesFile)) {
+                const data = JSON.parse(fs.readFileSync(purchasesFile, 'utf8'));
+                if (Array.isArray(data)) {
+                    purchases = data.map(p => ({
+                        id: p.id || String(Math.random()),
+                        displayName: formatPrivacySafeName(p.customerName || p.name),
+                        location: p.country || p.location || 'India',
+                        productName: p.productName || 'TextMorph Pro 2.0',
+                        createdAt: p.createdAt || p.timestamp || new Date().toISOString()
+                    }));
+                }
+            }
+        } catch (e) {
+            console.error('Error reading purchases:', e);
+        }
+
+        res.end(JSON.stringify({ purchases }));
+        return;
+    }
+
+    if (reqUrl === '/api/webhook/razorpay' && req.method === 'POST') {
+        let body = '';
+        req.on('data', chunk => { body += chunk; });
+        req.on('end', () => {
+            try {
+                const payload = JSON.parse(body || '{}');
+                const payment = payload.payload?.payment?.entity || payload;
+                const customerName = payment.notes?.customer_name || payment.notes?.name || payment.customer?.name || (payment.description !== 'TextMorph Pro 2.0' ? payment.description : null) || 'Someone';
+                const country = payment.notes?.country || payment.country || 'India';
+                
+                const purchasesFile = path.join(ROOT, 'purchases.json');
+                let list = [];
+                if (fs.existsSync(purchasesFile)) {
+                    list = JSON.parse(fs.readFileSync(purchasesFile, 'utf8') || '[]');
+                }
+                list.unshift({
+                    id: payment.id || ('order_' + Date.now()),
+                    customerName: customerName,
+                    country: country,
+                    productName: 'TextMorph Pro 2.0',
+                    createdAt: new Date().toISOString()
+                });
+                // Keep last 50
+                list = list.slice(0, 50);
+                fs.writeFileSync(purchasesFile, JSON.stringify(list, null, 2));
+
+                res.writeHead(200, { 'Content-Type': 'application/json' });
+                res.end(JSON.stringify({ status: 'ok' }));
+            } catch (err) {
+                res.writeHead(400, { 'Content-Type': 'application/json' });
+                res.end(JSON.stringify({ error: err.message }));
+            }
+        });
+        return;
+    }
+
     // If requesting directory or clean /store or /store/...
     if (reqUrl === '/store' || reqUrl === '/store/' || reqUrl.startsWith('/store/')) {
         // If it directly points to an existing file in store, e.g. store.js, store.css
@@ -66,6 +133,16 @@ const server = http.createServer((req, res) => {
         res.end('404 Not Found');
     }
 });
+
+// Helper: formats names privacy-safely e.g. "Arjun Kumar" -> "Arjun K.", "Priya" -> "Priya", null -> "Someone"
+function formatPrivacySafeName(rawName) {
+    if (!rawName || typeof rawName !== 'string') return 'Someone';
+    const trimmed = rawName.trim();
+    if (!trimmed || trimmed.toLowerCase() === 'customer' || trimmed.toLowerCase() === 'someone') return 'Someone';
+    const parts = trimmed.split(/\s+/);
+    if (parts.length === 1) return parts[0];
+    return `${parts[0]} ${parts[parts.length - 1][0].toUpperCase()}.`;
+}
 
 function serveFile(filePath, res) {
     const ext = path.extname(filePath).toLowerCase();
