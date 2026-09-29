@@ -15,18 +15,16 @@
         return path;
     }
 
-    // ==================== 0. GLOBAL REAL SALE CONFIGURATION ====================
-    // Centralized sale configuration. Change settings here in one place.
-    const SALE_CONFIG = {
-        SALE_ENABLED: true,
-        // Global fixed sale end timestamp (ISO 8601 string)
-        // 30-minute introductory offer window from current launch:
-        SALE_END_TIME: '2026-09-29T12:30:00+05:30',
+    // ==================== 0. PER-VISITOR 6-HOUR INTRODUCTORY OFFER ====================
+    // Each visitor receives their own independent 6-hour introductory offer window.
+    // The expiration timestamp is persisted in localStorage & validated cryptographically by the server.
+    const OFFER_CONFIG = {
+        OFFER_DURATION_HOURS: 6,
         PROMO_PRICE_INR: 99,
         REGULAR_PRICE_INR: 899,
         PROMO_PAYMENT_URL: 'https://rzp.io/rzp/textmorphpro',
-        REGULAR_PAYMENT_URL: 'https://rzp.io/rzp/textmorphpro', // Payment URL for regular price
-        ENDED_NOTICE_TEXT: 'The introductory offer has ended.'
+        REGULAR_PAYMENT_URL: 'https://rzp.io/rzp/textmorphpro',
+        ENDED_NOTICE_TEXT: 'INTRODUCTORY OFFER ENDED'
     };
 
     // ==================== 0.1 DEVELOPMENT DEMO NOTIFICATION FLAG ====================
@@ -40,30 +38,90 @@
         'Varun', 'Nikhil', 'Harsh', 'Pranav'
     ];
 
-    // ==================== 0.2 SALE SERVICE ====================
-    const SaleService = {
+    // ==================== 0.2 PERSISTENT OFFER SERVICE ====================
+    const OfferService = {
         timerInterval: null,
+        visitorId: null,
+        token: null,
+        expiresAt: null,
+        isInitialized: false,
 
-        isSaleActive() {
-            if (!SALE_CONFIG.SALE_ENABLED) return false;
-            return Date.now() < this.getEndTime();
+        getVisitorId() {
+            if (this.visitorId) return this.visitorId;
+            let vid = null;
+            try { vid = localStorage.getItem('tmp_visitor_id'); } catch(e) {}
+            if (!vid) {
+                vid = 'vid_' + Math.random().toString(36).substring(2, 10) + Date.now().toString(36);
+                try { localStorage.setItem('tmp_visitor_id', vid); } catch(e) {}
+            }
+            this.visitorId = vid;
+            return vid;
         },
 
-        getEndTime() {
-            let endMs = new Date(SALE_CONFIG.SALE_END_TIME).getTime();
-            if (isNaN(endMs) || endMs <= 0) {
-                let stored = localStorage.getItem('tmp_global_sale_end');
-                if (!stored) {
-                    stored = new Date(Date.now() + 30 * 60 * 1000).toISOString();
-                    localStorage.setItem('tmp_global_sale_end', stored);
-                }
-                endMs = new Date(stored).getTime();
+        async init() {
+            const vid = this.getVisitorId();
+            let savedToken = null;
+            let savedExpires = null;
+            try {
+                savedToken = localStorage.getItem('tmp_offer_token');
+                savedExpires = localStorage.getItem('tmp_offer_expires');
+            } catch(e) {}
+
+            if (savedToken && savedExpires) {
+                this.token = savedToken;
+                this.expiresAt = parseInt(savedExpires, 10);
             }
-            return endMs;
+
+            // Sync with backend validation
+            try {
+                const query = new URLSearchParams({
+                    visitor_id: vid,
+                    ...(this.token ? { token: this.token } : {})
+                });
+                const res = await fetch(`/api/offer?${query.toString()}`);
+                if (res.ok) {
+                    const data = await res.json();
+                    if (data && data.success) {
+                        this.token = data.token;
+                        this.expiresAt = data.expires_at;
+                        try {
+                            localStorage.setItem('tmp_offer_token', this.token);
+                            localStorage.setItem('tmp_offer_expires', String(this.expiresAt));
+                        } catch(e) {}
+                    }
+                }
+            } catch(e) {
+                // Fallback offline initialization
+                if (!this.expiresAt) {
+                    this.expiresAt = Date.now() + (OFFER_CONFIG.OFFER_DURATION_HOURS * 60 * 60 * 1000);
+                    try { localStorage.setItem('tmp_offer_expires', String(this.expiresAt)); } catch(err) {}
+                }
+            }
+
+            this.isInitialized = true;
+            this.initCountdownUI();
+        },
+
+        isOfferActive() {
+            if (!this.expiresAt) {
+                try {
+                    const savedExpires = localStorage.getItem('tmp_offer_expires');
+                    if (savedExpires) this.expiresAt = parseInt(savedExpires, 10);
+                } catch(e) {}
+            }
+            if (!this.expiresAt) return true;
+            return Date.now() < this.expiresAt;
         },
 
         getRemainingTime() {
-            const remaining = Math.max(0, this.getEndTime() - Date.now());
+            if (!this.expiresAt) {
+                try {
+                    const savedExpires = localStorage.getItem('tmp_offer_expires');
+                    if (savedExpires) this.expiresAt = parseInt(savedExpires, 10);
+                } catch(e) {}
+            }
+            const target = this.expiresAt || (Date.now() + OFFER_CONFIG.OFFER_DURATION_HOURS * 60 * 60 * 1000);
+            const remaining = Math.max(0, target - Date.now());
             const totalSecs = Math.floor(remaining / 1000);
             const hours = Math.floor(totalSecs / 3600);
             const mins = Math.floor((totalSecs % 3600) / 60);
@@ -94,51 +152,51 @@
                 const buyBtn = document.getElementById('btnLandingHeroBuy');
                 const buyBtnPrice = buyBtn ? buyBtn.querySelector('.price-val-target') : null;
 
-                if (!this.isSaleActive() || rem.isExpired) {
-                    // Sale Expired
+                if (!this.isOfferActive() || rem.isExpired) {
+                    // Offer Expired for this visitor
                     if (saleBanner) {
                         saleBanner.classList.add('expired');
-                        saleBanner.innerHTML = `<div class="store-sale-banner-content"><span class="sale-banner-flame">🔥</span> <span>${SALE_CONFIG.ENDED_NOTICE_TEXT}</span></div>`;
+                        saleBanner.innerHTML = `<div class="store-sale-banner-content"><span class="sale-banner-flame">🔥</span> <span style="letter-spacing:0.6px; font-weight:700;">${OFFER_CONFIG.ENDED_NOTICE_TEXT}</span></div>`;
                     }
-                    if (priceNowEl) priceNowEl.textContent = `₹${SALE_CONFIG.REGULAR_PRICE_INR}`;
+                    if (priceNowEl) priceNowEl.textContent = `₹${OFFER_CONFIG.REGULAR_PRICE_INR}`;
                     if (priceWasEl) priceWasEl.style.display = 'none';
                     if (priceSaveEl) priceSaveEl.style.display = 'none';
-                    if (buyBtnPrice) buyBtnPrice.textContent = `₹${SALE_CONFIG.REGULAR_PRICE_INR}`;
+                    if (buyBtnPrice) buyBtnPrice.textContent = `₹${OFFER_CONFIG.REGULAR_PRICE_INR}`;
                     if (buyBtn) {
-                        buyBtn.href = SALE_CONFIG.REGULAR_PAYMENT_URL;
+                        buyBtn.href = OFFER_CONFIG.REGULAR_PAYMENT_URL;
                         const spanEl = buyBtn.querySelector('span:first-child');
-                        if (spanEl) spanEl.textContent = `BUY NOW — ₹${SALE_CONFIG.REGULAR_PRICE_INR}`;
+                        if (spanEl) spanEl.textContent = `BUY NOW — ₹${OFFER_CONFIG.REGULAR_PRICE_INR}`;
                     }
                     if (this.timerInterval) {
                         clearInterval(this.timerInterval);
                         this.timerInterval = null;
                     }
                 } else {
-                    // Sale Active
+                    // Offer Active
                     if (saleBanner) {
                         saleBanner.classList.remove('expired');
                     }
                     if (topClockEl) {
                         topClockEl.textContent = `ENDS IN ${rem.formatted}`;
                     }
-                    if (priceNowEl) priceNowEl.textContent = `₹${SALE_CONFIG.PROMO_PRICE_INR}`;
+                    if (priceNowEl) priceNowEl.textContent = `₹${OFFER_CONFIG.PROMO_PRICE_INR}`;
                     if (priceWasEl) {
-                        priceWasEl.textContent = `₹${SALE_CONFIG.REGULAR_PRICE_INR}`;
+                        priceWasEl.textContent = `₹${OFFER_CONFIG.REGULAR_PRICE_INR}`;
                         priceWasEl.style.display = '';
                     }
                     if (priceSaveEl) {
                         priceSaveEl.textContent = 'SAVE 89%';
                         priceSaveEl.style.display = '';
                     }
-                    if (buyBtnPrice) buyBtnPrice.textContent = `₹${SALE_CONFIG.PROMO_PRICE_INR}`;
+                    if (buyBtnPrice) buyBtnPrice.textContent = `₹${OFFER_CONFIG.PROMO_PRICE_INR}`;
                     if (buyBtn) {
-                        buyBtn.href = SALE_CONFIG.PROMO_PAYMENT_URL;
+                        buyBtn.href = OFFER_CONFIG.PROMO_PAYMENT_URL;
                     }
                 }
             };
 
             updateUI();
-            if (this.isSaleActive()) {
+            if (this.isOfferActive()) {
                 this.timerInterval = setInterval(updateUI, 1000);
             }
         }
@@ -1483,8 +1541,8 @@
             });
         });
 
-        // Initialize Real Sale Countdown UI
-        SaleService.initCountdownUI();
+        // Initialize Persistent Per-Visitor Offer Countdown UI
+        OfferService.initCountdownUI();
     }
 
     function renderDetailView(product) {
@@ -1999,7 +2057,7 @@
     updateActiveNav();
     parseUrlRoute();
     renderProducts();
-    SaleService.initCountdownUI();
+    OfferService.init();
     PurchaseNotificationService.init();
 
 })();

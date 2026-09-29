@@ -21,8 +21,48 @@ const MIME_TYPES = {
     '.ttf': 'font/ttf'
 };
 
+const crypto = require('crypto');
+
+const SERVER_SECRET = process.env.OFFER_SECRET || 'editmorph_textmorph_secret_key_2026';
+const OFFER_DURATION_MS = 6 * 60 * 60 * 1000; // 6 hours
+const PROMO_PRICE_INR = 99;
+const REGULAR_PRICE_INR = 899;
+const PROMO_PAYMENT_URL = 'https://rzp.io/rzp/textmorphpro';
+const REGULAR_PAYMENT_URL = 'https://rzp.io/rzp/textmorphpro';
+
+function signOffer(visitorId, expiresAt) {
+    const data = `${visitorId}:${expiresAt}`;
+    const hmac = crypto.createHmac('sha256', SERVER_SECRET).update(data).digest('hex');
+    return `${data}:${hmac}`;
+}
+
+function verifyOffer(token) {
+    if (!token || typeof token !== 'string') return null;
+    const parts = token.split(':');
+    if (parts.length !== 3) return null;
+    const [visitorId, expiresAtStr, signature] = parts;
+    const expiresAt = parseInt(expiresAtStr, 10);
+    if (isNaN(expiresAt)) return null;
+
+    const expectedHmac = crypto.createHmac('sha256', SERVER_SECRET).update(`${visitorId}:${expiresAt}`).digest('hex');
+    if (signature !== expectedHmac) return null;
+
+    const now = Date.now();
+    const isExpired = now >= expiresAt;
+    const remainingMs = Math.max(0, expiresAt - now);
+
+    return {
+        visitorId,
+        expiresAt,
+        isExpired,
+        remainingMs,
+        isValid: !isExpired
+    };
+}
+
 const server = http.createServer((req, res) => {
-    let reqUrl = req.url.split('?')[0];
+    const parsedUrl = new URL(req.url, `http://${req.headers.host || 'localhost:3000'}`);
+    let reqUrl = parsedUrl.pathname;
 
     // Decode URL
     try {
@@ -34,6 +74,77 @@ const server = http.createServer((req, res) => {
     let filePath = path.join(ROOT, reqUrl);
 
     // ==================== API ENDPOINTS ====================
+    if (reqUrl === '/api/offer' || reqUrl === '/api/offer/status' || reqUrl === '/api/offer/validate') {
+        res.writeHead(200, {
+            'Content-Type': 'application/json',
+            'Cache-Control': 'no-store, no-cache, must-revalidate',
+            'Access-Control-Allow-Origin': '*'
+        });
+
+        let body = '';
+        req.on('data', chunk => { body += chunk; });
+        req.on('end', () => {
+            let parsedBody = {};
+            try { parsedBody = JSON.parse(body || '{}'); } catch(e) {}
+
+            const visitorId = parsedBody.visitor_id || parsedUrl.searchParams.get('visitor_id') || ('vid_' + crypto.randomBytes(8).toString('hex'));
+            const token = parsedBody.token || parsedUrl.searchParams.get('token');
+
+            if (token) {
+                const verified = verifyOffer(token);
+                if (verified && verified.visitorId === visitorId) {
+                    if (verified.isValid) {
+                        res.end(JSON.stringify({
+                            success: true,
+                            visitor_id: verified.visitorId,
+                            token: token,
+                            expires_at: verified.expiresAt,
+                            remaining_ms: verified.remainingMs,
+                            is_expired: false,
+                            price_inr: PROMO_PRICE_INR,
+                            regular_price_inr: REGULAR_PRICE_INR,
+                            discount_badge: 'SAVE 89%',
+                            checkout_url: PROMO_PAYMENT_URL
+                        }));
+                    } else {
+                        res.end(JSON.stringify({
+                            success: true,
+                            visitor_id: verified.visitorId,
+                            token: token,
+                            expires_at: verified.expiresAt,
+                            remaining_ms: 0,
+                            is_expired: true,
+                            price_inr: REGULAR_PRICE_INR,
+                            regular_price_inr: REGULAR_PRICE_INR,
+                            discount_badge: null,
+                            checkout_url: REGULAR_PAYMENT_URL
+                        }));
+                    }
+                    return;
+                }
+            }
+
+            // Fresh 6-hour introductory offer for new visitor
+            const now = Date.now();
+            const expiresAt = now + OFFER_DURATION_MS;
+            const newToken = signOffer(visitorId, expiresAt);
+
+            res.end(JSON.stringify({
+                success: true,
+                visitor_id: visitorId,
+                token: newToken,
+                expires_at: expiresAt,
+                remaining_ms: OFFER_DURATION_MS,
+                is_expired: false,
+                price_inr: PROMO_PRICE_INR,
+                regular_price_inr: REGULAR_PRICE_INR,
+                discount_badge: 'SAVE 89%',
+                checkout_url: PROMO_PAYMENT_URL
+            }));
+        });
+        return;
+    }
+
     if (reqUrl === '/api/purchases' || reqUrl === '/api/recent-purchases') {
         res.writeHead(200, {
             'Content-Type': 'application/json',
