@@ -1027,7 +1027,7 @@
                                     <span class="feature-tool-tag">• Right to Left</span>
                                 </div>
 
-                                <div style="font-size: 0.8rem; font-weight: 600; color: #0369a1; background: #e0f2fe; padding: 6px 12px; border-radius: 6px; display: inline-block;">
+                                <div style="font-size: 0.8rem; font-weight: 600; color: #34d399; background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.25); padding: 6px 12px; border-radius: 6px; display: inline-block;">
                                     ℹ️ Adjust animation duration directly from the interface.
                                 </div>
 
@@ -1133,7 +1133,7 @@
 
                 <!-- 3. FULL TUTORIAL VIDEO (DEDICATED 16:9 SECTION) -->
                 <section class="landing-tutorial-card">
-                    <span class="landing-section-kicker" style="color: #ea580c;">MASTER THE SUITE</span>
+                    <span class="landing-section-kicker" style="color: #10b981;">MASTER THE SUITE</span>
                     <h2 class="landing-section-title" style="color: #ffffff;">TextMorph Pro 2.0 — Full Tutorial</h2>
                     <p class="landing-section-subtitle" style="color: #94a3b8;">
                         Watch the complete walkthrough to learn how to use the TextMorph Pro 2.0 tools inside After Effects.
