@@ -532,24 +532,44 @@
             requirements: 'No third-party plugins required. Uses native After Effects expressions and shape vector pipelines.',
             faqs: [
                 {
-                    q: 'Can I use this for paid client reels and commercial projects?',
-                    a: 'Yes! Every purchase comes with a full Commercial Client License permitting unlimited commercial and personal video projects.'
+                    q: 'What is TextMorph Pro 2.0?',
+                    a: 'TextMorph Pro 2.0 is an After Effects toolkit for typography, text animation, effects, captions, and motion-design workflows.'
                 },
                 {
-                    q: 'Which After Effects versions and operating systems are supported?',
-                    a: 'TextMorph Pro 2.0 is fully tested and compatible with Adobe After Effects 2023–2026 on both Windows + macOS.'
+                    q: 'Which versions of After Effects are supported?',
+                    a: 'TextMorph Pro 2.0 supports After Effects 2023–2026 on both Windows and macOS.'
                 },
                 {
-                    q: 'Are all 6 modules included in this purchase?',
-                    a: 'Yes! Apex Toolkit, Script & SRT / Caption Studio, Text Animation, Text Effects, Magic Reveal, and Icon Presets are all included inside TextMorph Pro 2.0 as one single unified plugin.'
+                    q: 'Does TextMorph Pro 2.0 work on both Windows and macOS?',
+                    a: 'Yes. TextMorph Pro 2.0 is designed for both Windows and macOS.'
                 },
                 {
-                    q: 'Do I need extra plugins like Element 3D or Trapcode?',
-                    a: 'None at all. TextMorph Pro 2.0 operates 100% natively using standard After Effects expression and shape vector pipelines.'
+                    q: 'What is included in TextMorph Pro 2.0?',
+                    a: 'TextMorph Pro 2.0 includes Apex Toolkit, Script & SRT, 19 Text Animations, 10 Text Effects, Magic Reveal, and Icon Presets.'
                 },
                 {
-                    q: 'How do I receive updates when new features are added?',
-                    a: 'All customers receive instant download notification emails and lifetime access to future version updates.'
+                    q: 'How many text animations are included?',
+                    a: 'TextMorph Pro 2.0 includes 19 ready-to-use text animation presets.'
+                },
+                {
+                    q: 'How do I receive the plugin after purchasing?',
+                    a: 'Indian customers purchase through Razorpay and follow the existing download/license delivery flow. International customers purchase through Gumroad and receive the plugin download through Gumroad.'
+                },
+                {
+                    q: 'How do international customers get their license key?',
+                    a: 'After purchasing through Gumroad, send the Gmail address used for the purchase to our WhatsApp number. We will verify the purchase and provide the TextMorph Pro license key.'
+                },
+                {
+                    q: 'What payment method should I use?',
+                    a: 'Customers in India should use Razorpay. Customers outside India should purchase TextMorph Pro 2.0 through Gumroad.'
+                },
+                {
+                    q: 'Will I receive future TextMorph Pro updates?',
+                    a: 'Yes. TextMorph Pro updates and version announcements are shared with customers through the available update channels, including the TextMorph Pro Discord community.'
+                },
+                {
+                    q: 'Where can I get help with TextMorph Pro 2.0?',
+                    a: 'For license-related help, international customers can contact us through WhatsApp. For TextMorph Pro updates and community announcements, join the Discord community.'
                 }
             ]
         }
@@ -1134,7 +1154,7 @@
                                         <span class="tm-stars">★★★★★</span>
                                         <span class="tm-rating-score">4.9 / 5.0</span>
                                     </div>
-                                    <span class="tm-trust-count">Trusted by 539+ creators</span>
+                                    <span class="tm-trust-count">Trusted by 539+ editors</span>
                                 </div>
 
                                 <!-- Compatibility -->
@@ -1164,13 +1184,7 @@
 
                                 <!-- International Purchase Flow (Gumroad + WhatsApp License Key) -->
                                 <div class="tm-intl-purchase-card" id="tmIntlPurchaseCard" style="display: none;">
-                                    <div class="tm-intl-badge">
-                                        <span class="tm-intl-globe">🌎</span>
-                                        <span>INTERNATIONAL PURCHASE</span>
-                                    </div>
-                                    <p class="tm-intl-desc">Buy TextMorph Pro 2.0 securely through Gumroad.</p>
-
-                                    <a href="${INTERNATIONAL_PURCHASE_CONFIG.GUMROAD_PRODUCT_URL}" target="_blank" rel="noopener noreferrer" class="tm-intl-gumroad-btn" id="btnGumroadHeroBuy">
+                                    <a href="${INTERNATIONAL_PURCHASE_CONFIG.GUMROAD_PRODUCT_URL}" target="_blank" rel="noopener noreferrer" class="tm-primary-buy-btn" id="btnGumroadHeroBuy">
                                         <span>BUY ON GUMROAD</span>
                                         <span class="tm-btn-arrow">→</span>
                                     </a>
@@ -1181,7 +1195,7 @@
                                             <span>LICENSE KEY</span>
                                         </div>
                                         <p class="tm-intl-license-text">
-                                            After purchasing, send us the Gmail address you used for your Gumroad purchase on WhatsApp to receive your TextMorph Pro license key.
+                                            After purchasing through Gumroad, send the Gmail address used for your Gumroad purchase on WhatsApp to receive your TextMorph Pro license key.
                                         </p>
                                         <a href="${INTERNATIONAL_PURCHASE_CONFIG.getWhatsAppUrl()}" target="_blank" rel="noopener noreferrer" class="tm-intl-whatsapp-btn" id="btnWhatsappHeroKey">
                                             <span>GET LICENSE KEY ON WHATSAPP</span>
@@ -1522,17 +1536,22 @@
                     </div>
                 </section>
 
-                <!-- 4. FAQS ACCORDION -->
-                <section class="landing-overview-card" style="margin-top: 10px;">
-                    <div class="overview-card-title"><span>❓</span> Frequently Asked Questions</div>
-                    <div class="faq-accordion">
+                <!-- 4. FAQS ACCORDION SECTION -->
+                <section class="landing-faq-section" id="tmFaqSection">
+                    <div class="landing-faq-header">
+                        <span class="landing-section-kicker" style="color: #10b981;">FREQUENTLY ASKED QUESTIONS</span>
+                        <h2 class="landing-section-title" style="color: #ffffff;">Frequently Asked Questions</h2>
+                    </div>
+                    <div class="faq-accordion tm-faq-accordion">
                         ${(product.faqs || []).map((faq, i) => `
-                            <div class="faq-item ${i === 0 ? 'open' : ''}">
-                                <button type="button" class="faq-question-btn">
-                                    <span>${faq.q}</span>
-                                    <span class="faq-icon-arrow">▼</span>
+                            <div class="faq-item tm-faq-item ${i === 0 ? 'open' : ''}">
+                                <button type="button" class="faq-question-btn tm-faq-question-btn" aria-expanded="${i === 0 ? 'true' : 'false'}">
+                                    <span class="tm-faq-q-text">${faq.q}</span>
+                                    <span class="tm-faq-plus">+</span>
                                 </button>
-                                <div class="faq-answer">${faq.a}</div>
+                                <div class="faq-answer tm-faq-answer">
+                                    <p class="tm-faq-answer-text">${faq.a}</p>
+                                </div>
                             </div>
                         `).join('')}
                     </div>
@@ -1581,12 +1600,24 @@
             });
         });
 
-        // FAQ Accordion Toggle
-        productDetailView.querySelectorAll('.faq-question-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                const item = btn.closest('.faq-item');
-                item.classList.toggle('open');
-            });
+        // FAQ Accordion Toggle (Single-Open Accordion)
+        const faqItems = productDetailView.querySelectorAll('.tm-faq-item, .faq-item');
+        faqItems.forEach(item => {
+            const btn = item.querySelector('.faq-question-btn');
+            if (btn) {
+                btn.addEventListener('click', () => {
+                    const isOpen = item.classList.contains('open');
+                    faqItems.forEach(otherItem => {
+                        otherItem.classList.remove('open');
+                        const otherBtn = otherItem.querySelector('.faq-question-btn');
+                        if (otherBtn) otherBtn.setAttribute('aria-expanded', 'false');
+                    });
+                    if (!isOpen) {
+                        item.classList.add('open');
+                        btn.setAttribute('aria-expanded', 'true');
+                    }
+                });
+            }
         });
 
         // Apply localized prices & country-specific purchase flow
@@ -1657,7 +1688,7 @@
                     <div class="detail-rating-row">
                         <span>★★★★★</span>
                         <span>${product.rating.toFixed(1)} / 5.0</span>
-                        <span style="color: var(--store-text-muted);">• ${product.id === 'textmorph-pro' ? 'Trusted by 539+ creators' : `(${product.reviewsCount} verified reviews)`}</span>
+                        <span style="color: var(--store-text-muted);">• ${product.id === 'textmorph-pro' ? 'Trusted by 539+ editors' : `(${product.reviewsCount} verified reviews)`}</span>
                     </div>
 
                     <p style="font-size: 0.92rem; line-height: 1.5; color: var(--store-text-muted);">${product.description}</p>

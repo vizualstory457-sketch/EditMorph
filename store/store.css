@@ -2537,98 +2537,42 @@ body.store-body {
     display: flex;
     flex-direction: column;
     gap: 12px;
-    background: linear-gradient(180deg, rgba(16, 185, 129, 0.07) 0%, rgba(15, 23, 42, 0.7) 100%);
-    border: 1px solid rgba(16, 185, 129, 0.28);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border-radius: 14px;
-    padding: 18px 20px;
-    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45), 0 0 20px rgba(16, 185, 129, 0.08);
     width: 100%;
     box-sizing: border-box;
-}
-
-.tm-intl-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 0.74rem;
-    font-weight: 800;
-    letter-spacing: 0.8px;
-    text-transform: uppercase;
-    color: #34d399;
-}
-
-.tm-intl-globe {
-    font-size: 0.95rem;
-    line-height: 1;
-}
-
-.tm-intl-desc {
-    font-size: 0.88rem;
-    color: #cbd5e1;
-    line-height: 1.45;
-    margin: 0;
-}
-
-.tm-intl-gumroad-btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-    color: #ffffff !important;
-    font-size: 1.05rem;
-    font-weight: 800;
-    padding: 14px 28px;
-    border-radius: 10px;
-    text-decoration: none;
-    box-shadow: 0 10px 24px -4px rgba(16, 185, 129, 0.45);
-    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-    letter-spacing: 0.3px;
-    width: 100%;
-    cursor: pointer;
-    border: none;
-    box-sizing: border-box;
-}
-
-.tm-intl-gumroad-btn:hover {
-    background: linear-gradient(135deg, #34d399 0%, #10b981 100%);
-    transform: translateY(-2px);
-    box-shadow: 0 14px 30px -4px rgba(16, 185, 129, 0.6);
-    color: #ffffff !important;
 }
 
 .tm-intl-license-box {
     display: flex;
     flex-direction: column;
     gap: 8px;
-    background: rgba(0, 0, 0, 0.35);
+    background: rgba(15, 23, 42, 0.65);
     border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 10px;
-    padding: 12px 14px;
+    border-radius: 12px;
+    padding: 14px 16px;
     margin-top: 2px;
     box-sizing: border-box;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
 }
 
 .tm-intl-license-header {
     display: flex;
     align-items: center;
     gap: 6px;
-    font-size: 0.72rem;
+    font-size: 0.74rem;
     font-weight: 800;
     color: #e2e8f0;
-    letter-spacing: 0.6px;
+    letter-spacing: 0.8px;
     text-transform: uppercase;
 }
 
 .tm-key-icon {
-    font-size: 0.85rem;
+    font-size: 0.9rem;
     line-height: 1;
 }
 
 .tm-intl-license-text {
-    font-size: 0.82rem;
+    font-size: 0.84rem;
     color: #94a3b8;
     line-height: 1.45;
     margin: 0;
@@ -2642,10 +2586,10 @@ body.store-body {
     background: rgba(37, 211, 102, 0.12);
     border: 1px solid rgba(37, 211, 102, 0.38);
     color: #25d366 !important;
-    font-size: 0.82rem;
+    font-size: 0.84rem;
     font-weight: 700;
-    padding: 10px 16px;
-    border-radius: 8px;
+    padding: 11px 18px;
+    border-radius: 9px;
     text-decoration: none;
     transition: all 0.2s ease;
     letter-spacing: 0.3px;
@@ -2661,21 +2605,146 @@ body.store-body {
     transform: translateY(-1px);
 }
 
-@media (max-width: 600px) {
-    .tm-intl-purchase-card {
-        padding: 14px 12px;
-        gap: 10px;
+/* ==================== TEXTMORPH PRO 2.0 FAQ SECTION ==================== */
+.landing-faq-section {
+    width: 100%;
+    margin-top: 44px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.landing-faq-header {
+    margin-bottom: 2px;
+}
+
+.tm-faq-accordion {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+}
+
+.tm-faq-item {
+    background: rgba(255, 255, 255, 0.025);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    overflow: hidden;
+    transition: border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+}
+
+.tm-faq-item:hover {
+    border-color: rgba(16, 185, 129, 0.3);
+    background: rgba(255, 255, 255, 0.038);
+}
+
+.tm-faq-item.open {
+    border-color: rgba(16, 185, 129, 0.45);
+    background: rgba(16, 185, 129, 0.035);
+    box-shadow: 0 8px 24px -4px rgba(0, 0, 0, 0.35), 0 0 16px rgba(16, 185, 129, 0.06);
+}
+
+.tm-faq-question-btn {
+    width: 100%;
+    padding: 18px 22px;
+    background: transparent;
+    border: none;
+    text-align: left;
+    font-size: 0.98rem;
+    font-weight: 700;
+    font-family: var(--store-font, sans-serif);
+    color: #f8fafc;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    cursor: pointer;
+    transition: color 0.2s ease;
+    box-sizing: border-box;
+}
+
+.tm-faq-question-btn:hover {
+    color: #34d399;
+}
+
+.tm-faq-item.open .tm-faq-question-btn {
+    color: #34d399;
+}
+
+.tm-faq-q-text {
+    flex: 1;
+    line-height: 1.4;
+}
+
+.tm-faq-plus {
+    font-size: 1.35rem;
+    font-weight: 400;
+    color: #64748b;
+    transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), color 0.2s ease;
+    flex-shrink: 0;
+    line-height: 1;
+    display: inline-block;
+}
+
+.tm-faq-item.open .tm-faq-plus {
+    transform: rotate(45deg);
+    color: #34d399;
+}
+
+.tm-faq-answer {
+    padding: 0 22px 18px 22px;
+    font-size: 0.9rem;
+    color: #94a3b8;
+    line-height: 1.6;
+    display: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    padding-top: 14px;
+}
+
+.tm-faq-answer p,
+.tm-faq-answer-text {
+    margin: 0;
+    color: #94a3b8;
+}
+
+.tm-faq-item.open .tm-faq-answer {
+    display: block;
+    animation: tmFaqFade 0.2s ease;
+}
+
+@keyframes tmFaqFade {
+    from {
+        opacity: 0;
+        transform: translateY(-4px);
     }
-    .tm-intl-gumroad-btn {
-        padding: 12px 16px;
-        font-size: 0.95rem;
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 600px) {
+    .landing-faq-section {
+        margin-top: 32px;
+        gap: 16px;
+    }
+    .tm-faq-question-btn {
+        padding: 15px 16px;
+        font-size: 0.92rem;
+    }
+    .tm-faq-answer {
+        padding: 0 16px 15px 16px;
+        padding-top: 12px;
+        font-size: 0.86rem;
     }
     .tm-intl-license-box {
-        padding: 10px 12px;
+        padding: 12px 14px;
     }
     .tm-intl-whatsapp-btn {
-        padding: 9px 12px;
-        font-size: 0.78rem;
+        padding: 10px 14px;
+        font-size: 0.8rem;
     }
 }
 
