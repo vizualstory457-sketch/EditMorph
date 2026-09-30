@@ -77,6 +77,7 @@ body.store-body {
     justify-content: center;
     font-family: var(--store-font);
     color: var(--store-text-main);
+    -webkit-overflow-scrolling: touch;
 }
 
 /* ---------- 1. MAIN APPLICATION SHELL (ROUNDED DASHBOARD CANVAS) ---------- */
@@ -107,6 +108,8 @@ body.store-body {
     position: sticky;
     top: 0;
     z-index: 50;
+    will-change: transform;
+    transform: translateZ(0);
 }
 
 /* Logo & Brand */
@@ -3348,8 +3351,36 @@ body.store-body {
     }
 }
 
-/* ===== 768px: Showcase padding reduction, tutorial padding ===== */
+/* ===== 768px: Showcase padding reduction, tutorial padding & Mobile Scroll GPU Acceleration ===== */
 @media (max-width: 768px) {
+    body.store-body {
+        background-attachment: scroll;
+    }
+    .store-shell {
+        transform: translateZ(0);
+    }
+    .store-topbar,
+    .store-sale-banner {
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+    }
+    .tm-unified-showcase,
+    .landing-feature-row,
+    .landing-faq-section,
+    .landing-overview-card,
+    .landing-tutorial-card,
+    .landing-final-cta-card {
+        contain: paint;
+        transform: translateZ(0);
+    }
+    .tm-faq-item,
+    .landing-feature-row,
+    .landing-tutorial-card,
+    .landing-final-cta-card,
+    .tm-discord-card {
+        backdrop-filter: blur(4px);
+        -webkit-backdrop-filter: blur(4px);
+    }
     .product-landing-fullwidth {
         gap: 24px;
     }

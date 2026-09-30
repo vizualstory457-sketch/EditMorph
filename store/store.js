@@ -149,10 +149,12 @@
             };
         },
 
+        lastFormattedTime: null,
         updateBanner() {
             const rem = this.getRemainingTime();
             const topClockEl = document.getElementById('topCountdownClock');
-            if (topClockEl) {
+            if (topClockEl && this.lastFormattedTime !== rem.formatted) {
+                this.lastFormattedTime = rem.formatted;
                 topClockEl.textContent = `Ends in ${rem.formatted}`;
             }
 
@@ -163,20 +165,26 @@
                 const priceWasEl = document.querySelector('.original-price, .tm-price-was.price-regular-target');
                 const priceSaveEl = document.querySelector('.discount-badge, .tm-price-discount.price-save-target');
 
-                if (priceNowEl) priceNowEl.textContent = `₹${DAILY_OFFER_CONFIG.PROMO_PRICE_INR}`;
-                if (priceWasEl) {
+                if (priceNowEl && priceNowEl.textContent !== `₹${DAILY_OFFER_CONFIG.PROMO_PRICE_INR}`) {
+                    priceNowEl.textContent = `₹${DAILY_OFFER_CONFIG.PROMO_PRICE_INR}`;
+                }
+                if (priceWasEl && priceWasEl.textContent !== `₹${DAILY_OFFER_CONFIG.REGULAR_PRICE_INR}`) {
                     priceWasEl.textContent = `₹${DAILY_OFFER_CONFIG.REGULAR_PRICE_INR}`;
                     priceWasEl.style.display = '';
                 }
-                if (priceSaveEl) {
+                if (priceSaveEl && priceSaveEl.textContent !== 'SAVE 89%') {
                     priceSaveEl.textContent = 'SAVE 89%';
                     priceSaveEl.style.display = '';
                 }
                 document.querySelectorAll('.price-india-val').forEach(el => {
-                    el.textContent = `₹${DAILY_OFFER_CONFIG.PROMO_PRICE_INR}`;
+                    if (el.textContent !== `₹${DAILY_OFFER_CONFIG.PROMO_PRICE_INR}`) {
+                        el.textContent = `₹${DAILY_OFFER_CONFIG.PROMO_PRICE_INR}`;
+                    }
                 });
                 document.querySelectorAll('.price-intl-val').forEach(el => {
-                    el.textContent = '$1.17';
+                    if (el.textContent !== '$2') {
+                        el.textContent = '$2';
+                    }
                 });
             }
         },
@@ -734,7 +742,7 @@
             });
 
             const isIndia = (data.country === 'IN' || data.currency === 'INR');
-            const intlPriceText = (!isIndia && data.currency !== 'INR') ? data.priceText : '$1.17';
+            const intlPriceText = '$2';
 
             document.querySelectorAll('.price-india-val').forEach(el => {
                 el.textContent = '₹99';
@@ -1202,7 +1210,7 @@
                                         <span class="tm-btn-arrow">→</span>
                                     </a>
                                     <a href="${INTERNATIONAL_PURCHASE_CONFIG.GUMROAD_PRODUCT_URL}" target="_blank" rel="noopener noreferrer" class="tm-buy-btn tm-btn-intl" id="btnLandingHeroBuyIntl">
-                                        <span class="tm-btn-text">🌎 BUY INTERNATIONAL — <span class="price-intl-val">$1.17</span></span>
+                                        <span class="tm-btn-text">🌎 BUY INTERNATIONAL — <span class="price-intl-val">$2</span></span>
                                         <span class="tm-btn-arrow">→</span>
                                     </a>
                                 </div>
@@ -1710,7 +1718,7 @@
                                         <span class="tm-btn-arrow">→</span>
                                     </a>
                                     <a href="${INTERNATIONAL_PURCHASE_CONFIG.GUMROAD_PRODUCT_URL}" target="_blank" rel="noopener noreferrer" class="tm-buy-btn tm-btn-intl">
-                                        <span class="tm-btn-text">🌎 BUY INTERNATIONAL — <span class="price-intl-val">$1.17</span></span>
+                                        <span class="tm-btn-text">🌎 BUY INTERNATIONAL — <span class="price-intl-val">$2</span></span>
                                         <span class="tm-btn-arrow">→</span>
                                     </a>
                                 </div>
@@ -1841,7 +1849,7 @@
                                             <span class="tm-btn-arrow">→</span>
                                         </a>
                                         <a href="${INTERNATIONAL_PURCHASE_CONFIG.GUMROAD_PRODUCT_URL}" target="_blank" rel="noopener noreferrer" class="tm-buy-btn tm-btn-intl">
-                                            <span class="tm-btn-text">🌎 BUY INTERNATIONAL — <span class="price-intl-val">$1.17</span></span>
+                                            <span class="tm-btn-text">🌎 BUY INTERNATIONAL — <span class="price-intl-val">$2</span></span>
                                             <span class="tm-btn-arrow">→</span>
                                         </a>
                                     </div>
