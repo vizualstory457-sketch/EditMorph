@@ -15,16 +15,19 @@
         return path;
     }
 
-    // ==================== 0. PER-VISITOR 6-HOUR INTRODUCTORY OFFER ====================
-    // Each visitor receives their own independent 6-hour introductory offer window.
-    // The expiration timestamp is persisted in localStorage & validated cryptographically by the server.
-    const OFFER_CONFIG = {
-        OFFER_DURATION_HOURS: 6,
+    // ==================== 0. DAILY RESET OFFER TIMER (6-10 HOURS) ====================
+    // Offer timer resets based on the user's local calendar day.
+    // Each calendar day selects a random duration between 6h and 10h (with random HH:MM:SS).
+    // State is persisted in localStorage so refreshes, tab switching, and browser restarts retain the countdown.
+    // When the timer reaches 00:00:00, a new daily cycle (6-10h) is immediately initialized.
+    const DAILY_OFFER_CONFIG = {
+        MIN_HOURS: 6,
+        MAX_HOURS: 10,
         PROMO_PRICE_INR: 99,
         REGULAR_PRICE_INR: 899,
         PROMO_PAYMENT_URL: 'https://rzp.io/rzp/textmorphpro',
-        REGULAR_PAYMENT_URL: 'https://rzp.io/rzp/textmorphpro',
-        ENDED_NOTICE_TEXT: 'INTRODUCTORY OFFER ENDED'
+        STORAGE_KEY_DATE: 'tmp_daily_offer_date',
+        STORAGE_KEY_END: 'tmp_daily_offer_end'
     };
 
     // ==================== 0.1 DEVELOPMENT DEMO NOTIFICATION FLAG ====================
@@ -38,102 +41,129 @@
         'Varun', 'Nikhil', 'Harsh', 'Pranav'
     ];
 
-    // ==================== 0.2 PERSISTENT OFFER SERVICE ====================
+    // ==================== 0.2 PERSISTENT DAILY OFFER SERVICE ====================
     const OfferService = {
         timerInterval: null,
-        visitorId: null,
-        token: null,
         expiresAt: null,
         isInitialized: false,
 
-        getVisitorId() {
-            if (this.visitorId) return this.visitorId;
-            let vid = null;
-            try { vid = localStorage.getItem('tmp_visitor_id'); } catch(e) {}
-            if (!vid) {
-                vid = 'vid_' + Math.random().toString(36).substring(2, 10) + Date.now().toString(36);
-                try { localStorage.setItem('tmp_visitor_id', vid); } catch(e) {}
-            }
-            this.visitorId = vid;
-            return vid;
+        getLocalDateKey() {
+            const now = new Date();
+            const y = now.getFullYear();
+            const m = String(now.getMonth() + 1).padStart(2, '0');
+            const d = String(now.getDate()).padStart(2, '0');
+            return `${y}-${m}-${d}`;
         },
 
-        async init() {
-            const vid = this.getVisitorId();
-            let savedToken = null;
-            let savedExpires = null;
-            try {
-                savedToken = localStorage.getItem('tmp_offer_token');
-                savedExpires = localStorage.getItem('tmp_offer_expires');
-            } catch(e) {}
+        generateRandomDurationMs() {
+            const minSecs = DAILY_OFFER_CONFIG.MIN_HOURS * 3600; // 21,600s
+            const maxSecs = DAILY_OFFER_CONFIG.MAX_HOURS * 3600; // 36,000s
+            const randomSecs = Math.floor(Math.random() * (maxSecs - minSecs + 1)) + minSecs;
+            return randomSecs * 1000;
+        },
 
-            if (savedToken && savedExpires) {
-                this.token = savedToken;
-                this.expiresAt = parseInt(savedExpires, 10);
+        startNewCycle() {
+            const today = this.getLocalDateKey();
+            const durationMs = this.generateRandomDurationMs();
+            const newEnd = Date.now() + durationMs;
+            this.expiresAt = newEnd;
+            try {
+                localStorage.setItem(DAILY_OFFER_CONFIG.STORAGE_KEY_DATE, today);
+                localStorage.setItem(DAILY_OFFER_CONFIG.STORAGE_KEY_END, String(newEnd));
+            } catch (e) {}
+            return newEnd;
+        },
+
+        init() {
+            const today = this.getLocalDateKey();
+            let savedDate = null;
+            let savedEnd = null;
+
+            try {
+                savedDate = localStorage.getItem(DAILY_OFFER_CONFIG.STORAGE_KEY_DATE);
+                savedEnd = parseInt(localStorage.getItem(DAILY_OFFER_CONFIG.STORAGE_KEY_END), 10);
+            } catch (e) {}
+
+            // Check if saved state belongs to the current calendar day and is still in the future
+            if (savedDate === today && savedEnd && !isNaN(savedEnd) && savedEnd > Date.now()) {
+                this.expiresAt = savedEnd;
+            } else {
+                // First visit of the day or expired: generate new randomized 6-10h cycle
+                this.startNewCycle();
             }
 
-            // Sync with backend validation
-            try {
-                const query = new URLSearchParams({
-                    visitor_id: vid,
-                    ...(this.token ? { token: this.token } : {})
-                });
-                const res = await fetch(`/api/offer?${query.toString()}`);
-                if (res.ok) {
-                    const data = await res.json();
-                    if (data && data.success) {
-                        this.token = data.token;
-                        this.expiresAt = data.expires_at;
-                        try {
-                            localStorage.setItem('tmp_offer_token', this.token);
-                            localStorage.setItem('tmp_offer_expires', String(this.expiresAt));
-                        } catch(e) {}
-                    }
+            // Sync across multiple open browser tabs in real-time
+            window.addEventListener('storage', (e) => {
+                if (e.key === DAILY_OFFER_CONFIG.STORAGE_KEY_END || e.key === DAILY_OFFER_CONFIG.STORAGE_KEY_DATE) {
+                    try {
+                        const syncedEnd = parseInt(localStorage.getItem(DAILY_OFFER_CONFIG.STORAGE_KEY_END), 10);
+                        if (syncedEnd && !isNaN(syncedEnd) && syncedEnd > Date.now()) {
+                            this.expiresAt = syncedEnd;
+                            this.updateBanner();
+                        }
+                    } catch (err) {}
                 }
-            } catch(e) {
-                // Fallback offline initialization
-                if (!this.expiresAt) {
-                    this.expiresAt = Date.now() + (OFFER_CONFIG.OFFER_DURATION_HOURS * 60 * 60 * 1000);
-                    try { localStorage.setItem('tmp_offer_expires', String(this.expiresAt)); } catch(err) {}
-                }
-            }
+            });
 
             this.isInitialized = true;
             this.initCountdownUI();
         },
 
-        isOfferActive() {
-            if (!this.expiresAt) {
-                try {
-                    const savedExpires = localStorage.getItem('tmp_offer_expires');
-                    if (savedExpires) this.expiresAt = parseInt(savedExpires, 10);
-                } catch(e) {}
-            }
-            if (!this.expiresAt) return true;
-            return Date.now() < this.expiresAt;
-        },
-
         getRemainingTime() {
-            if (!this.expiresAt) {
-                try {
-                    const savedExpires = localStorage.getItem('tmp_offer_expires');
-                    if (savedExpires) this.expiresAt = parseInt(savedExpires, 10);
-                } catch(e) {}
+            const today = this.getLocalDateKey();
+            let savedDate = null;
+            try {
+                savedDate = localStorage.getItem(DAILY_OFFER_CONFIG.STORAGE_KEY_DATE);
+            } catch (e) {}
+
+            // Check if calendar day transitioned or countdown reached 00:00:00
+            if (savedDate !== today || !this.expiresAt || this.expiresAt <= Date.now()) {
+                this.startNewCycle();
             }
-            const target = this.expiresAt || (Date.now() + OFFER_CONFIG.OFFER_DURATION_HOURS * 60 * 60 * 1000);
-            const remaining = Math.max(0, target - Date.now());
+
+            const remaining = Math.max(0, this.expiresAt - Date.now());
             const totalSecs = Math.floor(remaining / 1000);
             const hours = Math.floor(totalSecs / 3600);
             const mins = Math.floor((totalSecs % 3600) / 60);
             const secs = totalSecs % 60;
+
+            const pad = (n) => String(n).padStart(2, '0');
             return {
                 totalMs: remaining,
-                isExpired: remaining <= 0,
                 hours,
                 mins,
                 secs,
-                formatted: `${String(hours).padStart(2, '0')}:${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`
+                formatted: `${pad(hours)} : ${pad(mins)} : ${pad(secs)}`
             };
+        },
+
+        updateBanner() {
+            const rem = this.getRemainingTime();
+            const topClockEl = document.getElementById('topCountdownClock');
+            if (topClockEl) {
+                topClockEl.textContent = `Ends in ${rem.formatted}`;
+            }
+
+            // Ensure promo prices and CTA links remain properly wired
+            const priceNowEl = document.querySelector('.sale-price, .tm-price-now.price-val-target');
+            const priceWasEl = document.querySelector('.original-price, .tm-price-was.price-regular-target');
+            const priceSaveEl = document.querySelector('.discount-badge, .tm-price-discount.price-save-target');
+            const buyBtn = document.getElementById('btnLandingHeroBuy');
+            const buyBtnPrice = buyBtn ? buyBtn.querySelector('.price-val-target') : null;
+
+            if (priceNowEl) priceNowEl.textContent = `₹${DAILY_OFFER_CONFIG.PROMO_PRICE_INR}`;
+            if (priceWasEl) {
+                priceWasEl.textContent = `₹${DAILY_OFFER_CONFIG.REGULAR_PRICE_INR}`;
+                priceWasEl.style.display = '';
+            }
+            if (priceSaveEl) {
+                priceSaveEl.textContent = 'SAVE 89%';
+                priceSaveEl.style.display = '';
+            }
+            if (buyBtnPrice) buyBtnPrice.textContent = `₹${DAILY_OFFER_CONFIG.PROMO_PRICE_INR}`;
+            if (buyBtn) {
+                buyBtn.href = DAILY_OFFER_CONFIG.PROMO_PAYMENT_URL;
+            }
         },
 
         initCountdownUI() {
@@ -142,63 +172,10 @@
                 this.timerInterval = null;
             }
 
-            const updateUI = () => {
-                const rem = this.getRemainingTime();
-                const saleBanner = document.getElementById('storeSaleBanner');
-                const topClockEl = document.getElementById('topCountdownClock');
-                const priceNowEl = document.querySelector('.sale-price, .tm-price-now.price-val-target');
-                const priceWasEl = document.querySelector('.original-price, .tm-price-was.price-regular-target');
-                const priceSaveEl = document.querySelector('.discount-badge, .tm-price-discount.price-save-target');
-                const buyBtn = document.getElementById('btnLandingHeroBuy');
-                const buyBtnPrice = buyBtn ? buyBtn.querySelector('.price-val-target') : null;
-
-                if (!this.isOfferActive() || rem.isExpired) {
-                    // Offer Expired for this visitor
-                    if (saleBanner) {
-                        saleBanner.classList.add('expired');
-                        saleBanner.innerHTML = `<div class="store-sale-banner-content"><span class="sale-banner-flame">🔥</span> <span style="letter-spacing:0.6px; font-weight:700;">${OFFER_CONFIG.ENDED_NOTICE_TEXT}</span></div>`;
-                    }
-                    if (priceNowEl) priceNowEl.textContent = `₹${OFFER_CONFIG.REGULAR_PRICE_INR}`;
-                    if (priceWasEl) priceWasEl.style.display = 'none';
-                    if (priceSaveEl) priceSaveEl.style.display = 'none';
-                    if (buyBtnPrice) buyBtnPrice.textContent = `₹${OFFER_CONFIG.REGULAR_PRICE_INR}`;
-                    if (buyBtn) {
-                        buyBtn.href = OFFER_CONFIG.REGULAR_PAYMENT_URL;
-                        const spanEl = buyBtn.querySelector('span:first-child');
-                        if (spanEl) spanEl.textContent = `BUY NOW — ₹${OFFER_CONFIG.REGULAR_PRICE_INR}`;
-                    }
-                    if (this.timerInterval) {
-                        clearInterval(this.timerInterval);
-                        this.timerInterval = null;
-                    }
-                } else {
-                    // Offer Active
-                    if (saleBanner) {
-                        saleBanner.classList.remove('expired');
-                    }
-                    if (topClockEl) {
-                        topClockEl.textContent = `ENDS IN ${rem.formatted}`;
-                    }
-                    if (priceNowEl) priceNowEl.textContent = `₹${OFFER_CONFIG.PROMO_PRICE_INR}`;
-                    if (priceWasEl) {
-                        priceWasEl.textContent = `₹${OFFER_CONFIG.REGULAR_PRICE_INR}`;
-                        priceWasEl.style.display = '';
-                    }
-                    if (priceSaveEl) {
-                        priceSaveEl.textContent = 'SAVE 89%';
-                        priceSaveEl.style.display = '';
-                    }
-                    if (buyBtnPrice) buyBtnPrice.textContent = `₹${OFFER_CONFIG.PROMO_PRICE_INR}`;
-                    if (buyBtn) {
-                        buyBtn.href = OFFER_CONFIG.PROMO_PAYMENT_URL;
-                    }
-                }
-            };
-
-            updateUI();
-            if (this.isOfferActive()) {
-                this.timerInterval = setInterval(updateUI, 1000);
-            }
+            this.updateBanner();
+            this.timerInterval = setInterval(() => {
+                this.updateBanner();
+            }, 1000);
         }
     };
 

@@ -3422,7 +3422,7 @@ body.store-body {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 10px;
+    gap: 8px 12px;
     flex-wrap: wrap;
     text-align: center;
     font-size: 0.82rem;
@@ -3433,6 +3433,8 @@ body.store-body {
 .sale-banner-flame {
     font-size: 0.95rem;
     line-height: 1;
+    display: inline-flex;
+    align-items: center;
 }
 
 .sale-banner-tag {
@@ -3441,6 +3443,7 @@ body.store-body {
     text-transform: uppercase;
     letter-spacing: 0.8px;
     color: #34d399;
+    white-space: nowrap;
 }
 
 .sale-banner-divider {
@@ -3455,6 +3458,7 @@ body.store-body {
     color: #ffffff;
     letter-spacing: 0.8px;
     text-shadow: 0 0 12px rgba(16, 185, 129, 0.4);
+    white-space: nowrap;
 }
 
 .sale-banner-cta {
@@ -3465,6 +3469,7 @@ body.store-body {
     display: inline-flex;
     align-items: center;
     gap: 4px;
+    white-space: nowrap;
     transition: color 0.2s ease, transform 0.2s ease;
 }
 
@@ -3549,17 +3554,18 @@ body.store-body {
 
 @media (max-width: 600px) {
     .store-sale-banner {
-        padding: 7px 10px;
+        padding: 6px 8px;
     }
     .store-sale-banner-content {
-        gap: 6px;
+        gap: 4px 8px;
         font-size: 0.74rem;
+        line-height: 1.4;
     }
     .sale-banner-tag {
         font-size: 0.68rem;
     }
     .sale-banner-countdown {
-        font-size: 0.8rem;
+        font-size: 0.78rem;
     }
     .sale-banner-cta {
         font-size: 0.72rem;
