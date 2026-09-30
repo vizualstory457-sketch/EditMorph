@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TextMorph Pro 2.0 — Customer Access &amp; Downloads | Dibendu Das</title>
-    <meta name="description" content="Thank you for your purchase of TextMorph Pro 2.0. Access your downloads, fonts, resources, and updates.">
+    <meta name="description" content="Thank you for your purchase of TextMorph Pro 2.0. Watch the setup tutorial and access your downloads, fonts, and resources.">
     <meta name="robots" content="noindex, nofollow">
     <meta name="author" content="Dibendu Das">
 
@@ -58,13 +58,12 @@
             -moz-osx-font-smoothing: grayscale;
         }
 
-        /* Ambient subtle grain / background glow */
         .tm-access-container {
             width: 100%;
             max-width: 860px;
             display: flex;
             flex-direction: column;
-            gap: 32px;
+            gap: 28px;
             margin: 0 auto;
         }
 
@@ -76,7 +75,7 @@
             gap: 12px;
             text-decoration: none;
             color: #ffffff;
-            margin-bottom: 4px;
+            margin-bottom: 2px;
         }
 
         .tm-brand-icon {
@@ -106,7 +105,7 @@
             align-items: center;
             text-align: center;
             gap: 12px;
-            padding: 10px 0;
+            padding: 4px 0 8px 0;
         }
 
         .tm-success-badge {
@@ -153,6 +152,73 @@
             font-weight: 500;
             max-width: 520px;
             line-height: 1.5;
+        }
+
+        /* ==================== INSTALLATION & SETUP VIDEO PANEL ==================== */
+        .tm-video-panel {
+            background: rgba(15, 23, 42, 0.45);
+            border: 1px solid rgba(16, 185, 129, 0.28);
+            border-radius: 20px;
+            padding: 28px;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            box-shadow: 0 24px 48px -12px rgba(0, 0, 0, 0.6), 0 0 24px rgba(16, 185, 129, 0.08);
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .tm-video-header {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .tm-video-label {
+            font-family: var(--tm-font-mono);
+            font-size: 0.74rem;
+            font-weight: 700;
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
+            color: var(--tm-green-light);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .tm-video-title {
+            font-family: var(--tm-font-heading);
+            font-size: clamp(1.4rem, 2.8vw, 1.75rem);
+            font-weight: 800;
+            color: #ffffff;
+            letter-spacing: -0.4px;
+        }
+
+        .tm-video-subtitle {
+            font-size: 0.92rem;
+            color: var(--tm-text-muted);
+            line-height: 1.45;
+        }
+
+        .tm-video-frame-wrap {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            border-radius: 12px;
+            overflow: hidden;
+            background: #000000;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .tm-video-frame-wrap iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+            display: block;
         }
 
         /* ==================== MAIN ACCESS AREA: GLASS PANEL ==================== */
@@ -516,6 +582,16 @@
                 padding: 24px 16px 40px 16px;
             }
 
+            .tm-access-container {
+                gap: 22px;
+            }
+
+            .tm-video-panel {
+                padding: 20px 16px;
+                border-radius: 16px;
+                gap: 14px;
+            }
+
             .tm-downloads-panel {
                 padding: 20px 16px;
                 border-radius: 16px;
@@ -556,6 +632,10 @@
         @media (max-width: 430px) {
             .tm-main-heading {
                 font-size: 1.85rem;
+            }
+
+            .tm-video-title {
+                font-size: 1.35rem;
             }
 
             .tm-primary-title {
@@ -600,7 +680,25 @@
             <p class="tm-subheading">Your TextMorph Pro resources are ready.</p>
         </header>
 
-        <!-- MAIN ACCESS AREA: LARGE GLASS PANEL -->
+        <!-- 1. INSTALLATION & SETUP VIDEO SECTION (WATCH BEFORE YOU INSTALL) -->
+        <section class="tm-video-panel" aria-label="Installation &amp; Setup Tutorial">
+            <div class="tm-video-header">
+                <span class="tm-video-label">🎬 INSTALLATION &amp; SETUP</span>
+                <h2 class="tm-video-title">Watch Before You Install</h2>
+                <p class="tm-video-subtitle">Follow the setup steps before installing TextMorph Pro 2.0.</p>
+            </div>
+            <div class="tm-video-frame-wrap">
+                <iframe 
+                    src="https://www.youtube.com/embed/3v8oMst-BRQ" 
+                    title="TextMorph Pro 2.0 — Installation &amp; Setup Tutorial" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                    allowfullscreen>
+                </iframe>
+            </div>
+        </section>
+
+        <!-- 2. MAIN ACCESS AREA: LARGE GLASS PANEL -->
         <main class="tm-downloads-panel" role="main">
             <div class="tm-panel-header">
                 <h2 class="tm-panel-title">
