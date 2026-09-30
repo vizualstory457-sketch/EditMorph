@@ -2,6 +2,8 @@
   "cleanUrls": true,
   "rewrites": [
     { "source": "/api/(.*)", "destination": "/api/$1" },
+    { "source": "/store/access", "destination": "/store/access/index.html" },
+    { "source": "/access", "destination": "/store/access/index.html" },
     { "source": "/store/:slug*", "destination": "/store" }
   ]
 }

@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TextMorph Pro 2.0 — Customer Access &amp; Downloads | Dibendu Das</title>
+    <meta name="description" content="Thank you for your purchase of TextMorph Pro 2.0. Access your downloads, fonts, resources, and updates.">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="author" content="Dibendu Das">
+
+    <!-- Fonts: Outfit (modern SaaS heading), Inter (clean UI), Space Mono (monospace details) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* ==================== DESIGN TOKENS & RESET ==================== */
+        :root {
+            --tm-bg: #070b10;
+            --tm-bg-card: rgba(15, 23, 42, 0.55);
+            --tm-bg-card-hover: rgba(15, 23, 42, 0.75);
+            --tm-border: rgba(255, 255, 255, 0.08);
+            --tm-border-highlight: rgba(16, 185, 129, 0.35);
+            --tm-green: #10b981;
+            --tm-green-light: #34d399;
+            --tm-green-glow: rgba(16, 185, 129, 0.35);
+            --tm-cyan: #06b6d4;
+            --tm-cyan-light: #38bdf8;
+            --tm-text-main: #f8fafc;
+            --tm-text-muted: #94a3b8;
+            --tm-text-subtle: #64748b;
+            --tm-font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            --tm-font-heading: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+            --tm-font-mono: 'Space Mono', monospace;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--tm-bg);
+            background-image: 
+                radial-gradient(ellipse 80% 50% at 50% -10%, rgba(16, 185, 129, 0.16), transparent 65%),
+                radial-gradient(ellipse 60% 40% at 85% 85%, rgba(6, 182, 212, 0.07), transparent 60%),
+                radial-gradient(ellipse 60% 40% at 15% 90%, rgba(16, 185, 129, 0.05), transparent 60%);
+            background-attachment: fixed;
+            color: var(--tm-text-main);
+            font-family: var(--tm-font-sans);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 20px 60px 20px;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Ambient subtle grain / background glow */
+        .tm-access-container {
+            width: 100%;
+            max-width: 860px;
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+            margin: 0 auto;
+        }
+
+        /* ==================== TOP NAVIGATION / BRAND ==================== */
+        .tm-brand-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            text-decoration: none;
+            color: #ffffff;
+            margin-bottom: 4px;
+        }
+
+        .tm-brand-icon {
+            width: 38px;
+            height: 38px;
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.25) 0%, rgba(6, 182, 212, 0.2) 100%);
+            border: 1px solid rgba(16, 185, 129, 0.4);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 16px rgba(16, 185, 129, 0.25);
+        }
+
+        .tm-brand-title {
+            font-family: var(--tm-font-heading);
+            font-size: 1.15rem;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            color: #ffffff;
+        }
+
+        /* ==================== TOP SECTION: WELCOME & SUCCESS ==================== */
+        .tm-welcome-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 12px;
+            padding: 10px 0;
+        }
+
+        .tm-success-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(16, 185, 129, 0.12);
+            border: 1px solid rgba(16, 185, 129, 0.4);
+            color: var(--tm-green-light);
+            font-size: 0.84rem;
+            font-weight: 700;
+            padding: 6px 14px;
+            border-radius: 100px;
+            letter-spacing: 0.4px;
+            box-shadow: 0 0 20px rgba(16, 185, 129, 0.18);
+        }
+
+        .tm-success-badge .check-icon {
+            font-size: 0.95rem;
+            font-weight: 900;
+        }
+
+        .tm-small-label {
+            font-family: var(--tm-font-mono);
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--tm-green-light);
+        }
+
+        .tm-main-heading {
+            font-family: var(--tm-font-heading);
+            font-size: clamp(2rem, 4vw, 2.75rem);
+            font-weight: 900;
+            color: #ffffff;
+            letter-spacing: -0.8px;
+            line-height: 1.15;
+        }
+
+        .tm-subheading {
+            font-size: 1.05rem;
+            color: var(--tm-text-muted);
+            font-weight: 500;
+            max-width: 520px;
+            line-height: 1.5;
+        }
+
+        /* ==================== MAIN ACCESS AREA: GLASS PANEL ==================== */
+        .tm-downloads-panel {
+            background: rgba(15, 23, 42, 0.45);
+            border: 1px solid var(--tm-border);
+            border-radius: 20px;
+            padding: 32px;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            box-shadow: 0 24px 48px -12px rgba(0, 0, 0, 0.6), 0 0 24px rgba(16, 185, 129, 0.05);
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .tm-panel-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-bottom: 16px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .tm-panel-title {
+            font-family: var(--tm-font-heading);
+            font-size: 1.35rem;
+            font-weight: 800;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .tm-panel-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-family: var(--tm-font-mono);
+            font-size: 0.74rem;
+            font-weight: 700;
+            color: var(--tm-green-light);
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.25);
+            padding: 4px 10px;
+            border-radius: 6px;
+        }
+
+        .tm-panel-status::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background-color: var(--tm-green-light);
+            border-radius: 50%;
+            box-shadow: 0 0 8px var(--tm-green-light);
+        }
+
+        /* ==================== CARD 01: MAIN PLUGIN (PRIMARY) ==================== */
+        .tm-primary-card {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(15, 23, 42, 0.8) 100%);
+            border: 1.5px solid rgba(16, 185, 129, 0.45);
+            border-radius: 16px;
+            padding: 28px 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 16px 36px rgba(0, 0, 0, 0.45), 0 0 28px rgba(16, 185, 129, 0.12);
+            transition: border-color 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .tm-primary-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 220px;
+            height: 220px;
+            background: radial-gradient(circle, rgba(16, 185, 129, 0.15) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .tm-primary-top {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .tm-primary-info {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .tm-purchase-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.25) 0%, rgba(6, 182, 212, 0.2) 100%);
+            border: 1px solid rgba(16, 185, 129, 0.5);
+            color: #ffffff;
+            font-family: var(--tm-font-mono);
+            font-size: 0.72rem;
+            font-weight: 800;
+            padding: 4px 10px;
+            border-radius: 6px;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+            width: fit-content;
+        }
+
+        .tm-primary-title {
+            font-family: var(--tm-font-heading);
+            font-size: clamp(1.6rem, 3vw, 2rem);
+            font-weight: 900;
+            color: #ffffff;
+            letter-spacing: -0.5px;
+        }
+
+        .tm-primary-desc {
+            font-size: 0.95rem;
+            color: #cbd5e1;
+            line-height: 1.5;
+        }
+
+        .tm-primary-pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 4px;
+        }
+
+        .tm-pill {
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: #cbd5e1;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 5px 10px;
+            border-radius: 6px;
+        }
+
+        .tm-primary-access-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: #ffffff !important;
+            font-size: 1.15rem;
+            font-weight: 800;
+            padding: 18px 36px;
+            border-radius: 12px;
+            text-decoration: none;
+            box-shadow: 0 10px 24px -4px rgba(16, 185, 129, 0.45);
+            transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+            letter-spacing: 0.3px;
+            width: 100%;
+            cursor: pointer;
+            border: none;
+            box-sizing: border-box;
+            text-align: center;
+        }
+
+        .tm-primary-access-btn:hover {
+            background: linear-gradient(135deg, #34d399 0%, #10b981 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 14px 30px -4px rgba(16, 185, 129, 0.65);
+            color: #ffffff !important;
+        }
+
+        .tm-btn-arrow {
+            font-size: 1.25rem;
+            transition: transform 0.2s ease;
+        }
+
+        .tm-primary-access-btn:hover .tm-btn-arrow {
+            transform: translateX(4px);
+        }
+
+        /* ==================== SECONDARY RESOURCES GRID (CARDS 02, 03, 04, 05) ==================== */
+        .tm-resources-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            width: 100%;
+        }
+
+        .tm-resource-card {
+            background: rgba(255, 255, 255, 0.025);
+            border: 1px solid var(--tm-border);
+            border-radius: 14px;
+            padding: 20px 22px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 16px;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
+        }
+
+        .tm-resource-card:hover {
+            border-color: rgba(16, 185, 129, 0.35);
+            background: rgba(255, 255, 255, 0.04);
+            transform: translateY(-2px);
+        }
+
+        .tm-resource-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .tm-resource-icon {
+            font-size: 1.25rem;
+            line-height: 1;
+        }
+
+        .tm-resource-title {
+            font-family: var(--tm-font-heading);
+            font-size: 1.12rem;
+            font-weight: 800;
+            color: #ffffff;
+        }
+
+        .tm-resource-desc {
+            font-size: 0.88rem;
+            color: var(--tm-text-muted);
+            line-height: 1.45;
+            flex-grow: 1;
+        }
+
+        .tm-secondary-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            color: #f1f5f9 !important;
+            font-size: 0.88rem;
+            font-weight: 700;
+            padding: 12px 18px;
+            border-radius: 10px;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            letter-spacing: 0.3px;
+            width: 100%;
+            cursor: pointer;
+            box-sizing: border-box;
+            text-align: center;
+        }
+
+        .tm-secondary-btn:hover {
+            background: rgba(16, 185, 129, 0.12);
+            border-color: rgba(16, 185, 129, 0.45);
+            color: var(--tm-green-light) !important;
+            transform: translateY(-1px);
+        }
+
+        .tm-secondary-btn:hover .tm-btn-arrow {
+            transform: translateX(3px);
+        }
+
+        /* ==================== DISCORD COMMUNITY CARD ==================== */
+        .tm-discord-card {
+            background: rgba(88, 101, 242, 0.07);
+            border: 1px solid rgba(88, 101, 242, 0.28);
+            border-radius: 14px;
+            padding: 18px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            box-sizing: border-box;
+        }
+
+        .tm-discord-info {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            min-width: 0;
+        }
+
+        .tm-discord-header {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.74rem;
+            font-weight: 800;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+            color: #818cf8;
+            font-family: var(--tm-font-mono);
+        }
+
+        .tm-discord-title {
+            font-family: var(--tm-font-heading);
+            font-size: 1.05rem;
+            font-weight: 800;
+            color: #ffffff;
+        }
+
+        .tm-discord-desc {
+            font-size: 0.85rem;
+            color: #94a3b8;
+            line-height: 1.4;
+        }
+
+        .tm-discord-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: rgba(88, 101, 242, 0.18);
+            border: 1px solid rgba(88, 101, 242, 0.45);
+            color: #c7d2fe !important;
+            font-size: 0.88rem;
+            font-weight: 700;
+            padding: 11px 20px;
+            border-radius: 9px;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+            flex-shrink: 0;
+            box-sizing: border-box;
+        }
+
+        .tm-discord-btn:hover {
+            background: rgba(88, 101, 242, 0.35);
+            border-color: rgba(88, 101, 242, 0.75);
+            color: #ffffff !important;
+            transform: translateY(-1px);
+        }
+
+        /* ==================== MINIMAL FOOTER ==================== */
+        .tm-access-footer {
+            text-align: center;
+            padding: 16px 0 0 0;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            font-size: 0.82rem;
+            color: var(--tm-text-subtle);
+        }
+
+        .tm-footer-brand {
+            font-weight: 700;
+            color: #94a3b8;
+        }
+
+        /* ==================== MOBILE RESPONSIVENESS ==================== */
+        @media (max-width: 768px) {
+            body {
+                padding: 24px 16px 40px 16px;
+            }
+
+            .tm-downloads-panel {
+                padding: 20px 16px;
+                border-radius: 16px;
+                gap: 18px;
+            }
+
+            .tm-primary-card {
+                padding: 20px 18px;
+                border-radius: 14px;
+            }
+
+            .tm-primary-access-btn {
+                padding: 16px 24px;
+                font-size: 1.05rem;
+            }
+
+            .tm-resources-grid {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+
+            .tm-resource-card {
+                padding: 16px 18px;
+            }
+
+            .tm-discord-card {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 12px;
+                padding: 16px;
+            }
+
+            .tm-discord-btn {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 430px) {
+            .tm-main-heading {
+                font-size: 1.85rem;
+            }
+
+            .tm-primary-title {
+                font-size: 1.45rem;
+            }
+
+            .tm-primary-access-btn {
+                padding: 14px 18px;
+                font-size: 0.98rem;
+            }
+
+            .tm-secondary-btn {
+                padding: 11px 14px;
+                font-size: 0.84rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="tm-access-container">
+
+        <!-- BRAND HEADER -->
+        <a href="/store" class="tm-brand-header" title="Dibendu Store">
+            <div class="tm-brand-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#34d399" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                    <polyline points="2 17 12 22 22 17"></polyline>
+                    <polyline points="2 12 12 17 22 12"></polyline>
+                </svg>
+            </div>
+            <span class="tm-brand-title">DIBENDU STORE</span>
+        </a>
+
+        <!-- TOP SECTION: CENTERED WELCOME AREA -->
+        <header class="tm-welcome-section">
+            <div class="tm-success-badge">
+                <span class="check-icon">✓</span> Purchase Successful
+            </div>
+            <span class="tm-small-label">TEXTMORPH PRO 2.0</span>
+            <h1 class="tm-main-heading">Thank You for Your Purchase</h1>
+            <p class="tm-subheading">Your TextMorph Pro resources are ready.</p>
+        </header>
+
+        <!-- MAIN ACCESS AREA: LARGE GLASS PANEL -->
+        <main class="tm-downloads-panel" role="main">
+            <div class="tm-panel-header">
+                <h2 class="tm-panel-title">
+                    <span>⚡</span> Your Downloads
+                </h2>
+                <div class="tm-panel-status">Instant Access Ready</div>
+            </div>
+
+            <!-- CARD 01: MAIN PLUGIN (PRIMARY CARD) -->
+            <article class="tm-primary-card" aria-label="TextMorph Pro 2.0 Download">
+                <div class="tm-primary-top">
+                    <div class="tm-primary-info">
+                        <span class="tm-purchase-badge">★ YOUR PURCHASE</span>
+                        <h3 class="tm-primary-title">TextMorph Pro 2.0</h3>
+                        <p class="tm-primary-desc">Download the latest version of TextMorph Pro 2.0.</p>
+                        <div class="tm-primary-pills">
+                            <span class="tm-pill">💾 After Effects 2023–2026</span>
+                            <span class="tm-pill">💻 Windows &amp; macOS</span>
+                            <span class="tm-pill">🛡️ Lifetime Client License</span>
+                        </div>
+                    </div>
+                </div>
+
+                <a href="https://drive.google.com/file/d/1S5siliRuahCtpSP6gOsYucpWMcdCW3Mi/view?usp=drive_link" 
+                   target="_blank" 
+                   rel="noopener noreferrer" 
+                   class="tm-primary-access-btn" 
+                   id="btnDownloadMainPlugin">
+                    <span>DOWNLOAD TEXTMORPH PRO 2.0</span>
+                    <span class="tm-btn-arrow">→</span>
+                </a>
+            </article>
+
+            <!-- SECONDARY RESOURCES GRID (CARDS 02, 03, 04, 05) -->
+            <div class="tm-resources-grid">
+                
+                <!-- CARD 02: OTHER PLUGINS -->
+                <article class="tm-resource-card" aria-label="Other Plugins">
+                    <div class="tm-resource-header">
+                        <span class="tm-resource-icon">🧩</span>
+                        <h3 class="tm-resource-title">Other Plugins</h3>
+                    </div>
+                    <p class="tm-resource-desc">Explore other plugins and tools.</p>
+                    <a href="/store" 
+                       class="tm-secondary-btn" 
+                       id="btnOtherPlugins">
+                        <span>VIEW OTHER PLUGINS</span>
+                        <span class="tm-btn-arrow">→</span>
+                    </a>
+                </article>
+
+                <!-- CARD 03: FONTS -->
+                <article class="tm-resource-card" aria-label="Fonts Resource">
+                    <div class="tm-resource-header">
+                        <span class="tm-resource-icon">🔤</span>
+                        <h3 class="tm-resource-title">Fonts</h3>
+                    </div>
+                    <p class="tm-resource-desc">Access the font resources for your workflow.</p>
+                    <a href="https://drive.google.com/drive/folders/1OzdXYWP-4LAPMhlNJ4FtAzrOMC9QpBXz?usp=drive_link" 
+                       target="_blank" 
+                       rel="noopener noreferrer" 
+                       class="tm-secondary-btn" 
+                       id="btnFonts">
+                        <span>GET FONTS</span>
+                        <span class="tm-btn-arrow">→</span>
+                    </a>
+                </article>
+
+                <!-- CARD 04: OLD VERSION -->
+                <article class="tm-resource-card" aria-label="Previous Version">
+                    <div class="tm-resource-header">
+                        <span class="tm-resource-icon">📦</span>
+                        <h3 class="tm-resource-title">Previous TextMorph Pro Version</h3>
+                    </div>
+                    <p class="tm-resource-desc">Need the previous version? Access the older TextMorph Pro build here.</p>
+                    <a href="https://drive.google.com/file/d/19a6ijtVDenV4QiIDN9D0xW3YAK82Zxam/view?usp=drive_link" 
+                       target="_blank" 
+                       rel="noopener noreferrer" 
+                       class="tm-secondary-btn" 
+                       id="btnOldVersion">
+                        <span>DOWNLOAD OLD VERSION</span>
+                        <span class="tm-btn-arrow">→</span>
+                    </a>
+                </article>
+
+                <!-- CARD 05: MAIN DRIVE -->
+                <article class="tm-resource-card" aria-label="Main Resource Drive">
+                    <div class="tm-resource-header">
+                        <span class="tm-resource-icon">📁</span>
+                        <h3 class="tm-resource-title">Main Resource Drive</h3>
+                    </div>
+                    <p class="tm-resource-desc">Access the main resource folder and available files.</p>
+                    <a href="https://drive.google.com/drive/folders/100mbjFc6mmg12lxi5PPWhnYOT8Id1rI1?usp=drive_link" 
+                       target="_blank" 
+                       rel="noopener noreferrer" 
+                       class="tm-secondary-btn" 
+                       id="btnMainDrive">
+                        <span>OPEN MAIN DRIVE</span>
+                        <span class="tm-btn-arrow">→</span>
+                    </a>
+                </article>
+
+            </div>
+
+        </main>
+
+        <!-- DISCORD COMMUNITY SECTION -->
+        <aside class="tm-discord-card" aria-label="Discord Community">
+            <div class="tm-discord-info">
+                <div class="tm-discord-header">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994.021-.041.001-.09-.041-.106a13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.929 1.793 8.18 1.793 12.061 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.894.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.028zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
+                    <span>DISCORD COMMUNITY</span>
+                </div>
+                <h4 class="tm-discord-title">TEXTMORPH PRO COMMUNITY</h4>
+                <p class="tm-discord-desc">Get TextMorph Pro updates, version announcements and community news.</p>
+            </div>
+            <a href="https://discord.com/invite/kHQFmAJaSU" 
+               target="_blank" 
+               rel="noopener noreferrer" 
+               class="tm-discord-btn" 
+               id="btnDiscordCommunity">
+                <span>JOIN DISCORD</span>
+                <span class="tm-btn-arrow">→</span>
+            </a>
+        </aside>
+
+        <!-- MINIMAL FOOTER -->
+        <footer class="tm-access-footer">
+            <div class="tm-footer-brand">TextMorph Pro 2.0</div>
+            <div>&copy; Dibendu Das. All rights reserved.</div>
+        </footer>
+
+    </div>
+
+    <!-- ==================== CENTRALIZED RESOURCE CONFIGURATION ==================== -->
+    <script>
+        /**
+         * Centralized Resource Configuration for TextMorph Pro 2.0 Customer Access
+         * Modify these links here if Google Drive URLs change in the future.
+         */
+        const TEXTMORPH_RESOURCE_CONFIG = {
+            TEXTMORPH_PRO_DOWNLOAD_URL: "https://drive.google.com/file/d/1S5siliRuahCtpSP6gOsYucpWMcdCW3Mi/view?usp=drive_link",
+            OTHER_PLUGINS_URL: "/store",
+            FONTS_URL: "https://drive.google.com/drive/folders/1OzdXYWP-4LAPMhlNJ4FtAzrOMC9QpBXz?usp=drive_link",
+            OLD_TEXTMORPH_PRO_URL: "https://drive.google.com/file/d/19a6ijtVDenV4QiIDN9D0xW3YAK82Zxam/view?usp=drive_link",
+            MAIN_DRIVE_URL: "https://drive.google.com/drive/folders/100mbjFc6mmg12lxi5PPWhnYOT8Id1rI1?usp=drive_link",
+            DISCORD_URL: "https://discord.com/invite/kHQFmAJaSU"
+        };
+
+        // Attach dynamic URLs from configuration object
+        document.addEventListener('DOMContentLoaded', () => {
+            const btnMain = document.getElementById('btnDownloadMainPlugin');
+            if (btnMain) btnMain.href = TEXTMORPH_RESOURCE_CONFIG.TEXTMORPH_PRO_DOWNLOAD_URL;
+
+            const btnPlugins = document.getElementById('btnOtherPlugins');
+            if (btnPlugins) btnPlugins.href = TEXTMORPH_RESOURCE_CONFIG.OTHER_PLUGINS_URL;
+
+            const btnFonts = document.getElementById('btnFonts');
+            if (btnFonts) btnFonts.href = TEXTMORPH_RESOURCE_CONFIG.FONTS_URL;
+
+            const btnOld = document.getElementById('btnOldVersion');
+            if (btnOld) btnOld.href = TEXTMORPH_RESOURCE_CONFIG.OLD_TEXTMORPH_PRO_URL;
+
+            const btnDrive = document.getElementById('btnMainDrive');
+            if (btnDrive) btnDrive.href = TEXTMORPH_RESOURCE_CONFIG.MAIN_DRIVE_URL;
+
+            const btnDiscord = document.getElementById('btnDiscordCommunity');
+            if (btnDiscord) btnDiscord.href = TEXTMORPH_RESOURCE_CONFIG.DISCORD_URL;
+        });
+    </script>
+</body>
+</html>
