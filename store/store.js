@@ -30,6 +30,18 @@
         STORAGE_KEY_END: 'tmp_daily_offer_end'
     };
 
+    // ==================== 0.01 INTERNATIONAL PURCHASE CONFIG ====================
+    // For customers outside India: Gumroad checkout + WhatsApp License Key delivery.
+    const INTERNATIONAL_PURCHASE_CONFIG = {
+        GUMROAD_PRODUCT_URL: 'https://gumroad.com', // [PASTE GUMROAD PRODUCT LINK HERE]
+        WHATSAPP_NUMBER: '918100501454', // [PASTE WHATSAPP NUMBER HERE]
+        getWhatsAppUrl() {
+            const num = this.WHATSAPP_NUMBER ? this.WHATSAPP_NUMBER.replace(/\D/g, '') : '';
+            const msg = encodeURIComponent('Hi, I purchased TextMorph Pro 2.0 on Gumroad. Here is my Gmail to receive my license key: ');
+            return num ? `https://wa.me/${num}?text=${msg}` : `https://wa.me/?text=${msg}`;
+        }
+    };
+
     // ==================== 0.1 DEVELOPMENT DEMO NOTIFICATION FLAG ====================
     // Disabled for production. In production, notifications strictly use verified real purchases from the backend.
     const DEMO_PURCHASE_NOTIFICATIONS = false;
@@ -144,25 +156,28 @@
                 topClockEl.textContent = `Ends in ${rem.formatted}`;
             }
 
-            // Ensure promo prices and CTA links remain properly wired
-            const priceNowEl = document.querySelector('.sale-price, .tm-price-now.price-val-target');
-            const priceWasEl = document.querySelector('.original-price, .tm-price-was.price-regular-target');
-            const priceSaveEl = document.querySelector('.discount-badge, .tm-price-discount.price-save-target');
-            const buyBtn = document.getElementById('btnLandingHeroBuy');
-            const buyBtnPrice = buyBtn ? buyBtn.querySelector('.price-val-target') : null;
+            if (CurrencyService.cachedData) {
+                CurrencyService.updateAllPriceTargets(CurrencyService.cachedData);
+            } else {
+                const priceNowEl = document.querySelector('.sale-price, .tm-price-now.price-val-target');
+                const priceWasEl = document.querySelector('.original-price, .tm-price-was.price-regular-target');
+                const priceSaveEl = document.querySelector('.discount-badge, .tm-price-discount.price-save-target');
+                const buyBtn = document.getElementById('btnLandingHeroBuy');
+                const buyBtnPrice = buyBtn ? buyBtn.querySelector('.price-val-target') : null;
 
-            if (priceNowEl) priceNowEl.textContent = `₹${DAILY_OFFER_CONFIG.PROMO_PRICE_INR}`;
-            if (priceWasEl) {
-                priceWasEl.textContent = `₹${DAILY_OFFER_CONFIG.REGULAR_PRICE_INR}`;
-                priceWasEl.style.display = '';
-            }
-            if (priceSaveEl) {
-                priceSaveEl.textContent = 'SAVE 89%';
-                priceSaveEl.style.display = '';
-            }
-            if (buyBtnPrice) buyBtnPrice.textContent = `₹${DAILY_OFFER_CONFIG.PROMO_PRICE_INR}`;
-            if (buyBtn) {
-                buyBtn.href = DAILY_OFFER_CONFIG.PROMO_PAYMENT_URL;
+                if (priceNowEl) priceNowEl.textContent = `₹${DAILY_OFFER_CONFIG.PROMO_PRICE_INR}`;
+                if (priceWasEl) {
+                    priceWasEl.textContent = `₹${DAILY_OFFER_CONFIG.REGULAR_PRICE_INR}`;
+                    priceWasEl.style.display = '';
+                }
+                if (priceSaveEl) {
+                    priceSaveEl.textContent = 'SAVE 89%';
+                    priceSaveEl.style.display = '';
+                }
+                if (buyBtnPrice) buyBtnPrice.textContent = `₹${DAILY_OFFER_CONFIG.PROMO_PRICE_INR}`;
+                if (buyBtn) {
+                    buyBtn.href = DAILY_OFFER_CONFIG.PROMO_PAYMENT_URL;
+                }
             }
         },
 
@@ -697,6 +712,16 @@
             document.querySelectorAll('.price-save-target').forEach(el => {
                 el.textContent = data.savingsText;
             });
+
+            const isIndia = (data.country === 'IN' || data.currency === 'INR');
+
+            // Show India Razorpay flow for India visitors, International Gumroad flow for foreign visitors
+            document.querySelectorAll('.tm-india-purchase-flow').forEach(el => {
+                el.style.display = isIndia ? '' : 'none';
+            });
+            document.querySelectorAll('.tm-intl-purchase-card').forEach(el => {
+                el.style.display = isIndia ? 'none' : 'flex';
+            });
         }
     };
 
@@ -1129,10 +1154,41 @@
                                     <span class="discount-badge tm-price-discount price-save-target">SAVE 89%</span>
                                 </div>
 
-                                <a href="https://rzp.io/rzp/textmorphpro" target="_blank" rel="noopener noreferrer" class="tm-primary-buy-btn" id="btnLandingHeroBuy">
-                                    <span>BUY NOW — <span class="price-val-target">₹99</span></span>
-                                    <span class="tm-btn-arrow">→</span>
-                                </a>
+                                <!-- India Purchase Flow (Razorpay) -->
+                                <div class="tm-india-purchase-flow">
+                                    <a href="https://rzp.io/rzp/textmorphpro" target="_blank" rel="noopener noreferrer" class="tm-primary-buy-btn" id="btnLandingHeroBuy">
+                                        <span>BUY NOW — <span class="price-val-target">₹99</span></span>
+                                        <span class="tm-btn-arrow">→</span>
+                                    </a>
+                                </div>
+
+                                <!-- International Purchase Flow (Gumroad + WhatsApp License Key) -->
+                                <div class="tm-intl-purchase-card" id="tmIntlPurchaseCard" style="display: none;">
+                                    <div class="tm-intl-badge">
+                                        <span class="tm-intl-globe">🌎</span>
+                                        <span>INTERNATIONAL PURCHASE</span>
+                                    </div>
+                                    <p class="tm-intl-desc">Buy TextMorph Pro 2.0 securely through Gumroad.</p>
+
+                                    <a href="${INTERNATIONAL_PURCHASE_CONFIG.GUMROAD_PRODUCT_URL}" target="_blank" rel="noopener noreferrer" class="tm-intl-gumroad-btn" id="btnGumroadHeroBuy">
+                                        <span>BUY ON GUMROAD</span>
+                                        <span class="tm-btn-arrow">→</span>
+                                    </a>
+
+                                    <div class="tm-intl-license-box">
+                                        <div class="tm-intl-license-header">
+                                            <span class="tm-key-icon">🔑</span>
+                                            <span>LICENSE KEY</span>
+                                        </div>
+                                        <p class="tm-intl-license-text">
+                                            After purchasing, send us the Gmail address you used for your Gumroad purchase on WhatsApp to receive your TextMorph Pro license key.
+                                        </p>
+                                        <a href="${INTERNATIONAL_PURCHASE_CONFIG.getWhatsAppUrl()}" target="_blank" rel="noopener noreferrer" class="tm-intl-whatsapp-btn" id="btnWhatsappHeroKey">
+                                            <span>GET LICENSE KEY ON WHATSAPP</span>
+                                            <span class="tm-btn-arrow">→</span>
+                                        </a>
+                                    </div>
+                                </div>
 
                                 <div class="tm-guarantee-note">
                                     <span>🛡️</span> 14-Day Money-Back Guarantee &nbsp;•&nbsp; Clean Commercial License &nbsp;•&nbsp; Free Future Updates
@@ -1518,6 +1574,11 @@
             });
         });
 
+        // Apply localized prices & country-specific purchase flow
+        CurrencyService.getLocalizedPrice().then(data => {
+            CurrencyService.updateAllPriceTargets(data);
+        });
+
         // Initialize Persistent Per-Visitor Offer Countdown UI
         OfferService.initCountdownUI();
     }
@@ -1589,20 +1650,46 @@
                     <!-- Pricing & CTA Card -->
                     <div class="detail-pricing-box">
                         <div>
-                            <div class="detail-price-main">${priceDisplay}</div>
-                            ${product.salePrice ? `<div style="font-size: 0.8rem; color: var(--store-text-subtle);">Regular price: <span style="text-decoration: line-through;">$${product.salePrice}</span> (Save $${product.salePrice - product.price})</div>` : ''}
+                            <div class="detail-price-main"><span class="price-val-target">${priceDisplay}</span></div>
+                            ${product.salePrice ? `<div style="font-size: 0.8rem; color: var(--store-text-subtle);">Regular price: <span class="price-regular-target" style="text-decoration: line-through;">$${product.salePrice}</span> (<span class="price-save-target">SAVE 89%</span>)</div>` : ''}
                         </div>
                         <div class="detail-cta-row">
                             ${product.id === 'textmorph-pro' ? `
-                                <a href="https://rzp.io/rzp/textmorphpro" target="_blank" rel="noopener noreferrer" class="btn-detail-buy" id="btnDetailCheckout">
-                                    BUY NOW — $${product.price} →
-                                </a>
+                                <div class="tm-india-purchase-flow" style="width: 100%;">
+                                    <a href="https://rzp.io/rzp/textmorphpro" target="_blank" rel="noopener noreferrer" class="btn-detail-buy" id="btnDetailCheckout">
+                                        BUY NOW — <span class="price-val-target">₹99</span> →
+                                    </a>
+                                </div>
+                                <div class="tm-intl-purchase-card" style="display: none; width: 100%;">
+                                    <div class="tm-intl-badge">
+                                        <span class="tm-intl-globe">🌎</span>
+                                        <span>INTERNATIONAL PURCHASE</span>
+                                    </div>
+                                    <p class="tm-intl-desc">Buy TextMorph Pro 2.0 securely through Gumroad.</p>
+                                    <a href="${INTERNATIONAL_PURCHASE_CONFIG.GUMROAD_PRODUCT_URL}" target="_blank" rel="noopener noreferrer" class="tm-intl-gumroad-btn">
+                                        <span>BUY ON GUMROAD</span>
+                                        <span class="tm-btn-arrow">→</span>
+                                    </a>
+                                    <div class="tm-intl-license-box">
+                                        <div class="tm-intl-license-header">
+                                            <span class="tm-key-icon">🔑</span>
+                                            <span>LICENSE KEY</span>
+                                        </div>
+                                        <p class="tm-intl-license-text">
+                                            After purchasing, send us the Gmail address you used for your Gumroad purchase on WhatsApp to receive your TextMorph Pro license key.
+                                        </p>
+                                        <a href="${INTERNATIONAL_PURCHASE_CONFIG.getWhatsAppUrl()}" target="_blank" rel="noopener noreferrer" class="tm-intl-whatsapp-btn">
+                                            <span>GET LICENSE KEY ON WHATSAPP</span>
+                                            <span class="tm-btn-arrow">→</span>
+                                        </a>
+                                    </div>
+                                </div>
                             ` : `
                                 <button type="button" class="btn-detail-buy" id="btnDetailCheckout">
                                     ${isFree ? 'DOWNLOAD FREE' : `BUY NOW — $${product.price}`} →
                                 </button>
+                                ${!isFree ? `<button type="button" class="btn-detail-add-cart" id="btnDetailAddCart">Add to Cart</button>` : ''}
                             `}
-                            ${!isFree ? `<button type="button" class="btn-detail-add-cart" id="btnDetailAddCart">Add to Cart</button>` : ''}
                         </div>
                     </div>
 
@@ -1699,13 +1786,39 @@
                             <!-- 4. FINAL BUY NOW CTA -->
                             <div class="detail-pricing-box post-video-cta" style="margin-top: 24px;">
                                 <div>
-                                    <div class="detail-price-main">${priceDisplay}</div>
-                                    ${product.salePrice ? `<div style="font-size: 0.8rem; color: var(--store-text-subtle);">Regular price: <span style="text-decoration: line-through;">$${product.salePrice}</span> (Save $${product.salePrice - product.price})</div>` : ''}
+                                    <div class="detail-price-main"><span class="price-val-target">${priceDisplay}</span></div>
+                                    ${product.salePrice ? `<div style="font-size: 0.8rem; color: var(--store-text-subtle);">Regular price: <span class="price-regular-target" style="text-decoration: line-through;">$${product.salePrice}</span> (<span class="price-save-target">SAVE 89%</span>)</div>` : ''}
                                 </div>
-                                <div class="detail-cta-row">
-                                    <a href="https://rzp.io/rzp/textmorphpro" target="_blank" rel="noopener noreferrer" class="btn-detail-buy">
-                                        BUY NOW — $${product.price} →
-                                    </a>
+                                <div class="detail-cta-row" style="width: 100%;">
+                                    <div class="tm-india-purchase-flow" style="width: 100%;">
+                                        <a href="https://rzp.io/rzp/textmorphpro" target="_blank" rel="noopener noreferrer" class="btn-detail-buy">
+                                            BUY NOW — <span class="price-val-target">₹99</span> →
+                                        </a>
+                                    </div>
+                                    <div class="tm-intl-purchase-card" style="display: none; width: 100%;">
+                                        <div class="tm-intl-badge">
+                                            <span class="tm-intl-globe">🌎</span>
+                                            <span>INTERNATIONAL PURCHASE</span>
+                                        </div>
+                                        <p class="tm-intl-desc">Buy TextMorph Pro 2.0 securely through Gumroad.</p>
+                                        <a href="${INTERNATIONAL_PURCHASE_CONFIG.GUMROAD_PRODUCT_URL}" target="_blank" rel="noopener noreferrer" class="tm-intl-gumroad-btn">
+                                            <span>BUY ON GUMROAD</span>
+                                            <span class="tm-btn-arrow">→</span>
+                                        </a>
+                                        <div class="tm-intl-license-box">
+                                            <div class="tm-intl-license-header">
+                                                <span class="tm-key-icon">🔑</span>
+                                                <span>LICENSE KEY</span>
+                                            </div>
+                                            <p class="tm-intl-license-text">
+                                                After purchasing, send us the Gmail address you used for your Gumroad purchase on WhatsApp to receive your TextMorph Pro license key.
+                                            </p>
+                                            <a href="${INTERNATIONAL_PURCHASE_CONFIG.getWhatsAppUrl()}" target="_blank" rel="noopener noreferrer" class="tm-intl-whatsapp-btn">
+                                                <span>GET LICENSE KEY ON WHATSAPP</span>
+                                                <span class="tm-btn-arrow">→</span>
+                                            </a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -1836,6 +1949,11 @@
                     }
                 }
             });
+        });
+
+        // Apply localized prices & country-specific purchase flow
+        CurrencyService.getLocalizedPrice().then(data => {
+            CurrencyService.updateAllPriceTargets(data);
         });
     }
 

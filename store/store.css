@@ -2528,6 +2528,157 @@ body.store-body {
     gap: 8px;
 }
 
+/* ==================== INTERNATIONAL PURCHASE CARD (GUMROAD + WHATSAPP) ==================== */
+.tm-india-purchase-flow {
+    width: 100%;
+}
+
+.tm-intl-purchase-card {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    background: linear-gradient(180deg, rgba(16, 185, 129, 0.07) 0%, rgba(15, 23, 42, 0.7) 100%);
+    border: 1px solid rgba(16, 185, 129, 0.28);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-radius: 14px;
+    padding: 18px 20px;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45), 0 0 20px rgba(16, 185, 129, 0.08);
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.tm-intl-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.74rem;
+    font-weight: 800;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    color: #34d399;
+}
+
+.tm-intl-globe {
+    font-size: 0.95rem;
+    line-height: 1;
+}
+
+.tm-intl-desc {
+    font-size: 0.88rem;
+    color: #cbd5e1;
+    line-height: 1.45;
+    margin: 0;
+}
+
+.tm-intl-gumroad-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    color: #ffffff !important;
+    font-size: 1.05rem;
+    font-weight: 800;
+    padding: 14px 28px;
+    border-radius: 10px;
+    text-decoration: none;
+    box-shadow: 0 10px 24px -4px rgba(16, 185, 129, 0.45);
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    letter-spacing: 0.3px;
+    width: 100%;
+    cursor: pointer;
+    border: none;
+    box-sizing: border-box;
+}
+
+.tm-intl-gumroad-btn:hover {
+    background: linear-gradient(135deg, #34d399 0%, #10b981 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 14px 30px -4px rgba(16, 185, 129, 0.6);
+    color: #ffffff !important;
+}
+
+.tm-intl-license-box {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    background: rgba(0, 0, 0, 0.35);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+    padding: 12px 14px;
+    margin-top: 2px;
+    box-sizing: border-box;
+}
+
+.tm-intl-license-header {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.72rem;
+    font-weight: 800;
+    color: #e2e8f0;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+}
+
+.tm-key-icon {
+    font-size: 0.85rem;
+    line-height: 1;
+}
+
+.tm-intl-license-text {
+    font-size: 0.82rem;
+    color: #94a3b8;
+    line-height: 1.45;
+    margin: 0;
+}
+
+.tm-intl-whatsapp-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: rgba(37, 211, 102, 0.12);
+    border: 1px solid rgba(37, 211, 102, 0.38);
+    color: #25d366 !important;
+    font-size: 0.82rem;
+    font-weight: 700;
+    padding: 10px 16px;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    letter-spacing: 0.3px;
+    width: 100%;
+    margin-top: 4px;
+    box-sizing: border-box;
+}
+
+.tm-intl-whatsapp-btn:hover {
+    background: rgba(37, 211, 102, 0.22);
+    border-color: rgba(37, 211, 102, 0.6);
+    color: #4ade80 !important;
+    transform: translateY(-1px);
+}
+
+@media (max-width: 600px) {
+    .tm-intl-purchase-card {
+        padding: 14px 12px;
+        gap: 10px;
+    }
+    .tm-intl-gumroad-btn {
+        padding: 12px 16px;
+        font-size: 0.95rem;
+    }
+    .tm-intl-license-box {
+        padding: 10px 12px;
+    }
+    .tm-intl-whatsapp-btn {
+        padding: 9px 12px;
+        font-size: 0.78rem;
+    }
+}
+
 /* 7 Thumbnails Rail */
 .tm-thumbs-track-wrap {
     z-index: 1;
