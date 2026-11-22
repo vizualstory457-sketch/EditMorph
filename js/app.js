@@ -9,7 +9,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initHeroVideo();
   initNav();
   renderProblems();
-  renderServices();
   renderPortfolio();
   renderOffer();
   renderProcess();
@@ -134,36 +133,6 @@ function renderProblems() {
         <p class="problem-desc">${p.desc}</p>
       </div>
     </div>`).join('');
-}
-
-/* ── SERVICES ─────────────────────────────────────── */
-function renderServices() {
-  const el = document.getElementById('services-grid');
-  if (!el) return;
-
-  const serviceData = {
-    reels: { img: 'assets/images/service-reels.jpg', tag: 'VERTICAL 9:16' },
-    film: { img: 'assets/images/service-film.jpg', tag: 'CINEMATIC 4K' },
-    drone: { img: 'assets/images/service-drone.jpg', tag: 'AERIAL HDR' },
-    walkthrough: { img: 'assets/images/service-walkthrough.jpg', tag: 'SMOOTH GIMBAL' },
-    branding: { img: 'assets/images/service-branding.jpg', tag: 'AUTHORITY BUILDER' },
-    social: { img: 'assets/images/service-social.jpg', tag: 'DAILY CONTENT' }
-  };
-
-  el.innerHTML = window.EDITMORPH.services.map(s => {
-    const meta = serviceData[s.icon] || serviceData.reels;
-    return `
-    <div class="service-card reveal">
-      <div class="service-thumb">
-        <img src="${meta.img}" alt="${s.title}" loading="lazy">
-        <div class="service-thumb-badge">${meta.tag}</div>
-      </div>
-      <div class="service-body">
-        <h3 class="service-title">${s.title}</h3>
-        <p class="service-desc">${s.desc}</p>
-      </div>
-    </div>`;
-  }).join('');
 }
 
 /* ── PORTFOLIO (VIMEO 9:16 VERTICAL REELS) ───────── */
