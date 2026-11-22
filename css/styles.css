@@ -668,16 +668,16 @@ section {
   overflow: hidden;
   user-select: none;
   -webkit-user-select: none;
-  mask-image: linear-gradient(90deg, transparent 0%, black 10%, black 90%, transparent 100%);
-  -webkit-mask-image: linear-gradient(90deg, transparent 0%, black 10%, black 90%, transparent 100%);
-  padding: 12px 0;
+  mask-image: linear-gradient(90deg, transparent 0%, black 8%, black 92%, transparent 100%);
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, black 8%, black 92%, transparent 100%);
+  padding: 14px 0;
 }
 
 .clients-marquee-track {
   display: flex;
   width: max-content;
-  gap: 28px;
-  animation: marqueeRTL 28s linear infinite;
+  gap: 24px;
+  animation: marqueeRTL 32s linear infinite;
   will-change: transform;
 }
 
@@ -689,26 +689,27 @@ section {
 .clients-marquee-group {
   display: flex;
   align-items: center;
-  gap: 28px;
+  gap: 24px;
   flex-shrink: 0;
 }
 
-/* Elegant Client Image Frame */
+/* Elegant Client Image Frame — Large, Crisp, Natural Colors */
 .client-card {
   position: relative;
-  background: rgba(14, 14, 14, 0.65);
+  background: rgba(15, 15, 15, 0.78);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 16px;
-  padding: 16px 30px;
+  padding: 12px 24px;
   height: 96px;
-  min-width: 172px;
+  width: 320px;
+  min-width: 320px;
   display: flex;
   align-items: center;
   justify-content: center;
   transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.45);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.55);
   cursor: pointer;
 }
 
@@ -717,7 +718,7 @@ section {
   position: absolute;
   inset: 0;
   border-radius: 16px;
-  background: radial-gradient(circle at 50% 0%, rgba(255, 48, 56, 0.12) 0%, transparent 70%);
+  background: radial-gradient(circle at 50% 0%, rgba(255, 48, 56, 0.15) 0%, transparent 70%);
   opacity: 0;
   transition: opacity 0.35s ease;
   pointer-events: none;
@@ -725,9 +726,9 @@ section {
 
 .client-card:hover {
   transform: translateY(-4px) scale(1.02);
-  background: rgba(22, 22, 22, 0.9);
-  border-color: rgba(255, 48, 56, 0.38);
-  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.7), 0 0 24px rgba(255, 48, 56, 0.15);
+  background: rgba(24, 24, 24, 0.95);
+  border-color: rgba(255, 48, 56, 0.45);
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.75), 0 0 24px rgba(255, 48, 56, 0.18);
 }
 
 .client-card:hover::after {
@@ -735,19 +736,20 @@ section {
 }
 
 .client-logo {
-  max-height: 52px;
-  max-width: 135px;
-  width: auto;
-  height: auto;
+  max-height: 72px;
+  max-width: 268px;
+  width: 100%;
+  height: 100%;
   object-fit: contain;
   display: block;
-  filter: grayscale(100%) opacity(0.65) contrast(95%);
-  transition: filter 0.35s ease, transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s ease;
+  filter: none;
+  opacity: 0.98;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s ease;
 }
 
 .client-card:hover .client-logo {
-  filter: grayscale(0%) opacity(1) contrast(100%);
-  transform: scale(1.08);
+  opacity: 1;
+  transform: scale(1.04);
 }
 
 /* Right-to-Left Keyframe Animation */
@@ -1616,134 +1618,319 @@ section {
 }
 
 /* ============================================================
-   PORTFOLIO
+   VERTICAL REELS PORTFOLIO (VIMEO 9:16)
    ============================================================ */
-.portfolio-filters {
+.vimeo-portfolio-section {
+  position: relative;
+  background: #050505;
+  padding: 110px 0 120px;
+  overflow: hidden;
+}
+
+.vimeo-portfolio-section::before {
+  content: "";
+  position: absolute;
+  top: 15%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 900px;
+  height: 380px;
+  background: radial-gradient(ellipse at center, rgba(255, 48, 56, 0.08) 0%, transparent 70%);
+  filter: blur(60px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.vimeo-carousel-controls {
   display: flex;
-  gap: 8px;
-  margin-bottom: 40px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 34px;
+  position: relative;
+  z-index: 2;
   flex-wrap: wrap;
 }
 
+.portfolio-filters {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
 .portfolio-filter-btn {
-  padding: 8px 20px;
+  padding: 9px 22px;
   font-size: 0.85rem;
-  font-weight: 600;
+  font-weight: 700;
+  letter-spacing: 0.02em;
   border-radius: 100px;
-  background: transparent;
+  background: rgba(255, 255, 255, 0.04);
   color: var(--text-secondary);
-  border: 1px solid var(--border);
-  transition: all var(--transition);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.25s ease;
+  cursor: pointer;
 }
 
 .portfolio-filter-btn:hover {
-  color: var(--text-primary);
-  border-color: var(--border-hover);
+  color: #FFFFFF;
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.22);
 }
 
 .portfolio-filter-btn.active {
   background: var(--accent);
-  color: #FFF;
+  color: #FFFFFF;
   border-color: var(--accent);
+  box-shadow: 0 4px 18px rgba(255, 48, 56, 0.35);
 }
 
-.portfolio-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
+.vimeo-carousel-arrows {
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
-.portfolio-item {
-  position: relative;
-  border-radius: var(--radius-lg);
-  overflow: hidden;
+.vimeo-arrow-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
-  aspect-ratio: 16 / 10;
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  transition: all var(--transition);
+  transition: all 0.25s ease;
 }
 
-.portfolio-item:hover {
-  border-color: rgba(255, 48, 56, 0.45);
-  transform: translateY(-4px);
-  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.75), 0 0 35px rgba(255, 48, 56, 0.18);
+.vimeo-arrow-btn svg {
+  width: 20px;
+  height: 20px;
+  stroke: currentColor;
+  stroke-width: 2.2;
+  fill: none;
 }
 
-.portfolio-item-bg {
+.vimeo-arrow-btn:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 48, 56, 0.35);
+}
+
+.vimeo-carousel-track-wrapper {
+  position: relative;
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  padding: 16px 4px 28px;
+}
+
+.vimeo-carousel-track-wrapper::-webkit-scrollbar {
+  display: none;
+}
+
+.vimeo-carousel-track,
+#portfolio-grid.vimeo-carousel-track {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  gap: 24px;
+  width: max-content;
+  align-items: stretch;
+}
+
+/* 9:16 Vertical Reel Card */
+.vimeo-card {
+  position: relative;
+  flex: 0 0 270px;
+  width: 270px;
+  aspect-ratio: 9 / 16;
+  border-radius: 20px;
+  overflow: hidden;
+  background: #0E0E0E;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.7);
+  cursor: pointer;
+  scroll-snap-align: start;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease, box-shadow 0.4s ease;
+  user-select: none;
+}
+
+.vimeo-card:hover,
+.vimeo-card:focus-visible {
+  transform: translateY(-8px) scale(1.02);
+  border-color: rgba(255, 48, 56, 0.6);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.85), 0 0 35px rgba(255, 48, 56, 0.25);
+  outline: none;
+}
+
+.vimeo-card-thumb-wrap {
   position: absolute;
   inset: 0;
-  background: var(--bg-secondary);
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
 }
 
-.portfolio-img {
+.vimeo-card-thumb {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
-  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s ease;
 }
 
-.portfolio-item:hover .portfolio-img {
-  transform: scale(1.06);
+.vimeo-card:hover .vimeo-card-thumb {
+  transform: scale(1.08);
+  filter: brightness(1.06);
 }
 
-.portfolio-item-bg svg {
-  width: 100%;
-  height: 100%;
-}
-
-.portfolio-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, transparent 30%, rgba(5, 5, 5, 0.9) 100%);
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  padding: 24px;
-  transition: opacity var(--transition);
-}
-
-.portfolio-play {
+.vimeo-play-btn {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%) scale(0.9);
-  width: 56px;
-  height: 56px;
+  transform: translate(-50%, -50%) scale(0.92);
+  width: 58px;
+  height: 58px;
   border-radius: 50%;
-  background: var(--accent);
+  background: rgba(255, 48, 56, 0.92);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: #FFFFFF;
   display: flex;
   align-items: center;
   justify-content: center;
-  opacity: 0;
-  transition: all var(--transition);
+  box-shadow: 0 8px 30px rgba(255, 48, 56, 0.6);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 3;
 }
 
-.portfolio-item:hover .portfolio-play {
-  opacity: 1;
-  transform: translate(-50%, -50%) scale(1);
+.vimeo-play-btn svg {
+  width: 22px;
+  height: 22px;
+  fill: #FFFFFF;
+  margin-left: 3px;
 }
 
-.portfolio-play svg {
-  width: 20px;
-  height: 20px;
-  fill: #FFF;
-  margin-left: 2px;
+.vimeo-card:hover .vimeo-play-btn {
+  transform: translate(-50%, -50%) scale(1.1);
+  background: #FF3038;
+  box-shadow: 0 10px 40px rgba(255, 48, 56, 0.85);
 }
 
-.portfolio-cat {
-  font-size: 0.72rem;
-  font-weight: 700;
+.vimeo-card-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.45) 0%, transparent 32%, rgba(0, 0, 0, 0.35) 60%, rgba(5, 5, 5, 0.96) 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 18px 18px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.vimeo-card-badge {
+  align-self: flex-start;
+  font-size: 0.68rem;
+  font-weight: 800;
   letter-spacing: 0.1em;
   text-transform: uppercase;
+  color: #FFFFFF;
+  background: rgba(0, 0, 0, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  padding: 4px 10px;
+  border-radius: 6px;
+}
+
+.vimeo-card-cat {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
   color: var(--accent);
+  display: block;
   margin-bottom: 4px;
 }
 
-.portfolio-title {
-  font-size: 1.1rem;
-  font-weight: 700;
+.vimeo-card-title {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: #FFFFFF;
+  line-height: 1.25;
+  margin: 0;
+  letter-spacing: -0.01em;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.85);
+}
+
+/* Lightbox Modal for 9:16 Vertical Video */
+.modal-box.vimeo-modal-box {
+  width: 90vw;
+  max-width: 420px;
+  background: #0B0B0B;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.95), 0 0 50px rgba(255, 48, 56, 0.22);
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  max-height: 92vh;
+}
+
+.vimeo-modal-box .modal-close {
+  top: 14px;
+  right: 14px;
+  z-index: 10;
+  background: rgba(0, 0, 0, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #FFFFFF;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.vimeo-modal-box .modal-close:hover {
+  background: rgba(255, 48, 56, 0.9);
+  border-color: rgba(255, 48, 56, 1);
+  color: #FFFFFF;
+}
+
+.vimeo-modal-player-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 9 / 16;
+  background: #000000;
+  overflow: hidden;
+  flex: 1 1 auto;
+}
+
+.vimeo-modal-player-wrap iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+}
+
+.vimeo-modal-footer {
+  padding: 16px 22px 18px;
+  background: #101010;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-shrink: 0;
 }
 
 /* ============================================================
@@ -2853,14 +3040,15 @@ section {
   }
 
   .client-card {
+    width: 290px;
+    min-width: 290px;
     height: 90px;
-    min-width: 160px;
-    padding: 14px 26px;
+    padding: 12px 22px;
   }
 
   .client-logo {
-    max-height: 48px;
-    max-width: 125px;
+    max-height: 66px;
+    max-width: 240px;
   }
 
   .problem-hero {
@@ -2893,9 +3081,9 @@ section {
     gap: 18px;
   }
 
-  .portfolio-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 18px;
+  .vimeo-card {
+    flex: 0 0 250px;
+    width: 250px;
   }
 
   .offer-grid {
@@ -2975,14 +3163,15 @@ section {
   }
 
   .client-card {
-    height: 84px;
-    min-width: 148px;
-    padding: 12px 22px;
+    width: 260px;
+    min-width: 260px;
+    height: 82px;
+    padding: 10px 18px;
   }
 
   .client-logo {
-    max-height: 44px;
-    max-width: 118px;
+    max-height: 58px;
+    max-width: 215px;
   }
 
   .clients-marquee-track,
@@ -2994,12 +3183,28 @@ section {
     gap: 14px;
   }
 
+  .vimeo-card {
+    flex: 0 0 240px;
+    width: 240px;
+  }
+
+  .vimeo-carousel-controls {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .vimeo-carousel-arrows {
+    align-self: flex-end;
+  }
+
   .portfolio-filters {
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
     flex-wrap: nowrap;
     padding-bottom: 8px;
     scrollbar-width: none;
+    width: 100%;
   }
 
   .portfolio-filters::-webkit-scrollbar {
@@ -3119,15 +3324,16 @@ section {
   }
 
   .client-card {
-    height: 76px;
-    min-width: 136px;
-    padding: 12px 18px;
+    height: 72px;
+    width: 220px;
+    min-width: 220px;
+    padding: 8px 16px;
     border-radius: 12px;
   }
 
   .client-logo {
-    max-height: 38px;
-    max-width: 105px;
+    max-height: 52px;
+    max-width: 185px;
   }
 
   .clients-marquee-track,
@@ -3136,7 +3342,7 @@ section {
   }
 
   .clients-marquee-track {
-    animation-duration: 22s;
+    animation-duration: 24s;
   }
 
   /* Problem Section Mobile */
@@ -3280,10 +3486,28 @@ section {
   }
 
   /* Services & Portfolio Mobile */
-  .services-grid,
-  .portfolio-grid {
+  .services-grid {
     grid-template-columns: 1fr;
     gap: 16px;
+  }
+
+  .vimeo-carousel-track-wrapper {
+    margin: 0 -18px;
+    padding: 12px 18px 24px;
+    width: calc(100% + 36px);
+  }
+
+  .vimeo-card {
+    flex: 0 0 76vw;
+    width: 76vw;
+    max-width: 290px;
+    scroll-snap-align: center;
+  }
+
+  .vimeo-modal-box {
+    width: 94vw;
+    max-width: 380px;
+    border-radius: 18px;
   }
 
   .service-body {
@@ -3296,24 +3520,6 @@ section {
 
   .service-desc {
     font-size: 0.86rem;
-  }
-
-  .portfolio-overlay {
-    padding: 18px 16px;
-  }
-
-  .portfolio-title {
-    font-size: 1rem;
-  }
-
-  .portfolio-play {
-    width: 48px;
-    height: 48px;
-  }
-
-  .portfolio-play svg {
-    width: 18px;
-    height: 18px;
   }
 
   /* Offer, Values, Footer */
@@ -3356,14 +3562,20 @@ section {
   }
 
   .client-card {
-    height: 72px;
-    min-width: 124px;
-    padding: 10px 14px;
+    height: 64px;
+    width: 195px;
+    min-width: 195px;
+    padding: 6px 12px;
   }
 
   .client-logo {
-    max-height: 34px;
-    max-width: 95px;
+    max-height: 48px;
+    max-width: 165px;
+  }
+
+  .vimeo-card {
+    flex: 0 0 82vw;
+    width: 82vw;
   }
 
   .problem-hero-stats {

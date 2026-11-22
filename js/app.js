@@ -166,42 +166,38 @@ function renderServices() {
   }).join('');
 }
 
-/* ── PORTFOLIO ────────────────────────────────────── */
+/* ── PORTFOLIO (VIMEO 9:16 VERTICAL REELS) ───────── */
 function renderPortfolio() {
   const grid = document.getElementById('portfolio-grid');
   const filters = document.querySelectorAll('.portfolio-filter-btn');
+  const wrapper = document.getElementById('vimeo-carousel-wrapper');
+  const prevBtn = document.querySelector('.vimeo-prev-btn');
+  const nextBtn = document.querySelector('.vimeo-next-btn');
   if (!grid) return;
 
-  const projectImages = {
-    p1: 'assets/images/portfolio-p1.jpg',
-    p2: 'assets/images/portfolio-p2.jpg',
-    p3: 'assets/images/portfolio-p3.jpg',
-    p4: 'assets/images/portfolio-p4.jpg',
-    p5: 'assets/images/portfolio-p5.jpg',
-    p6: 'assets/images/portfolio-p6.jpg'
-  };
-
   function display(filter) {
-    const items = window.EDITMORPH.portfolio.filter(p => filter === 'all' || p.filter === filter);
-    grid.innerHTML = items.map((p, i) => {
-      const img = projectImages[p.id] || `assets/images/portfolio-p${(i % 6) + 1}.jpg`;
-      return `
-      <div class="portfolio-item reveal" data-id="${p.id}">
-        <div class="portfolio-item-bg">
-          <img src="${img}" alt="${p.title}" class="portfolio-img" loading="lazy">
+    const items = (window.EDITMORPH.portfolio || []).filter(p => filter === 'all' || p.filter === filter);
+    grid.innerHTML = items.map((p) => `
+      <div class="vimeo-card reveal" data-id="${p.id}" data-vimeo="${p.vimeoUrl}" role="button" tabindex="0" aria-label="Play ${p.title}">
+        <div class="vimeo-card-thumb-wrap">
+          <img src="${p.thumb}" alt="${p.title}" class="vimeo-card-thumb" loading="lazy">
         </div>
-        <div class="portfolio-overlay">
-          <div class="portfolio-play">
-            <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        <div class="vimeo-play-btn" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        </div>
+        <div class="vimeo-card-overlay">
+          <span class="vimeo-card-badge">${p.tag || '9:16 REEL'}</span>
+          <div class="vimeo-card-meta">
+            <span class="vimeo-card-cat">${p.category}</span>
+            <h3 class="vimeo-card-title">${p.title}</h3>
           </div>
-          <span class="portfolio-cat">${p.category}</span>
-          <span class="portfolio-title">${p.title}</span>
         </div>
-      </div>`;
-    }).join('');
+      </div>`).join('');
 
-    grid.querySelectorAll('.portfolio-item').forEach(item => {
-      item.addEventListener('click', () => openVideoModal(item.dataset.id));
+    grid.querySelectorAll('.vimeo-card').forEach(item => {
+      const open = () => openVimeoModal(item.dataset.id);
+      item.addEventListener('click', open);
+      item.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); } });
     });
   }
 
@@ -212,6 +208,15 @@ function renderPortfolio() {
       display(btn.dataset.filter);
     });
   });
+
+  if (wrapper && prevBtn && nextBtn) {
+    prevBtn.addEventListener('click', () => {
+      wrapper.scrollBy({ left: -300, behavior: 'smooth' });
+    });
+    nextBtn.addEventListener('click', () => {
+      wrapper.scrollBy({ left: 300, behavior: 'smooth' });
+    });
+  }
 
   display('all');
 }
@@ -429,6 +434,23 @@ function openApplyModal() {
   if (m) { m.classList.add('open'); document.body.style.overflow = 'hidden'; }
 }
 
+function openVimeoModal(projectId) {
+  closeModals();
+  const m = document.getElementById('vimeo-modal');
+  const iframe = document.getElementById('vimeo-modal-iframe');
+  const p = (window.EDITMORPH.portfolio || []).find(x => x.id === projectId);
+  if (!m || !iframe || !p) return;
+
+  const catEl = document.getElementById('vimeo-modal-cat');
+  const titleEl = document.getElementById('vimeo-modal-title');
+  if (catEl) catEl.textContent = `${p.category} • 9:16 VERTICAL REEL`;
+  if (titleEl) titleEl.textContent = p.title;
+
+  iframe.src = `https://player.vimeo.com/video/${p.vimeoId}?autoplay=1&badge=0&autopause=0&player_id=0&app_id=122963`;
+  m.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
 function openVideoModal(projectId) {
   closeModals();
   const m = document.getElementById('video-modal');
@@ -451,6 +473,10 @@ function closeModals() {
   const vslIframe = document.getElementById('vsl-modal-iframe');
   if (vslIframe) {
     vslIframe.src = '';
+  }
+  const vimeoIframe = document.getElementById('vimeo-modal-iframe');
+  if (vimeoIframe) {
+    vimeoIframe.src = '';
   }
   const vid = document.getElementById('portfolio-modal-video');
   if (vid) {

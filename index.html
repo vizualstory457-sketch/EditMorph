@@ -516,26 +516,38 @@
     <hr class="section-divider">
 
     <!-- ═══════════════════════════════════════════════
-         PORTFOLIO
+         VERTICAL REELS PORTFOLIO (VIMEO 9:16)
          ═══════════════════════════════════════════════ -->
-    <section id="portfolio">
+    <section id="portfolio" class="vimeo-portfolio-section">
       <div class="container">
         <div class="section-header center">
-          <div class="eyebrow">SELECTED WORK</div>
-          <h2 class="section-title">See the Difference Professional<br>Editing Makes.</h2>
+          <div class="eyebrow">OUR WORK, SPEAKS FOR ITSELF.</div>
+          <h2 class="section-title">Real Projects. Real Editing.<br><span class="text-accent">Premium Storytelling.</span></h2>
+          <p class="section-subtitle" style="max-width:620px; margin: 12px auto 0;">Explore our 9:16 vertical Reel productions created for ambitious brands, creators, and luxury property professionals.</p>
         </div>
 
-        <div class="portfolio-filters">
-          <button class="portfolio-filter-btn active" data-filter="all" type="button">All</button>
-          <button class="portfolio-filter-btn" data-filter="reels" type="button">Property Reels</button>
-          <button class="portfolio-filter-btn" data-filter="walkthrough" type="button">Walkthroughs</button>
-          <button class="portfolio-filter-btn" data-filter="drone" type="button">Drone Films</button>
-          <button class="portfolio-filter-btn" data-filter="interior" type="button">Interior</button>
-          <button class="portfolio-filter-btn" data-filter="branding" type="button">Branding</button>
+        <div class="vimeo-carousel-controls">
+          <div class="portfolio-filters">
+            <button class="portfolio-filter-btn active" data-filter="all" type="button">All Work</button>
+            <button class="portfolio-filter-btn" data-filter="commercial" type="button">Commercial &amp; Retail</button>
+            <button class="portfolio-filter-btn" data-filter="realestate" type="button">Real Estate &amp; Finance</button>
+            <button class="portfolio-filter-btn" data-filter="branding" type="button">Personal Brand</button>
+          </div>
+
+          <div class="vimeo-carousel-arrows">
+            <button class="vimeo-arrow-btn vimeo-prev-btn" aria-label="Previous reel" type="button">
+              <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+            </button>
+            <button class="vimeo-arrow-btn vimeo-next-btn" aria-label="Next reel" type="button">
+              <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+            </button>
+          </div>
         </div>
 
-        <div class="portfolio-grid" id="portfolio-grid">
-          <!-- Rendered dynamically -->
+        <div class="vimeo-carousel-track-wrapper" id="vimeo-carousel-wrapper">
+          <div class="vimeo-carousel-track" id="portfolio-grid">
+            <!-- 7 Vertical 9:16 Reel cards rendered dynamically -->
+          </div>
         </div>
       </div>
     </section>
@@ -932,6 +944,38 @@
           style="font-size:0.72rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--accent); margin-bottom:4px;"
           id="video-modal-cat">Category</div>
         <div style="font-size:1.2rem; font-weight:700;" id="video-modal-title">Project Title</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════
+       VIMEO VERTICAL REEL LIGHTBOX MODAL (9:16)
+       ═══════════════════════════════════════════════ -->
+  <div class="modal-overlay" id="vimeo-modal" role="dialog" aria-modal="true" aria-label="EditMorph Video Reel Player">
+    <div class="modal-box vimeo-modal-box">
+      <button class="modal-close" aria-label="Close video player" type="button">
+        <svg viewBox="0 0 24 24">
+          <line x1="18" y1="6" x2="6" y2="18" />
+          <line x1="6" y1="6" x2="18" y2="18" />
+        </svg>
+      </button>
+      <div class="vimeo-modal-player-wrap">
+        <iframe
+          id="vimeo-modal-iframe"
+          src=""
+          title="EditMorph Video Reel Player"
+          frameborder="0"
+          allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allowfullscreen>
+        </iframe>
+      </div>
+      <div class="vimeo-modal-footer">
+        <div>
+          <div class="eyebrow" id="vimeo-modal-cat" style="margin-bottom:4px; font-size:0.72rem;">VERTICAL REEL 9:16</div>
+          <h3 id="vimeo-modal-title" style="font-size:1.15rem; font-weight:800; color:#FFF; margin:0;">Project Title</h3>
+        </div>
+        <button class="btn btn-accent btn-sm open-apply-modal" style="padding:10px 20px;">Claim 15 Reels — $699</button>
       </div>
     </div>
   </div>

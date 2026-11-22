@@ -47,12 +47,69 @@ window.EDITMORPH = {
   ],
 
   portfolio: [
-    { id: "p1", title: "Oceanfront Modern Estate", category: "Luxury Property Reels", filter: "reels" },
-    { id: "p2", title: "Downtown Penthouse Tour", category: "Property Walkthroughs", filter: "walkthrough" },
-    { id: "p3", title: "Coastal Cliffside Villa", category: "Drone Films", filter: "drone" },
-    { id: "p4", title: "Designer Kitchen Reveal", category: "Interior Videos", filter: "interior" },
-    { id: "p5", title: "Top Producer Brand Film", category: "Agent Personal Branding", filter: "branding" },
-    { id: "p6", title: "Hillside Glass House", category: "Luxury Property Reels", filter: "reels" }
+    {
+      id: "1249051194",
+      title: "Ashley Outlet Commercial Reel",
+      category: "Commercial & Retail Ad",
+      filter: "commercial",
+      vimeoUrl: "https://vimeo.com/1249051194",
+      thumb: "assets/images/vimeo/vimeo-1249051194.jpg",
+      tag: "VERTICAL REEL 9:16"
+    },
+    {
+      id: "1249051191",
+      title: "Paradise Patio Teak Showcase",
+      category: "Luxury Living Showcase",
+      filter: "commercial",
+      vimeoUrl: "https://vimeo.com/1249051191",
+      thumb: "assets/images/vimeo/vimeo-1249051191.jpg",
+      tag: "VERTICAL REEL 9:16"
+    },
+    {
+      id: "1249051112",
+      title: "Sebastian Primerica Authority Film",
+      category: "Personal Brand & Authority",
+      filter: "branding",
+      vimeoUrl: "https://vimeo.com/1249051112",
+      thumb: "assets/images/vimeo/vimeo-1249051112.jpg",
+      tag: "VERTICAL REEL 9:16"
+    },
+    {
+      id: "1249051111",
+      title: "Vanessa VMB Loans Finance Reel",
+      category: "Real Estate & Finance",
+      filter: "realestate",
+      vimeoUrl: "https://vimeo.com/1249051111",
+      thumb: "assets/images/vimeo/vimeo-1249051111.jpg",
+      tag: "VERTICAL REEL 9:16"
+    },
+    {
+      id: "1249051117",
+      title: "Landmark Garage Doors Ad",
+      category: "Property Services Ad",
+      filter: "commercial",
+      vimeoUrl: "https://vimeo.com/1249051117",
+      thumb: "assets/images/vimeo/vimeo-1249051117.jpg",
+      tag: "VERTICAL REEL 9:16"
+    },
+    {
+      id: "1249050221",
+      title: "EstateQuest Hialeah Luxury Listing",
+      category: "Real Estate Property Reel",
+      filter: "realestate",
+      vimeoUrl: "https://vimeo.com/1249050221",
+      thumb: "assets/images/vimeo/vimeo-1249050221.jpg",
+      tag: "VERTICAL REEL 9:16"
+    },
+    {
+      id: "1249050186",
+      title: "Perfume Outlet Luxury Showcase",
+      category: "Luxury Brand Commercial",
+      filter: "commercial",
+      vimeoUrl: "https://vimeo.com/1249050186",
+      thumb: "assets/images/vimeo/vimeo-1249050186.jpg",
+      tag: "VERTICAL REEL 9:16"
+    }
   ],
 
   flagshipOffer: {
