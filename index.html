@@ -960,6 +960,10 @@
         </svg>
       </button>
       <div class="vimeo-modal-player-wrap">
+        <div class="vimeo-player-loader" id="vimeo-player-loader">
+          <div class="vimeo-spinner"></div>
+          <span>Loading Reel...</span>
+        </div>
         <iframe
           id="vimeo-modal-iframe"
           src=""
@@ -971,11 +975,13 @@
         </iframe>
       </div>
       <div class="vimeo-modal-footer">
-        <div>
-          <div class="eyebrow" id="vimeo-modal-cat" style="margin-bottom:4px; font-size:0.72rem;">VERTICAL REEL 9:16</div>
-          <h3 id="vimeo-modal-title" style="font-size:1.15rem; font-weight:800; color:#FFF; margin:0;">Project Title</h3>
+        <div class="vimeo-modal-info">
+          <span class="vimeo-modal-cat" id="vimeo-modal-cat">VERTICAL REEL 9:16</span>
+          <h3 class="vimeo-modal-title" id="vimeo-modal-title">Project Title</h3>
         </div>
-        <button class="btn btn-accent btn-sm open-apply-modal" style="padding:10px 20px;">Claim 15 Reels — $699</button>
+        <div class="vimeo-modal-action">
+          <button class="btn btn-accent btn-sm open-apply-modal" id="vimeo-modal-cta">Get 15 Reels — $699</button>
+        </div>
       </div>
     </div>
   </div>

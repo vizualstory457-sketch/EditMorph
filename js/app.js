@@ -438,15 +438,27 @@ function openVimeoModal(projectId) {
   closeModals();
   const m = document.getElementById('vimeo-modal');
   const iframe = document.getElementById('vimeo-modal-iframe');
-  const p = (window.EDITMORPH.portfolio || []).find(x => x.id === projectId);
+  const loader = document.getElementById('vimeo-player-loader');
+  const p = (window.EDITMORPH.portfolio || []).find(x => String(x.id) === String(projectId) || String(x.vimeoId) === String(projectId));
   if (!m || !iframe || !p) return;
+
+  const videoId = p.vimeoId || p.id;
+  if (!videoId) return;
 
   const catEl = document.getElementById('vimeo-modal-cat');
   const titleEl = document.getElementById('vimeo-modal-title');
   if (catEl) catEl.textContent = `${p.category} • 9:16 VERTICAL REEL`;
   if (titleEl) titleEl.textContent = p.title;
 
-  iframe.src = `https://player.vimeo.com/video/${p.vimeoId}?autoplay=1&badge=0&autopause=0&player_id=0&app_id=122963`;
+  if (loader) {
+    loader.classList.remove('hidden');
+  }
+
+  iframe.onload = () => {
+    if (loader) loader.classList.add('hidden');
+  };
+
+  iframe.src = `https://player.vimeo.com/video/${videoId}?autoplay=1&badge=0&autopause=0&player_id=0&app_id=122963`;
   m.classList.add('open');
   document.body.style.overflow = 'hidden';
 }
@@ -477,6 +489,10 @@ function closeModals() {
   const vimeoIframe = document.getElementById('vimeo-modal-iframe');
   if (vimeoIframe) {
     vimeoIframe.src = '';
+  }
+  const loader = document.getElementById('vimeo-player-loader');
+  if (loader) {
+    loader.classList.remove('hidden');
   }
   const vid = document.getElementById('portfolio-modal-video');
   if (vid) {
