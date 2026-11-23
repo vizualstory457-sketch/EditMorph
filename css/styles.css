@@ -1569,36 +1569,6 @@ section {
   flex-wrap: wrap;
 }
 
-.portfolio-filters {
-  display: none !important;
-}
-
-.portfolio-filter-btn {
-  padding: 9px 22px;
-  font-size: 0.85rem;
-  font-weight: 700;
-  letter-spacing: 0.02em;
-  border-radius: 100px;
-  background: rgba(255, 255, 255, 0.04);
-  color: var(--text-secondary);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  transition: all 0.25s ease;
-  cursor: pointer;
-}
-
-.portfolio-filter-btn:hover {
-  color: #FFFFFF;
-  background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(255, 255, 255, 0.22);
-}
-
-.portfolio-filter-btn.active {
-  background: var(--accent);
-  color: #FFFFFF;
-  border-color: var(--accent);
-  box-shadow: 0 4px 18px rgba(255, 48, 56, 0.35);
-}
-
 .vimeo-carousel-arrows {
   display: flex;
   align-items: center;
@@ -3333,24 +3303,6 @@ section {
 
   .vimeo-carousel-arrows {
     align-self: center;
-  }
-
-  .portfolio-filters {
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    flex-wrap: nowrap;
-    padding-bottom: 8px;
-    scrollbar-width: none;
-    width: 100%;
-  }
-
-  .portfolio-filters::-webkit-scrollbar {
-    display: none;
-  }
-
-  .portfolio-filter-btn {
-    flex-shrink: 0;
-    white-space: nowrap;
   }
 }
 
