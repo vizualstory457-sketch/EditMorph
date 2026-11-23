@@ -138,56 +138,93 @@ function renderProblems() {
 /* ── PORTFOLIO (VIMEO 9:16 VERTICAL REELS) ───────── */
 function renderPortfolio() {
   const grid = document.getElementById('portfolio-grid');
-  const filters = document.querySelectorAll('.portfolio-filter-btn');
   const wrapper = document.getElementById('vimeo-carousel-wrapper');
   const prevBtn = document.querySelector('.vimeo-prev-btn');
   const nextBtn = document.querySelector('.vimeo-next-btn');
   if (!grid) return;
 
-  function display(filter) {
-    const items = (window.EDITMORPH.portfolio || []).filter(p => filter === 'all' || p.filter === filter);
-    grid.innerHTML = items.map((p) => `
-      <div class="vimeo-card reveal" data-id="${p.id}" data-vimeo="${p.vimeoUrl}" role="button" tabindex="0" aria-label="Play ${p.title}">
-        <div class="vimeo-card-thumb-wrap">
-          <img src="${p.thumb}" alt="${p.title}" class="vimeo-card-thumb" loading="lazy">
+  const items = window.EDITMORPH.portfolio || [];
+  grid.innerHTML = items.map((p) => `
+    <div class="vimeo-card reveal" data-id="${p.id}" data-vimeo="${p.vimeoUrl}" role="button" tabindex="0" aria-label="Play ${p.title}">
+      <div class="vimeo-card-thumb-wrap">
+        <img src="${p.thumb}" alt="${p.title}" class="vimeo-card-thumb" loading="lazy">
+      </div>
+      <div class="vimeo-play-btn" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+      </div>
+      <div class="vimeo-card-overlay">
+        <div class="vimeo-card-meta">
+          <h3 class="vimeo-card-title">${p.title}</h3>
         </div>
-        <div class="vimeo-play-btn" aria-hidden="true">
-          <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-        </div>
-        <div class="vimeo-card-overlay">
-          <span class="vimeo-card-badge">${p.tag || '9:16 REEL'}</span>
-          <div class="vimeo-card-meta">
-            <span class="vimeo-card-cat">${p.category}</span>
-            <h3 class="vimeo-card-title">${p.title}</h3>
-          </div>
-        </div>
-      </div>`).join('');
+      </div>
+    </div>`).join('');
 
-    grid.querySelectorAll('.vimeo-card').forEach(item => {
-      const open = () => openVimeoModal(item.dataset.id);
-      item.addEventListener('click', open);
-      item.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); } });
+  grid.querySelectorAll('.vimeo-card').forEach(item => {
+    const open = () => openVimeoModal(item.dataset.id);
+    item.addEventListener('click', () => {
+      if (item.dataset.dragged === 'true') {
+        item.dataset.dragged = 'false';
+        return;
+      }
+      open();
     });
-  }
-
-  filters.forEach(btn => {
-    btn.addEventListener('click', () => {
-      filters.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      display(btn.dataset.filter);
+    item.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        open();
+      }
     });
   });
 
   if (wrapper && prevBtn && nextBtn) {
+    const getScrollStep = () => {
+      const card = grid.querySelector('.vimeo-card');
+      return card ? card.offsetWidth + 24 : 300;
+    };
+
     prevBtn.addEventListener('click', () => {
-      wrapper.scrollBy({ left: -300, behavior: 'smooth' });
+      wrapper.scrollBy({ left: -getScrollStep(), behavior: 'smooth' });
     });
     nextBtn.addEventListener('click', () => {
-      wrapper.scrollBy({ left: 300, behavior: 'smooth' });
+      wrapper.scrollBy({ left: getScrollStep(), behavior: 'smooth' });
+    });
+
+    // Desktop mouse drag-to-scroll support
+    let isDown = false;
+    let startX = 0;
+    let scrollLeft = 0;
+    let moved = 0;
+
+    wrapper.addEventListener('mousedown', (e) => {
+      isDown = true;
+      moved = 0;
+      wrapper.classList.add('is-dragging');
+      startX = e.pageX - wrapper.offsetLeft;
+      scrollLeft = wrapper.scrollLeft;
+    });
+
+    window.addEventListener('mouseup', () => {
+      if (!isDown) return;
+      isDown = false;
+      wrapper.classList.remove('is-dragging');
+      setTimeout(() => {
+        grid.querySelectorAll('.vimeo-card').forEach(c => {
+          if (moved > 8) c.dataset.dragged = 'true';
+        });
+      }, 0);
+    });
+
+    wrapper.addEventListener('mousemove', (e) => {
+      if (!isDown) return;
+      const x = e.pageX - wrapper.offsetLeft;
+      moved = Math.abs(x - startX);
+      if (moved > 5) {
+        e.preventDefault();
+        const walk = (x - startX) * 1.4;
+        wrapper.scrollLeft = scrollLeft - walk;
+      }
     });
   }
-
-  display('all');
 }
 
 /* ── FLAGSHIP OFFER ───────────────────────────────── */
@@ -408,26 +445,43 @@ function openVimeoModal(projectId) {
   const m = document.getElementById('vimeo-modal');
   const iframe = document.getElementById('vimeo-modal-iframe');
   const loader = document.getElementById('vimeo-player-loader');
+  const restrictedNotice = document.getElementById('vimeo-restricted-notice');
   const p = (window.EDITMORPH.portfolio || []).find(x => String(x.id) === String(projectId) || String(x.vimeoId) === String(projectId));
   if (!m || !iframe || !p) return;
 
   const videoId = p.vimeoId || p.id;
-  if (!videoId) return;
-
-  const catEl = document.getElementById('vimeo-modal-cat');
   const titleEl = document.getElementById('vimeo-modal-title');
-  if (catEl) catEl.textContent = `${p.category} • 9:16 VERTICAL REEL`;
   if (titleEl) titleEl.textContent = p.title;
 
-  if (loader) {
-    loader.classList.remove('hidden');
+  if (p.restricted) {
+    if (loader) loader.classList.add('hidden');
+    iframe.src = '';
+    iframe.style.display = 'none';
+    if (restrictedNotice) {
+      restrictedNotice.classList.remove('hidden');
+      const rTitle = document.getElementById('vimeo-restricted-title');
+      if (rTitle) rTitle.textContent = p.title;
+      const rBg = document.getElementById('vimeo-restricted-bg');
+      if (rBg && p.thumb) {
+        rBg.style.backgroundImage = `url('${p.thumb}')`;
+      }
+    }
+  } else {
+    if (restrictedNotice) restrictedNotice.classList.add('hidden');
+    iframe.style.display = 'block';
+    if (loader) loader.classList.remove('hidden');
+
+    iframe.onload = () => {
+      if (loader) loader.classList.add('hidden');
+    };
+
+    setTimeout(() => {
+      if (loader) loader.classList.add('hidden');
+    }, 4500);
+
+    iframe.src = `https://player.vimeo.com/video/${videoId}?autoplay=1&autopause=0&muted=0&controls=1&playsinline=1&title=0&byline=0&portrait=0&dnt=1`;
   }
 
-  iframe.onload = () => {
-    if (loader) loader.classList.add('hidden');
-  };
-
-  iframe.src = `https://player.vimeo.com/video/${videoId}?autoplay=1&badge=0&autopause=0&player_id=0&app_id=122963`;
   m.classList.add('open');
   document.body.style.overflow = 'hidden';
 }
@@ -439,7 +493,6 @@ function openVideoModal(projectId) {
   if (!m || !p) return;
 
   document.getElementById('video-modal-title').textContent = p.title;
-  document.getElementById('video-modal-cat').textContent = p.category;
   const vid = document.getElementById('portfolio-modal-video');
   if (vid) {
     vid.currentTime = 0;
@@ -458,10 +511,15 @@ function closeModals() {
   const vimeoIframe = document.getElementById('vimeo-modal-iframe');
   if (vimeoIframe) {
     vimeoIframe.src = '';
+    vimeoIframe.style.display = 'block';
   }
   const loader = document.getElementById('vimeo-player-loader');
   if (loader) {
     loader.classList.remove('hidden');
+  }
+  const restrictedNotice = document.getElementById('vimeo-restricted-notice');
+  if (restrictedNotice) {
+    restrictedNotice.classList.add('hidden');
   }
   const vid = document.getElementById('portfolio-modal-video');
   if (vid) {

@@ -508,13 +508,6 @@
         </div>
 
         <div class="vimeo-carousel-controls">
-          <div class="portfolio-filters">
-            <button class="portfolio-filter-btn active" data-filter="all" type="button">All Work</button>
-            <button class="portfolio-filter-btn" data-filter="commercial" type="button">Commercial &amp; Retail</button>
-            <button class="portfolio-filter-btn" data-filter="realestate" type="button">Real Estate &amp; Finance</button>
-            <button class="portfolio-filter-btn" data-filter="branding" type="button">Personal Brand</button>
-          </div>
-
           <div class="vimeo-carousel-arrows">
             <button class="vimeo-arrow-btn vimeo-prev-btn" aria-label="Previous reel" type="button">
               <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
@@ -527,7 +520,7 @@
 
         <div class="vimeo-carousel-track-wrapper" id="vimeo-carousel-wrapper">
           <div class="vimeo-carousel-track" id="portfolio-grid">
-            <!-- 7 Vertical 9:16 Reel cards rendered dynamically -->
+            <!-- 9 Vertical 9:16 Reel cards rendered dynamically -->
           </div>
         </div>
       </div>
@@ -945,6 +938,21 @@
           <div class="vimeo-spinner"></div>
           <span>Loading Reel...</span>
         </div>
+        <div class="vimeo-restricted-notice hidden" id="vimeo-restricted-notice">
+          <div class="vimeo-restricted-bg" id="vimeo-restricted-bg"></div>
+          <div class="vimeo-restricted-content">
+            <div class="vimeo-restricted-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+              </svg>
+            </div>
+            <div class="vimeo-restricted-tag">CLIENT CONFIDENTIAL REEL</div>
+            <h4 class="vimeo-restricted-title" id="vimeo-restricted-title">Modern Architecture Property Showcase</h4>
+            <p class="vimeo-restricted-desc">This client reel is currently protected by privacy settings on Vimeo. To view our full confidential agency portfolio, request direct access below.</p>
+            <button type="button" class="btn btn-accent btn-sm open-apply-modal">Request Direct Access</button>
+          </div>
+        </div>
         <iframe
           id="vimeo-modal-iframe"
           src=""
@@ -957,7 +965,6 @@
       </div>
       <div class="vimeo-modal-footer">
         <div class="vimeo-modal-info">
-          <span class="vimeo-modal-cat" id="vimeo-modal-cat">VERTICAL REEL 9:16</span>
           <h3 class="vimeo-modal-title" id="vimeo-modal-title">Project Title</h3>
         </div>
         <div class="vimeo-modal-action">

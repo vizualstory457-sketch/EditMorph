@@ -48,74 +48,68 @@ window.EDITMORPH = {
 
   portfolio: [
     {
-      id: "1249051194",
-      vimeoId: "1249051194",
-      title: "Ashley Outlet Commercial Reel",
-      category: "Commercial & Retail Ad",
-      filter: "commercial",
-      vimeoUrl: "https://vimeo.com/1249051194",
-      thumb: "assets/images/vimeo/vimeo-1249051194.jpg",
-      tag: "VERTICAL REEL 9:16"
-    },
-    {
-      id: "1249051191",
-      vimeoId: "1249051191",
-      title: "Paradise Patio Teak Showcase",
-      category: "Luxury Living Showcase",
-      filter: "commercial",
-      vimeoUrl: "https://vimeo.com/1249051191",
-      thumb: "assets/images/vimeo/vimeo-1249051191.jpg",
-      tag: "VERTICAL REEL 9:16"
-    },
-    {
-      id: "1249051112",
-      vimeoId: "1249051112",
-      title: "Sebastian Primerica Authority Film",
-      category: "Personal Brand & Authority",
-      filter: "branding",
-      vimeoUrl: "https://vimeo.com/1249051112",
-      thumb: "assets/images/vimeo/vimeo-1249051112.jpg",
-      tag: "VERTICAL REEL 9:16"
+      id: "1249223480",
+      vimeoId: "1249223480",
+      title: "EstateQuest Hialeah Luxury Listing",
+      vimeoUrl: "https://vimeo.com/1249223480",
+      thumb: "assets/images/vimeo/vimeo-1249223480.jpg"
     },
     {
       id: "1249051111",
       vimeoId: "1249051111",
       title: "Vanessa VMB Loans Finance Reel",
-      category: "Real Estate & Finance",
-      filter: "realestate",
       vimeoUrl: "https://vimeo.com/1249051111",
-      thumb: "assets/images/vimeo/vimeo-1249051111.jpg",
-      tag: "VERTICAL REEL 9:16"
+      thumb: "assets/images/vimeo/vimeo-1249051111.jpg"
     },
     {
       id: "1249051117",
       vimeoId: "1249051117",
       title: "Landmark Garage Doors Ad",
-      category: "Property Services Ad",
-      filter: "commercial",
       vimeoUrl: "https://vimeo.com/1249051117",
-      thumb: "assets/images/vimeo/vimeo-1249051117.jpg",
-      tag: "VERTICAL REEL 9:16"
+      thumb: "assets/images/vimeo/vimeo-1249051117.jpg"
     },
     {
-      id: "1249050221",
-      vimeoId: "1249050221",
-      title: "EstateQuest Hialeah Luxury Listing",
-      category: "Real Estate Property Reel",
-      filter: "realestate",
-      vimeoUrl: "https://vimeo.com/1249050221",
-      thumb: "assets/images/vimeo/vimeo-1249050221.jpg",
-      tag: "VERTICAL REEL 9:16"
+      id: "1249050007",
+      vimeoId: "1249050007",
+      title: "Modern Architecture Property Showcase",
+      vimeoUrl: "https://vimeo.com/1249050007",
+      thumb: "assets/images/vimeo/vimeo-1249050007.jpg",
+      restricted: true
     },
     {
       id: "1249050186",
       vimeoId: "1249050186",
       title: "Perfume Outlet Luxury Showcase",
-      category: "Luxury Brand Commercial",
-      filter: "commercial",
       vimeoUrl: "https://vimeo.com/1249050186",
-      thumb: "assets/images/vimeo/vimeo-1249050186.jpg",
-      tag: "VERTICAL REEL 9:16"
+      thumb: "assets/images/vimeo/vimeo-1249050186.jpg"
+    },
+    {
+      id: "1249051191",
+      vimeoId: "1249051191",
+      title: "Paradise Patio Teak Showcase",
+      vimeoUrl: "https://vimeo.com/1249051191",
+      thumb: "assets/images/vimeo/vimeo-1249051191.jpg"
+    },
+    {
+      id: "1249051194",
+      vimeoId: "1249051194",
+      title: "Ashley Outlet Commercial Reel",
+      vimeoUrl: "https://vimeo.com/1249051194",
+      thumb: "assets/images/vimeo/vimeo-1249051194.jpg"
+    },
+    {
+      id: "1249051114",
+      vimeoId: "1249051114",
+      title: "Jeremy Fitness & Gym Showcase",
+      vimeoUrl: "https://vimeo.com/1249051114",
+      thumb: "assets/images/vimeo/vimeo-1249051114.jpg"
+    },
+    {
+      id: "1249051112",
+      vimeoId: "1249051112",
+      title: "Sebastian Primerica Authority Film",
+      vimeoUrl: "https://vimeo.com/1249051112",
+      thumb: "assets/images/vimeo/vimeo-1249051112.jpg"
     }
   ],
 
