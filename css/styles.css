@@ -1623,10 +1623,6 @@ section {
   user-select: none;
 }
 
-.vimeo-carousel-track-wrapper.is-dragging .vimeo-card {
-  pointer-events: none;
-}
-
 .vimeo-carousel-track-wrapper::-webkit-scrollbar {
   display: none;
 }
@@ -1992,6 +1988,23 @@ section {
   margin: 0;
   word-break: break-word;
   overflow-wrap: break-word;
+}
+
+.vimeo-direct-link {
+  font-size: 0.78rem;
+  color: rgba(255, 255, 255, 0.65);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 2px;
+  transition: color 0.2s ease;
+  width: fit-content;
+}
+
+.vimeo-direct-link:hover {
+  color: var(--accent, #FF3038);
+  text-decoration: underline;
 }
 
 .vimeo-modal-action {
