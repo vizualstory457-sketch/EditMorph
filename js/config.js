@@ -72,7 +72,7 @@ window.EDITMORPH = {
       id: "1249050007",
       vimeoId: "1249050007",
       title: "Modern Architecture Property Showcase",
-      vimeoUrl: "https://vimeo.com/1249050007",
+      vimeoUrl: "https://vimeo.com/1249050007?share=copy&fl=sv&fe=ci",
       thumb: "assets/images/vimeo/vimeo-1249050007.jpg"
     },
     {
