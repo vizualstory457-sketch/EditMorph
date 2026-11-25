@@ -3197,3 +3197,459 @@ section {
     font-size: 1.15rem;
   }
 }
+
+/* ============================================================
+   APEX-INSPIRED SPLIT PRICING CARD
+   ============================================================ */
+.apex-pricing-section {
+  position: relative;
+  background: #000000;
+  padding: 120px 0 110px;
+  overflow: hidden;
+}
+
+.apex-pricing-container {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 28px;
+  position: relative;
+  z-index: 2;
+}
+
+.apex-pricing-header {
+  margin-bottom: 52px;
+}
+
+.apex-pricing-split-card {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  border-radius: 28px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.85), 0 0 60px rgba(8, 127, 255, 0.08);
+  overflow: hidden;
+  background: #0B0E14;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.apex-pricing-split-card:hover {
+  box-shadow: 0 35px 100px rgba(0, 0, 0, 0.9), 0 0 70px rgba(8, 127, 255, 0.14);
+}
+
+/* ── LEFT PANEL (DARK) ── */
+.apex-pricing-left {
+  background: #0B0E14 radial-gradient(circle at 10% 10%, rgba(8, 127, 255, 0.08), transparent 55%);
+  padding: 48px 46px;
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  flex-direction: column;
+}
+
+.apex-split-label {
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #64748B;
+  margin-bottom: 32px;
+}
+
+.apex-split-phases {
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+}
+
+.apex-phase-item {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.apex-phase-header {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.apex-phase-num {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #087FFF;
+  font-feature-settings: "tnum";
+}
+
+.apex-phase-sep {
+  color: #475569;
+  font-weight: 600;
+}
+
+.apex-phase-title {
+  font-size: 1.12rem;
+  font-weight: 700;
+  color: #FFFFFF;
+  letter-spacing: -0.02em;
+}
+
+.apex-phase-desc {
+  font-size: 0.9rem;
+  color: #94A3B8;
+  line-height: 1.55;
+  font-weight: 400;
+  padding-left: 36px;
+}
+
+.apex-split-divider {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.08);
+  margin: 34px 0 28px;
+}
+
+/* ── EXTRAS INCLUDED ── */
+.apex-extras-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.apex-extras-label {
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #64748B;
+}
+
+.apex-extras-badge {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #087FFF;
+  background: rgba(8, 127, 255, 0.12);
+  border: 1px solid rgba(8, 127, 255, 0.3);
+  padding: 4px 12px;
+  border-radius: 20px;
+  letter-spacing: 0.02em;
+}
+
+.apex-extras-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.apex-extra-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  transition: background 0.25s, border-color 0.25s;
+}
+
+.apex-extra-item:hover {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(8, 127, 255, 0.25);
+}
+
+.apex-extra-bullet {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: rgba(8, 127, 255, 0.18);
+  color: #087FFF;
+  flex-shrink: 0;
+}
+
+.apex-extra-bullet svg {
+  width: 11px;
+  height: 11px;
+  stroke: #087FFF;
+  stroke-width: 2.8;
+  fill: none;
+}
+
+.apex-extra-name {
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: #E2E8F0;
+  flex: 1;
+}
+
+.apex-extra-val {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #94A3B8;
+}
+
+/* ── RIGHT PANEL (LIGHT) ── */
+.apex-pricing-right {
+  background: #FFFFFF;
+  padding: 48px 44px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 32px;
+  color: #0F172A;
+}
+
+.apex-right-badge {
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #087FFF;
+  margin-bottom: 12px;
+}
+
+.apex-right-price-row {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.apex-right-amount {
+  font-size: clamp(3.2rem, 4vw, 3.8rem);
+  font-weight: 900;
+  color: #0F172A;
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+
+.apex-right-period {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #64748B;
+  letter-spacing: 0.05em;
+}
+
+.apex-right-desc {
+  font-size: 0.92rem;
+  color: #475569;
+  line-height: 1.55;
+  margin-bottom: 24px;
+}
+
+.apex-right-divider {
+  height: 1px;
+  background: #E2E8F0;
+  margin-bottom: 24px;
+}
+
+.apex-deliverables-header {
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #64748B;
+  margin-bottom: 16px;
+}
+
+.apex-deliverables-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+}
+
+.apex-deliverables-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: #1E293B;
+  line-height: 1.4;
+}
+
+.apex-deliverables-list li svg {
+  width: 15px;
+  height: 15px;
+  stroke: #087FFF;
+  fill: none;
+  stroke-width: 2.8;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+/* ── CTA BUTTON ── */
+.apex-right-cta-block {
+  margin-top: 10px;
+}
+
+.apex-pricing-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: #087FFF;
+  color: #FFFFFF;
+  border-radius: 12px;
+  padding: 18px 24px;
+  font-size: 0.92rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  transition: transform 0.25s, box-shadow 0.25s, background 0.25s;
+  text-decoration: none;
+  box-shadow: 0 4px 18px rgba(8, 127, 255, 0.35);
+}
+
+.apex-pricing-btn:hover {
+  background: #0070E0;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(8, 127, 255, 0.45);
+}
+
+.apex-pricing-btn svg {
+  width: 16px;
+  height: 16px;
+  transition: transform 0.2s;
+}
+
+.apex-pricing-btn:hover svg {
+  transform: translateX(3px);
+}
+
+.apex-pricing-subtext {
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: #64748B;
+  text-align: center;
+  margin-top: 10px;
+}
+
+/* ── CONTINUOUS MOVING SOCIAL-PROOF STRIP ── */
+.apex-pricing-proof-strip {
+  margin-top: 56px;
+  padding-top: 28px;
+}
+
+.apex-proof-track-header {
+  text-align: center;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #64748B;
+  margin-bottom: 20px;
+}
+
+.apex-proof-marquee {
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
+}
+
+.apex-proof-track {
+  display: flex;
+  width: max-content;
+  animation: proofMarqueeScroll 28s linear infinite;
+  gap: 18px;
+}
+
+.apex-proof-marquee:hover .apex-proof-track {
+  animation-play-state: paused;
+}
+
+.apex-proof-group {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.apex-proof-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  padding: 8px 18px;
+  border-radius: 999px;
+  transition: border-color 0.2s, background 0.2s;
+  user-select: none;
+}
+
+.apex-proof-pill:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(8, 127, 255, 0.35);
+}
+
+.apex-proof-logo {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  border-radius: 50%;
+  background: #141414;
+}
+
+.apex-proof-pill span {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #E2E8F0;
+}
+
+@keyframes proofMarqueeScroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(calc(-50% - 9px));
+  }
+}
+
+/* ── RESPONSIVE DESIGN ── */
+@media (max-width: 992px) {
+  .apex-pricing-split-card {
+    grid-template-columns: 1fr;
+  }
+  .apex-pricing-left {
+    border-right: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 40px 32px;
+  }
+  .apex-pricing-right {
+    padding: 40px 32px;
+  }
+}
+
+@media (max-width: 600px) {
+  .apex-pricing-section {
+    padding: 80px 0 70px;
+  }
+  .apex-pricing-container {
+    padding: 0 18px;
+  }
+  .apex-pricing-left {
+    padding: 32px 20px;
+  }
+  .apex-pricing-right {
+    padding: 32px 20px;
+  }
+  .apex-phase-desc {
+    padding-left: 0;
+  }
+  .apex-right-amount {
+    font-size: 2.8rem;
+  }
+  .apex-extra-item {
+    padding: 9px 11px;
+  }
+  .apex-extra-name {
+    font-size: 0.82rem;
+  }
+  .apex-extra-val {
+    font-size: 0.8rem;
+  }
+}
