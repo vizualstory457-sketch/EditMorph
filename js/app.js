@@ -10,11 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initNav();
   renderProblems();
   renderPortfolio();
-  renderOffer();
   renderProcess();
-  renderWhyUs();
-  renderTestimonials();
-  renderPricing();
   renderFAQ();
   initModals();
   initScrollReveal();
