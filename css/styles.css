@@ -1963,6 +1963,41 @@ section {
   color: var(--accent);
 }
 
+.footer-contact-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.86rem;
+  color: var(--text-secondary);
+  transition: color var(--transition), transform var(--transition);
+  text-decoration: none;
+}
+
+.footer-contact-link:hover {
+  color: var(--accent);
+  transform: translateX(2px);
+}
+
+.footer-contact-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  min-width: 26px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: var(--accent);
+  transition: background var(--transition), border-color var(--transition);
+}
+
+.footer-contact-link:hover .footer-contact-icon {
+  background: rgba(89, 199, 21, 0.12);
+  border-color: rgba(89, 199, 21, 0.35);
+}
+
+
 .footer-social {
   display: flex;
   gap: 10px;
