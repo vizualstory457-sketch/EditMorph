@@ -4438,7 +4438,7 @@ section {
   align-items: stretch;
   gap: 16px;
   width: 100%;
-  height: 520px;
+  height: 540px;
   position: relative;
 }
 
@@ -4454,30 +4454,33 @@ section {
   border: 1px solid rgba(255, 255, 255, 0.08);
   cursor: pointer;
   outline: none;
-  transition: flex 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+  transition: flex 0.7s cubic-bezier(0.16, 1, 0.3, 1),
               border-color 0.45s ease,
               box-shadow 0.45s ease,
               filter 0.5s ease,
+              opacity 0.5s ease,
               transform 0.45s ease;
   user-select: none;
   -webkit-tap-highlight-color: transparent;
 }
 
-/* When ANY card in the grid is hovered, shrink non-hovered sibling cards */
+/* When ANY card in the grid is hovered on desktop, shrink non-hovered sibling cards */
 @media (hover: hover) and (pointer: fine) {
   .team-grid:hover .team-card:not(:hover) {
     flex: 0.65 1 0px;
-    filter: brightness(0.65) contrast(0.95);
+    filter: brightness(0.6) contrast(0.95);
+    opacity: 0.75;
     border-color: rgba(255, 255, 255, 0.04);
   }
 
   /* The Hovered Card Expands Significantly */
   .team-card:hover {
-    flex: 3.2 1 0px;
-    border-color: rgba(89, 199, 21, 0.7);
-    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.85),
-                0 0 35px rgba(89, 199, 21, 0.2);
+    flex: 3.5 1 0px;
+    border-color: rgba(89, 199, 21, 0.85);
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.9),
+                0 0 35px rgba(89, 199, 21, 0.25);
     filter: brightness(1);
+    opacity: 1;
     transform: translateY(-2px);
     z-index: 5;
   }
@@ -4485,18 +4488,19 @@ section {
 
 /* Programmatic / Touch Expanded State (for mobile or active click) */
 .team-card.is-expanded {
-  flex: 3.2 1 0px !important;
-  border-color: rgba(89, 199, 21, 0.75) !important;
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.85),
-              0 0 35px rgba(89, 199, 21, 0.2) !important;
+  flex: 3.5 1 0px !important;
+  border-color: rgba(89, 199, 21, 0.85) !important;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.9),
+              0 0 35px rgba(89, 199, 21, 0.25) !important;
   filter: brightness(1) !important;
+  opacity: 1 !important;
   transform: translateY(-2px);
   z-index: 5;
 }
 
 /* Primary Founder Profile Distinction */
 .team-card-founder {
-  border-color: rgba(89, 199, 21, 0.22);
+  border-color: rgba(89, 199, 21, 0.25);
 }
 
 .team-founder-badge {
@@ -4615,12 +4619,12 @@ section {
 
 .team-card:hover .team-name,
 .team-card.is-expanded .team-name {
-  font-size: 1.5rem;
+  font-size: 1.55rem;
 }
 
 .team-card:hover .team-role,
 .team-card.is-expanded .team-role {
-  font-size: 0.9375rem;
+  font-size: 0.95rem;
 }
 
 /* Mobile Touch / Swipe Hint */
