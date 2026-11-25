@@ -273,6 +273,7 @@ function renderOffer() {
 
 /* ── PROCESS ──────────────────────────────────────── */
 function renderProcess() {
+  initMethodTabs();
   const el = document.getElementById('process-grid');
   if (!el) return;
 
@@ -523,4 +524,53 @@ function initScrollReveal() {
   setTimeout(() => {
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
   }, 100);
+}
+
+
+/* ── THE EDITMORPH METHOD INTERACTIVE TABS ────────── */
+function initMethodTabs() {
+  const tabs = document.querySelectorAll('.method-tab');
+  const panels = document.querySelectorAll('.method-panel');
+  if (!tabs.length || !panels.length) return;
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      const targetId = tab.getAttribute('data-target');
+      if (!targetId) return;
+
+      tabs.forEach(t => {
+        const isActive = t === tab;
+        t.classList.toggle('active', isActive);
+        t.setAttribute('aria-selected', isActive ? 'true' : 'false');
+      });
+
+      panels.forEach(p => {
+        if (p.id === targetId) {
+          p.classList.add('active');
+          p.removeAttribute('hidden');
+        } else {
+          p.classList.remove('active');
+          p.setAttribute('hidden', 'true');
+        }
+      });
+    });
+
+    tab.addEventListener('keydown', (e) => {
+      const tabList = Array.from(tabs);
+      const currentIndex = tabList.indexOf(tab);
+      let nextIndex = null;
+
+      if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+        nextIndex = (currentIndex + 1) % tabList.length;
+      } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+        nextIndex = (currentIndex - 1 + tabList.length) % tabList.length;
+      }
+
+      if (nextIndex !== null) {
+        e.preventDefault();
+        tabList[nextIndex].focus();
+        tabList[nextIndex].click();
+      }
+    });
+  });
 }
