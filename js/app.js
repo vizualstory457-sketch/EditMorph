@@ -248,7 +248,7 @@ function renderOffer() {
           ${o.included.map(item => `<li><span class="check-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>${item}</li>`).join('')}
         </ul>
 
-        <button class="btn btn-accent btn-lg btn-block open-apply-modal">GET MY 15 REELS — $699</button>
+        <a href="https://calendly.com/dibendudas4577/30min" target="_blank" rel="noopener noreferrer" class="btn btn-accent btn-lg btn-block open-apply-modal">GET MY 15 REELS — $699</a>
         <p class="offer-supporting">Monthly subscription. No long-term contract.</p>
 
         <div class="guarantee-card">
@@ -344,7 +344,7 @@ function renderPricing() {
           ${p.features.map(f => `<li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span>${f}</span></li>`).join('')}
         </ul>
       </div>
-      <button class="btn ${p.featured ? 'btn-accent' : 'btn-outline'} btn-block open-apply-modal">${p.cta}</button>
+      <a href="https://calendly.com/dibendudas4577/30min" target="_blank" rel="noopener noreferrer" class="btn ${p.featured ? 'btn-accent' : 'btn-outline'} btn-block open-apply-modal">${p.cta}</a>
     </div>`).join('');
 }
 
@@ -372,11 +372,14 @@ function renderFAQ() {
 
 /* ── MODALS ───────────────────────────────────────── */
 function initModals() {
-  // Apply/Enquiry Modal
+  // Apply/Enquiry / Calendly Booking
   document.addEventListener('click', e => {
-    if (e.target.closest('.open-apply-modal')) {
+    const bookingBtn = e.target.closest('.open-apply-modal');
+    if (bookingBtn) {
       e.preventDefault();
-      openApplyModal();
+      const url = (window.EDITMORPH && window.EDITMORPH.brand && window.EDITMORPH.brand.bookingUrl) || 'https://calendly.com/dibendudas4577/30min';
+      window.open(url, '_blank', 'noopener,noreferrer');
+      return;
     } else if (e.target.closest('.open-vsl-modal')) {
       e.preventDefault();
       openVslModal();
@@ -432,9 +435,8 @@ function openVslModal() {
 }
 
 function openApplyModal() {
-  closeModals();
-  const m = document.getElementById('apply-modal');
-  if (m) { m.classList.add('open'); document.body.style.overflow = 'hidden'; }
+  const url = (window.EDITMORPH && window.EDITMORPH.brand && window.EDITMORPH.brand.bookingUrl) || 'https://calendly.com/dibendudas4577/30min';
+  window.open(url, '_blank', 'noopener,noreferrer');
 }
 
 function openVimeoModal(projectId) {

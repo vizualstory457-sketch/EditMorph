@@ -10,7 +10,7 @@ window.EDITMORPH = {
     email: "hello@editmorph.com",
     whatsapp: "+1234567890",
     instagram: "https://instagram.com/editmorph",
-    bookingUrl: "#apply",
+    bookingUrl: "https://calendly.com/dibendudas4577/30min",
     copyright: 2026
   },
 
