@@ -11,9 +11,9 @@
   --text-primary: #FFFFFF;
   --text-secondary: #A0A0A0;
   --text-muted: #666666;
-  --accent: #00C78B;
-  --accent-hover: #00A978;
-  --accent-glow: rgba(0, 199, 139, 0.18);
+  --accent: #59C715;
+  --accent-hover: #4CB012;
+  --accent-glow: rgba(89, 199, 21, 0.18);
   --border: rgba(255, 255, 255, 0.10);
   --border-hover: rgba(255, 255, 255, 0.18);
   --radius-sm: 8px;
@@ -504,13 +504,13 @@ ol {
   border-radius: var(--radius-lg);
   padding: 26px 22px;
   z-index: 10;
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.75), 0 0 35px rgba(0, 199, 139, 0.08);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.75), 0 0 35px rgba(89, 199, 21, 0.08);
   transition: transform var(--transition), border-color var(--transition);
 }
 
 .hero-offer-card:hover {
   transform: translateY(-4px);
-  border-color: rgba(0, 199, 139, 0.4);
+  border-color: rgba(89, 199, 21, 0.4);
 }
 
 .hero-offer-card-tag {
@@ -520,8 +520,8 @@ ol {
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--accent);
-  background: rgba(0, 199, 139, 0.12);
-  border: 1px solid rgba(0, 199, 139, 0.25);
+  background: rgba(89, 199, 21, 0.12);
+  border: 1px solid rgba(89, 199, 21, 0.25);
   padding: 4px 10px;
   border-radius: 999px;
   margin-bottom: 14px;
@@ -614,7 +614,7 @@ section {
   transform: translate(-50%, -50%);
   width: 720px;
   height: 180px;
-  background: radial-gradient(ellipse at center, rgba(0, 199, 139, 0.09) 0%, transparent 70%);
+  background: radial-gradient(ellipse at center, rgba(89, 199, 21, 0.09) 0%, transparent 70%);
   filter: blur(44px);
   pointer-events: none;
   z-index: 0;
@@ -651,7 +651,7 @@ section {
   display: inline-block;
   width: 18px;
   height: 1px;
-  background: rgba(0, 199, 139, 0.45);
+  background: rgba(89, 199, 21, 0.45);
 }
 
 .clients-subtitle {
@@ -718,7 +718,7 @@ section {
   position: absolute;
   inset: 0;
   border-radius: 16px;
-  background: radial-gradient(circle at 50% 0%, rgba(0, 199, 139, 0.15) 0%, transparent 70%);
+  background: radial-gradient(circle at 50% 0%, rgba(89, 199, 21, 0.15) 0%, transparent 70%);
   opacity: 0;
   transition: opacity 0.35s ease;
   pointer-events: none;
@@ -727,8 +727,8 @@ section {
 .client-card:hover {
   transform: translateY(-4px) scale(1.02);
   background: rgba(24, 24, 24, 0.95);
-  border-color: rgba(0, 199, 139, 0.45);
-  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.75), 0 0 24px rgba(0, 199, 139, 0.18);
+  border-color: rgba(89, 199, 21, 0.45);
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.75), 0 0 24px rgba(89, 199, 21, 0.18);
 }
 
 .client-card:hover::after {
@@ -780,7 +780,7 @@ section {
   transform: translateX(-50%);
   width: 900px;
   height: 380px;
-  background: radial-gradient(ellipse at center, rgba(0, 199, 139, 0.08) 0%, transparent 70%);
+  background: radial-gradient(ellipse at center, rgba(89, 199, 21, 0.08) 0%, transparent 70%);
   filter: blur(60px);
   pointer-events: none;
   z-index: 0;
@@ -829,7 +829,7 @@ section {
   background: var(--accent);
   border-color: var(--accent);
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(0, 199, 139, 0.35);
+  box-shadow: 0 6px 20px rgba(89, 199, 21, 0.35);
 }
 
 .vimeo-carousel-track-wrapper {
@@ -885,8 +885,8 @@ section {
 .vimeo-card:hover,
 .vimeo-card:focus-visible {
   transform: translateY(-8px) scale(1.02);
-  border-color: rgba(0, 199, 139, 0.6);
-  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.85), 0 0 35px rgba(0, 199, 139, 0.25);
+  border-color: rgba(89, 199, 21, 0.6);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.85), 0 0 35px rgba(89, 199, 21, 0.25);
   outline: none;
 }
 
@@ -919,14 +919,14 @@ section {
   width: 58px;
   height: 58px;
   border-radius: 50%;
-  background: rgba(0, 199, 139, 0.92);
+  background: rgba(89, 199, 21, 0.92);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   color: #FFFFFF;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 8px 30px rgba(0, 199, 139, 0.6);
+  box-shadow: 0 8px 30px rgba(89, 199, 21, 0.6);
   transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
   z-index: 3;
 }
@@ -940,8 +940,8 @@ section {
 
 .vimeo-card:hover .vimeo-play-btn {
   transform: translate(-50%, -50%) scale(1.1);
-  background: #00C78B;
-  box-shadow: 0 10px 40px rgba(0, 199, 139, 0.85);
+  background: #59C715;
+  box-shadow: 0 10px 40px rgba(89, 199, 21, 0.85);
 }
 
 .vimeo-card-overlay {
@@ -1001,7 +1001,7 @@ section {
   border: 1px solid rgba(255, 255, 255, 0.16);
   border-radius: 20px;
   overflow: hidden;
-  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.95), 0 0 50px rgba(0, 199, 139, 0.22);
+  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.95), 0 0 50px rgba(89, 199, 21, 0.22);
   padding: 0 !important;
   display: flex;
   flex-direction: column;
@@ -1030,8 +1030,8 @@ section {
 }
 
 .vimeo-modal-box .modal-close:hover {
-  background: #00C78B;
-  border-color: #00C78B;
+  background: #59C715;
+  border-color: #59C715;
   color: #FFFFFF;
   transform: scale(1.06);
 }
@@ -1084,7 +1084,7 @@ section {
   width: 36px;
   height: 36px;
   border: 3px solid rgba(255, 255, 255, 0.12);
-  border-top-color: #00C78B;
+  border-top-color: #59C715;
   border-radius: 50%;
   animation: vimeoSpin 0.8s linear infinite;
 }
@@ -1136,12 +1136,12 @@ section {
   width: 52px;
   height: 52px;
   border-radius: 50%;
-  background: rgba(0, 199, 139, 0.14);
-  border: 1px solid rgba(0, 199, 139, 0.4);
+  background: rgba(89, 199, 21, 0.14);
+  border: 1px solid rgba(89, 199, 21, 0.4);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #00C78B;
+  color: #59C715;
   margin-bottom: 4px;
 }
 
@@ -1154,7 +1154,7 @@ section {
   font-size: 0.68rem;
   font-weight: 800;
   letter-spacing: 0.12em;
-  color: #00C78B;
+  color: #59C715;
   text-transform: uppercase;
 }
 
@@ -1231,7 +1231,7 @@ section {
 }
 
 .vimeo-direct-link:hover {
-  color: var(--accent, #00C78B);
+  color: var(--accent, #59C715);
   text-decoration: underline;
 }
 
@@ -1248,7 +1248,7 @@ section {
   white-space: nowrap;
   letter-spacing: 0.02em;
   border-radius: 8px;
-  box-shadow: 0 4px 14px rgba(0, 199, 139, 0.4);
+  box-shadow: 0 4px 14px rgba(89, 199, 21, 0.4);
 }
 
 @media (max-width: 480px) {
@@ -1370,7 +1370,7 @@ section {
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  background: rgba(0, 199, 139, 0.15);
+  background: rgba(89, 199, 21, 0.15);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1429,7 +1429,7 @@ section {
   width: 24px;
   height: 24px;
   border-radius: 50%;
-  background: rgba(0, 199, 139, 0.15);
+  background: rgba(89, 199, 21, 0.15);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1540,8 +1540,8 @@ section {
   width: 56px;
   height: 56px;
   border-radius: 50%;
-  background: rgba(0, 199, 139, 0.1);
-  border: 1px solid rgba(0, 199, 139, 0.25);
+  background: rgba(89, 199, 21, 0.1);
+  border: 1px solid rgba(89, 199, 21, 0.25);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1595,7 +1595,7 @@ section {
   color: var(--accent);
   padding: 4px 12px;
   border-radius: 100px;
-  border: 1px solid rgba(0, 199, 139, 0.3);
+  border: 1px solid rgba(89, 199, 21, 0.3);
   display: inline-block;
   margin-bottom: 16px;
 }
@@ -1666,7 +1666,7 @@ section {
   background: #0F0F0F;
   position: relative;
   transform: scale(1.03);
-  box-shadow: 0 20px 60px rgba(0, 199, 139, 0.12);
+  box-shadow: 0 20px 60px rgba(89, 199, 21, 0.12);
 }
 
 .pricing-badge {
@@ -2173,7 +2173,7 @@ section {
   width: 56px;
   height: 56px;
   border-radius: 50%;
-  background: rgba(0, 199, 139, 0.15);
+  background: rgba(89, 199, 21, 0.15);
   color: var(--accent);
   display: flex;
   align-items: center;
@@ -2216,7 +2216,7 @@ section {
   border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: var(--radius-xl);
   overflow: hidden;
-  box-shadow: 0 30px 100px rgba(0, 0, 0, 0.9), 0 0 50px rgba(0, 199, 139, 0.15);
+  box-shadow: 0 30px 100px rgba(0, 0, 0, 0.9), 0 0 50px rgba(89, 199, 21, 0.15);
 }
 
 .vsl-modal-player-wrap {
@@ -2893,9 +2893,9 @@ section {
   display: inline-block;
   width: 22px;
   height: 2px;
-  background: var(--accent, #00C78B);
+  background: var(--accent, #59C715);
   border-radius: 2px;
-  box-shadow: 0 0 10px rgba(0, 199, 139, 0.5);
+  box-shadow: 0 0 10px rgba(89, 199, 21, 0.5);
   transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -2974,7 +2974,7 @@ section {
   perspective: 1000px;
 }
 
-/* ── CHAT BUBBLES (EMERALD GREEN & WHITE) ── */
+/* ── CHAT BUBBLES (LIME GREEN & WHITE) ── */
 .apex-chat-bubble {
   display: inline-flex;
   align-items: center;
@@ -2987,16 +2987,16 @@ section {
   transform: translateY(-2px) scale(1.02);
 }
 
-/* Emerald Green Bubble (Right-aligned, with tail) */
+/* Lime Green Bubble (Right-aligned, with tail) */
 .apex-bubble-green, .apex-bubble-blue {
   align-self: flex-end;
-  background: var(--accent, #00C78B);
+  background: var(--accent, #59C715);
   color: #FFFFFF;
   font-size: 0.92rem;
   font-weight: 500;
   padding: 10px 20px;
   border-radius: 20px 20px 4px 20px;
-  box-shadow: 0 4px 22px rgba(0, 199, 139, 0.4);
+  box-shadow: 0 4px 22px rgba(89, 199, 21, 0.4);
 }
 
 /* White Bubble (Left-aligned, with tail) */
@@ -3048,10 +3048,10 @@ section {
 }
 
 .apex-notif-icon.calendly-icon {
-  background: #00C78B;
+  background: #59C715;
   border-radius: 50%;
   color: #FFFFFF;
-  box-shadow: 0 4px 12px rgba(0, 199, 139, 0.35);
+  box-shadow: 0 4px 12px rgba(89, 199, 21, 0.35);
 }
 
 .apex-notif-body {
@@ -3225,19 +3225,19 @@ section {
   grid-template-columns: 1.3fr 1fr;
   border-radius: 28px;
   border: 1px solid rgba(255, 255, 255, 0.12);
-  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.85), 0 0 60px rgba(0, 199, 139, 0.08);
+  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.85), 0 0 60px rgba(89, 199, 21, 0.08);
   overflow: hidden;
   background: #0B0E14;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .apex-pricing-split-card:hover {
-  box-shadow: 0 35px 100px rgba(0, 0, 0, 0.9), 0 0 70px rgba(0, 199, 139, 0.14);
+  box-shadow: 0 35px 100px rgba(0, 0, 0, 0.9), 0 0 70px rgba(89, 199, 21, 0.14);
 }
 
 /* ── LEFT PANEL (DARK) ── */
 .apex-pricing-left {
-  background: #0B0E14 radial-gradient(circle at 10% 10%, rgba(0, 199, 139, 0.08), transparent 55%);
+  background: #0B0E14 radial-gradient(circle at 10% 10%, rgba(89, 199, 21, 0.08), transparent 55%);
   padding: 48px 46px;
   border-right: 1px solid rgba(255, 255, 255, 0.08);
   display: flex;
@@ -3274,7 +3274,7 @@ section {
 .apex-phase-num {
   font-size: 1.15rem;
   font-weight: 800;
-  color: #00C78B;
+  color: #59C715;
   font-feature-settings: "tnum";
 }
 
@@ -3325,9 +3325,9 @@ section {
 .apex-extras-badge {
   font-size: 0.75rem;
   font-weight: 700;
-  color: #00C78B;
-  background: rgba(0, 199, 139, 0.12);
-  border: 1px solid rgba(0, 199, 139, 0.3);
+  color: #59C715;
+  background: rgba(89, 199, 21, 0.12);
+  border: 1px solid rgba(89, 199, 21, 0.3);
   padding: 4px 12px;
   border-radius: 20px;
   letter-spacing: 0.02em;
@@ -3352,7 +3352,7 @@ section {
 
 .apex-extra-item:hover {
   background: rgba(255, 255, 255, 0.04);
-  border-color: rgba(0, 199, 139, 0.25);
+  border-color: rgba(89, 199, 21, 0.25);
 }
 
 .apex-extra-bullet {
@@ -3362,15 +3362,15 @@ section {
   width: 18px;
   height: 18px;
   border-radius: 50%;
-  background: rgba(0, 199, 139, 0.18);
-  color: #00C78B;
+  background: rgba(89, 199, 21, 0.18);
+  color: #59C715;
   flex-shrink: 0;
 }
 
 .apex-extra-bullet svg {
   width: 11px;
   height: 11px;
-  stroke: #00C78B;
+  stroke: #59C715;
   stroke-width: 2.8;
   fill: none;
 }
@@ -3404,7 +3404,7 @@ section {
   font-weight: 800;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: #00C78B;
+  color: #59C715;
   margin-bottom: 12px;
 }
 
@@ -3474,7 +3474,7 @@ section {
 .apex-deliverables-list li svg {
   width: 15px;
   height: 15px;
-  stroke: #00C78B;
+  stroke: #59C715;
   fill: none;
   stroke-width: 2.8;
   flex-shrink: 0;
@@ -3491,7 +3491,7 @@ section {
   align-items: center;
   justify-content: center;
   gap: 8px;
-  background: #00C78B;
+  background: #59C715;
   color: #FFFFFF;
   border-radius: 12px;
   padding: 18px 24px;
@@ -3501,13 +3501,13 @@ section {
   text-transform: uppercase;
   transition: transform 0.25s, box-shadow 0.25s, background 0.25s;
   text-decoration: none;
-  box-shadow: 0 4px 18px rgba(0, 199, 139, 0.35);
+  box-shadow: 0 4px 18px rgba(89, 199, 21, 0.35);
 }
 
 .apex-pricing-btn:hover {
-  background: #00A978;
+  background: #4CB012;
   transform: translateY(-2px);
-  box-shadow: 0 12px 30px rgba(0, 199, 139, 0.45);
+  box-shadow: 0 12px 30px rgba(89, 199, 21, 0.45);
 }
 
 .apex-pricing-btn svg {
@@ -3583,7 +3583,7 @@ section {
 
 .apex-proof-pill:hover {
   background: rgba(255, 255, 255, 0.06);
-  border-color: rgba(0, 199, 139, 0.35);
+  border-color: rgba(89, 199, 21, 0.35);
 }
 
 .apex-proof-logo {
