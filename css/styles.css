@@ -2400,6 +2400,10 @@ section {
 
 /* ── Tablet Portrait / Small Tablet (768px - 860px) ───────── */
 @media (max-width: 860px) {
+  .logo-img {
+    width: 150px;
+  }
+
   .nav-links {
     display: none;
   }
@@ -2504,6 +2508,10 @@ section {
 
 /* ── Mobile Devices (360px - 580px) ───────────────────────── */
 @media (max-width: 580px) {
+  .logo-img {
+    width: 140px;
+  }
+
   body {
     overflow-x: hidden;
     width: 100%;
@@ -2817,6 +2825,10 @@ section {
 
 /* ── Small Mobile Screens (360px - 380px) ─────────────────── */
 @media (max-width: 380px) {
+  .logo-img {
+    width: 130px;
+  }
+
   .container {
     padding: 0 14px;
   }
