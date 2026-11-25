@@ -3694,57 +3694,57 @@ section {
 
 
 /* ============================================================
-   THE COMMUNITY IN MOTION — APEX-STYLE TESTIMONIAL WALL
+   THE COMMUNITY IN MOTION — HORIZONTAL CLIENT SLIDER
    ============================================================ */
-.apex-wall-section {
+.community-section {
   position: relative;
-  padding: 100px 0 90px;
+  padding: 80px 0 90px;
   background: #000000;
   overflow: hidden;
 }
 
-.apex-wall-container {
-  max-width: 1240px;
+.community-header-container {
+  max-width: 1200px;
   margin: 0 auto;
   padding: 0 24px;
 }
 
-.apex-wall-header {
-  margin-bottom: 50px;
+.community-header {
+  margin-bottom: 44px;
 }
 
-.apex-wall-eyebrow-wrap {
+.community-eyebrow-wrap {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 12px;
-  margin-bottom: 14px;
+  margin-bottom: 12px;
 }
 
-.apex-wall-accent-line {
+.community-accent-line {
   display: inline-block;
   width: 24px;
   height: 1px;
   background: var(--accent);
 }
 
-.apex-wall-eyebrow {
+.community-eyebrow {
   color: var(--accent);
   letter-spacing: 0.16em;
   font-size: 0.78rem;
   font-weight: 700;
 }
 
-.apex-wall-title {
+.community-title {
   font-size: clamp(2.1rem, 4.5vw, 3.2rem);
   font-weight: 800;
   color: #FFFFFF;
   letter-spacing: -0.025em;
   line-height: 1.15;
-  margin-bottom: 14px;
+  margin-bottom: 12px;
 }
 
-.apex-wall-subtitle {
+.community-subtitle {
   font-size: 1.05rem;
   color: #A0A0A0;
   line-height: 1.55;
@@ -3752,236 +3752,237 @@ section {
   margin: 0 auto;
 }
 
-/* 3-Column Viewport with Top & Bottom Fade Masks */
-.apex-wall-viewport {
+/* Horizontal Marquee Track & Wrapper */
+.community-marquee-wrapper {
   position: relative;
-  height: 640px;
+  width: 100%;
   overflow: hidden;
-  border-radius: 24px;
-  padding: 10px 0;
+  padding: 14px 0;
+  mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
 }
 
-.apex-wall-viewport::before,
-.apex-wall-viewport::after {
+.community-marquee-wrapper::before,
+.community-marquee-wrapper::after {
   content: "";
   position: absolute;
-  left: 0;
-  right: 0;
-  height: 130px;
-  pointer-events: none;
-  z-index: 10;
-}
-
-.apex-wall-viewport::before {
   top: 0;
-  background: linear-gradient(to bottom, #000000 0%, rgba(0, 0, 0, 0.85) 45%, transparent 100%);
-}
-
-.apex-wall-viewport::after {
   bottom: 0;
-  background: linear-gradient(to top, #000000 0%, rgba(0, 0, 0, 0.85) 45%, transparent 100%);
+  width: 120px;
+  z-index: 5;
+  pointer-events: none;
 }
 
-/* Grid Layout */
-.apex-wall-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 22px;
-  height: 100%;
+.community-marquee-wrapper::before {
+  left: 0;
+  background: linear-gradient(to right, #000000 0%, transparent 100%);
 }
 
-.apex-wall-col {
-  overflow: hidden;
-  position: relative;
-  height: 100%;
+.community-marquee-wrapper::after {
+  right: 0;
+  background: linear-gradient(to left, #000000 0%, transparent 100%);
 }
 
-.apex-wall-track {
+.community-marquee-track {
   display: flex;
-  flex-direction: column;
-  gap: 20px;
+  width: max-content;
   will-change: transform;
+  animation: communityMarqueeRTL 24s linear infinite;
 }
 
-/* Hover-to-pause functionality */
-.apex-wall-viewport:hover .apex-wall-track {
+.community-marquee-wrapper:hover .community-marquee-track,
+.community-marquee-wrapper:active .community-marquee-track {
   animation-play-state: paused;
 }
 
-/* Animation Speeds & Directions */
-.apex-wall-col-up-1 .apex-wall-track {
-  animation: wallScrollUp 36s linear infinite;
-}
-
-.apex-wall-col-down .apex-wall-track {
-  animation: wallScrollDown 42s linear infinite;
-}
-
-.apex-wall-col-up-2 .apex-wall-track {
-  animation: wallScrollUp 30s linear infinite;
-}
-
-@keyframes wallScrollUp {
-  0% {
-    transform: translateY(0);
-  }
-  100% {
-    transform: translateY(-50%);
-  }
-}
-
-@keyframes wallScrollDown {
-  0% {
-    transform: translateY(-50%);
-  }
-  100% {
-    transform: translateY(0);
-  }
-}
-
-/* Testimonial Card Styling */
-.apex-wall-card {
-  position: relative;
-  background: #14161B;
-  border: 1px solid rgba(255, 255, 255, 0.09);
-  border-radius: 18px;
-  padding: 24px 24px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.55);
-  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease, box-shadow 0.3s ease;
-  cursor: pointer;
-}
-
-.apex-wall-card:hover {
-  transform: translateY(-3px) scale(1.01);
-  border-color: rgba(89, 199, 21, 0.45);
-  box-shadow: 0 16px 45px rgba(0, 0, 0, 0.75), 0 0 25px rgba(89, 199, 21, 0.15);
-  background: #191C22;
-}
-
-.apex-wall-card-header {
+.community-marquee-group {
   display: flex;
   align-items: center;
-  gap: 12px;
-  margin-bottom: 14px;
+  gap: 24px;
+  padding-right: 24px;
+  flex-shrink: 0;
 }
 
-.apex-wall-avatar {
-  width: 42px;
-  height: 42px;
+/* Single Clean Outer Rounded Card */
+.community-card {
+  position: relative;
+  background: rgba(16, 16, 16, 0.82);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  border-radius: 16px;
+  padding: 12px 24px;
+  height: 72px;
+  width: auto;
+  min-width: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 14px;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.55);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.community-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 16px;
+  background: radial-gradient(circle at 50% 0%, rgba(89, 199, 21, 0.15) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+}
+
+.community-card:hover {
+  transform: translateY(-4px) scale(1.02);
+  background: rgba(24, 24, 24, 0.95);
+  border-color: rgba(89, 199, 21, 0.45);
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.75), 0 0 24px rgba(89, 199, 21, 0.18);
+}
+
+.community-card:hover::after {
+  opacity: 1;
+}
+
+.community-avatar {
+  width: 46px;
+  height: 46px;
   border-radius: 50%;
   object-fit: cover;
+  display: block;
   flex-shrink: 0;
   border: 1.5px solid rgba(255, 255, 255, 0.14);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.35s ease;
 }
 
-.apex-wall-meta {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
+.community-card:hover .community-avatar {
+  transform: scale(1.08);
+  border-color: rgba(89, 199, 21, 0.6);
 }
 
-.apex-wall-name {
-  font-size: 0.96rem;
-  font-weight: 700;
-  color: #FFFFFF;
-  line-height: 1.2;
-}
-
-.apex-wall-label {
-  font-size: 0.75rem;
-  color: var(--accent);
-  font-weight: 500;
-  letter-spacing: 0.02em;
-}
-
-.apex-wall-headline {
+.community-name {
   font-size: 1.05rem;
-  font-weight: 700;
+  font-weight: 600;
   color: #FFFFFF;
-  line-height: 1.38;
-  margin-bottom: 8px;
   letter-spacing: -0.01em;
+  white-space: nowrap;
 }
 
-.apex-wall-message {
-  font-size: 0.88rem;
-  color: #A0A0A0;
-  line-height: 1.6;
-  margin: 0;
+@keyframes communityMarqueeRTL {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(calc(-100% / 3), 0, 0);
+  }
 }
 
 /* ── Responsive Styling ── */
-@media (max-width: 992px) {
-  .apex-wall-section {
-    padding: 80px 0 70px;
+@media (max-width: 900px) {
+  .community-section {
+    padding: 70px 0 80px;
   }
 
-  .apex-wall-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 18px;
+  .community-card {
+    min-width: 185px;
+    height: 66px;
+    padding: 10px 20px;
+    gap: 12px;
   }
 
-  .apex-wall-col-up-2 {
-    display: none;
+  .community-avatar {
+    width: 42px;
+    height: 42px;
   }
 
-  .apex-wall-viewport {
-    height: 580px;
+  .community-name {
+    font-size: 0.98rem;
   }
 }
 
-@media (max-width: 640px) {
-  .apex-wall-section {
-    padding: 64px 0 54px;
+@media (max-width: 768px) {
+  .community-card {
+    min-width: 175px;
+    height: 62px;
+    padding: 8px 18px;
+    gap: 11px;
   }
 
-  .apex-wall-header {
-    margin-bottom: 36px;
+  .community-avatar {
+    width: 38px;
+    height: 38px;
   }
 
-  .apex-wall-grid {
-    grid-template-columns: 1fr;
+  .community-name {
+    font-size: 0.92rem;
   }
 
-  .apex-wall-col-down {
-    display: none;
+  .community-marquee-group {
+    gap: 18px;
+    padding-right: 18px;
+  }
+}
+
+@media (max-width: 580px) {
+  .community-section {
+    padding: 60px 0 68px;
   }
 
-  .apex-wall-viewport {
-    height: 520px;
+  .community-header {
+    margin-bottom: 32px;
   }
 
-  .apex-wall-col-up-1 .apex-wall-track {
-    animation-duration: 28s;
+  .community-card {
+    height: 56px;
+    min-width: 155px;
+    padding: 7px 15px;
+    gap: 10px;
+    border-radius: 12px;
   }
 
-  .apex-wall-card {
-    padding: 20px 20px;
+  .community-avatar {
+    width: 34px;
+    height: 34px;
   }
 
-  .apex-wall-headline {
-    font-size: 0.98rem;
+  .community-name {
+    font-size: 0.88rem;
   }
 
-  .apex-wall-message {
-    font-size: 0.84rem;
+  .community-marquee-group {
+    gap: 14px;
+    padding-right: 14px;
+  }
+
+  .community-marquee-track {
+    animation-duration: 20s;
+  }
+}
+
+@media (max-width: 380px) {
+  .community-card {
+    height: 50px;
+    min-width: 140px;
+    padding: 6px 12px;
+    gap: 8px;
+    border-radius: 10px;
+  }
+
+  .community-avatar {
+    width: 30px;
+    height: 30px;
+  }
+
+  .community-name {
+    font-size: 0.82rem;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .apex-wall-col-up-1 .apex-wall-track,
-  .apex-wall-col-down .apex-wall-track,
-  .apex-wall-col-up-2 .apex-wall-track {
+  .community-marquee-track {
     animation: none !important;
-  }
-
-  .apex-wall-viewport {
-    height: auto;
-    overflow: visible;
-  }
-
-  .apex-wall-viewport::before,
-  .apex-wall-viewport::after {
-    display: none;
   }
 }
