@@ -3668,3 +3668,629 @@ section {
     grid-template-columns: 1fr;
   }
 }
+
+/* ============================================================
+   APEX-INSPIRED EDITORIAL STORYTELLING SECTION
+   "01 / THE EDITMORPH DIFFERENCE"
+   ============================================================ */
+.apex-story-section {
+  position: relative;
+  background: var(--bg-primary, #050505);
+  padding: 130px 0 110px;
+  overflow: hidden;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.apex-story-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 28px;
+  position: relative;
+  z-index: 2;
+}
+
+.apex-story-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr 1fr 1fr;
+  gap: 32px;
+  align-items: start;
+}
+
+/* ── LEFT COLUMN: EDITORIAL INTRO ── */
+.apex-story-intro {
+  padding-right: 12px;
+}
+
+.apex-eyebrow-wrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.apex-accent-line {
+  display: inline-block;
+  width: 26px;
+  height: 2px;
+  background: var(--accent);
+  border-radius: 2px;
+  box-shadow: 0 0 10px rgba(8, 127, 255, 0.5);
+  transition: width 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.apex-story-intro:hover .apex-accent-line {
+  width: 38px;
+}
+
+.apex-eyebrow {
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.apex-main-title {
+  font-size: clamp(2.1rem, 2.9vw, 2.85rem);
+  font-weight: 800;
+  line-height: 1.16;
+  color: #FFFFFF;
+  letter-spacing: -0.035em;
+  margin-bottom: 22px;
+}
+
+.apex-main-desc {
+  font-size: 0.98rem;
+  color: var(--text-secondary);
+  line-height: 1.68;
+  font-weight: 400;
+  max-width: 380px;
+}
+
+/* ── STAGE COLUMNS ── */
+.apex-stage-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.apex-stage-col.reveal {
+  transition-delay: var(--stage-delay, 0s);
+}
+
+.apex-stage-header {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.apex-stage-num {
+  font-size: 2.1rem;
+  font-weight: 900;
+  color: #FFFFFF;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  font-feature-settings: "tnum";
+}
+
+.apex-stage-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  color: rgba(255, 255, 255, 0.65);
+  text-transform: uppercase;
+}
+
+/* ── STAGE VISUAL CONTAINER ── */
+.apex-stage-visual {
+  position: relative;
+  height: 265px;
+  border-radius: 20px;
+  background: rgba(16, 16, 16, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 16px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.65), 0 0 30px rgba(8, 127, 255, 0.03);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+.apex-stage-col:hover .apex-stage-visual {
+  transform: translateY(-4px);
+  border-color: rgba(8, 127, 255, 0.35);
+  box-shadow: 0 28px 70px rgba(0, 0, 0, 0.8), 0 0 35px rgba(8, 127, 255, 0.14);
+}
+
+.apex-visual-ambient {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 50%, rgba(8, 127, 255, 0.06) 0%, transparent 75%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.visual-ambient-blue {
+  background: radial-gradient(circle at 60% 40%, rgba(8, 127, 255, 0.12) 0%, transparent 75%);
+}
+
+.visual-ambient-bright {
+  background: radial-gradient(circle at 50% 60%, rgba(8, 127, 255, 0.10) 0%, transparent 75%);
+}
+
+/* ── VISUAL 01: ORDINARY FEED POST ── */
+.apex-feed-mock {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 2;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #0D0D0D;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.apex-feed-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  background: rgba(18, 18, 18, 0.9);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.apex-feed-avatar {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #2A2A2A;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.apex-feed-user {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+  flex: 1;
+}
+
+.apex-feed-name {
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: #E0E0E0;
+}
+
+.apex-feed-sub {
+  font-size: 0.52rem;
+  color: #666;
+}
+
+.apex-feed-dots {
+  font-size: 0.7rem;
+  color: #666;
+  letter-spacing: 0.08em;
+}
+
+.apex-feed-media {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  background: #050505;
+}
+
+.apex-feed-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(40%) contrast(90%) brightness(85%);
+  transition: transform 0.6s ease;
+}
+
+.apex-feed-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.1) 0%, rgba(5, 5, 5, 0.65) 100%);
+}
+
+/* ── VISUAL 02: TRANSFORMATION CARD ── */
+.apex-transform-card {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  z-index: 2;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.apex-transform-media {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.apex-transform-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: contrast(108%) saturate(115%) brightness(95%);
+  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.apex-stage-col:hover .apex-transform-img {
+  transform: scale(1.05);
+}
+
+.apex-grade-shimmer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, transparent 40%, rgba(8, 127, 255, 0.15) 50%, transparent 60%);
+  transform: translateX(-100%);
+  animation: apexShimmer 5s infinite ease-in-out;
+  pointer-events: none;
+}
+
+.apex-transform-badges {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  display: flex;
+  gap: 6px;
+  z-index: 3;
+}
+
+.apex-pro-tag {
+  font-size: 0.58rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  background: rgba(5, 5, 5, 0.82);
+  color: #FFFFFF;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 3px 7px;
+  border-radius: 4px;
+  backdrop-filter: blur(8px);
+}
+
+.apex-pro-tag.pro-grade {
+  background: rgba(8, 127, 255, 0.85);
+  border-color: rgba(8, 127, 255, 0.9);
+  box-shadow: 0 0 12px rgba(8, 127, 255, 0.45);
+}
+
+/* ── VISUAL 03: OUTCOME CARD ── */
+.apex-outcome-card {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  z-index: 2;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.apex-outcome-media {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.apex-outcome-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: contrast(106%) saturate(110%);
+  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.apex-stage-col:hover .apex-outcome-img {
+  transform: scale(1.05);
+}
+
+.apex-outcome-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.2) 0%, rgba(5, 5, 5, 0.72) 100%);
+}
+
+/* ── FLOATING PILLS & MESSAGE BUBBLES ── */
+.apex-bubble {
+  position: absolute;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+  line-height: 1;
+  z-index: 4;
+}
+
+.apex-bubble-blue {
+  background: var(--accent);
+  color: #FFFFFF;
+  font-size: 0.75rem;
+  font-weight: 700;
+  border-radius: 100px;
+  padding: 8px 14px;
+  box-shadow: 0 8px 24px rgba(8, 127, 255, 0.45);
+}
+
+.apex-bubble-white {
+  background: #FFFFFF;
+  color: #0A0A0A;
+  font-size: 0.73rem;
+  font-weight: 700;
+  border-radius: 100px;
+  padding: 8px 14px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+.apex-badge-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #EF4444;
+}
+
+/* Floating positions in Column 01 */
+.apex-float-bubble {
+  top: 18px;
+  right: 12px;
+  animation: apexFloatA 4s ease-in-out infinite;
+}
+
+.apex-float-bubble-sub {
+  bottom: 16px;
+  left: 10px;
+  animation: apexFloatB 4.6s ease-in-out infinite 0.5s;
+}
+
+/* ── FLOATING iOS NOTIFICATION CARDS (Reference: Stripe/Calendly) ── */
+.apex-notif-stack {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  padding: 14px;
+  z-index: 4;
+  pointer-events: none;
+}
+
+.apex-ios-card {
+  width: 92%;
+  max-width: 235px;
+  background: rgba(255, 255, 255, 0.96);
+  color: #0A0A0A;
+  border-radius: 13px;
+  padding: 8px 11px;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5), 0 0 1px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  transition: transform 0.3s ease;
+}
+
+.apex-float-card-1 {
+  animation: apexFloatA 4.2s ease-in-out infinite;
+}
+
+.apex-float-card-2 {
+  animation: apexFloatB 4.8s ease-in-out infinite 0.6s;
+}
+
+.apex-ios-card-sub {
+  background: rgba(246, 248, 252, 0.95);
+  margin-left: 12px;
+}
+
+.apex-ios-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.apex-ios-icon.icon-em {
+  background: var(--accent);
+  color: #FFFFFF;
+}
+
+.apex-ios-icon.icon-check {
+  background: #10B981;
+  color: #FFFFFF;
+}
+
+.apex-ios-icon.icon-ig {
+  background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+  color: #FFFFFF;
+}
+
+.apex-ios-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.apex-ios-title {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #0A0A0A;
+  line-height: 1.2;
+}
+
+.apex-ios-time {
+  font-size: 0.58rem;
+  font-weight: 500;
+  color: #777777;
+  margin-left: 6px;
+}
+
+.apex-ios-desc {
+  font-size: 0.63rem;
+  color: #444444;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-top: 1px;
+}
+
+/* Floating positions in Column 03 */
+.apex-enquiry-stack {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 16px 12px;
+  z-index: 4;
+  pointer-events: none;
+}
+
+.apex-float-enquiry-1 {
+  align-self: flex-start;
+  animation: apexFloatA 3.8s ease-in-out infinite;
+}
+
+.apex-float-enquiry-2 {
+  align-self: flex-end;
+  animation: apexFloatB 4.4s ease-in-out infinite 0.4s;
+}
+
+.apex-float-enquiry-3 {
+  align-self: center;
+  width: 96%;
+  animation: apexFloatA 4.9s ease-in-out infinite 0.8s;
+}
+
+.apex-enquiry-icon {
+  font-size: 0.85rem;
+}
+
+/* ── STAGE HEADINGS & DESCRIPTIONS ── */
+.apex-stage-content {
+  margin-top: 20px;
+}
+
+.apex-stage-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #FFFFFF;
+  line-height: 1.35;
+  letter-spacing: -0.02em;
+  margin-bottom: 10px;
+}
+
+.apex-stage-desc {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.62;
+  font-weight: 400;
+}
+
+/* ── KEYFRAME ANIMATIONS ── */
+@keyframes apexFloatA {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+@keyframes apexFloatB {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes apexShimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  50%, 100% {
+    transform: translateX(180%);
+  }
+}
+
+/* ── RESPONSIVE DESIGN ── */
+@media (max-width: 1180px) {
+  .apex-story-grid {
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 28px;
+  }
+  .apex-story-intro {
+    grid-column: 1 / -1;
+    max-width: 680px;
+    margin-bottom: 16px;
+    padding-right: 0;
+  }
+}
+
+@media (max-width: 900px) {
+  .apex-story-section {
+    padding: 90px 0 80px;
+  }
+  .apex-story-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    max-width: 540px;
+    margin: 0 auto;
+  }
+  .apex-story-intro {
+    margin-bottom: 8px;
+  }
+  .apex-main-title {
+    font-size: 2.1rem;
+  }
+  .apex-stage-visual {
+    height: 250px;
+  }
+}
+
+@media (max-width: 480px) {
+  .apex-story-section {
+    padding: 70px 0 60px;
+  }
+  .apex-main-title {
+    font-size: 1.8rem;
+  }
+  .apex-stage-visual {
+    height: 235px;
+  }
+  .apex-bubble-blue,
+  .apex-bubble-white {
+    font-size: 0.68rem;
+    padding: 6px 11px;
+  }
+  .apex-ios-card {
+    padding: 7px 9px;
+  }
+  .apex-ios-title {
+    font-size: 0.68rem;
+  }
+  .apex-ios-desc {
+    font-size: 0.58rem;
+  }
+}
