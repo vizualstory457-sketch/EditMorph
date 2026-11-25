@@ -693,26 +693,24 @@ section {
   flex-shrink: 0;
 }
 
-/* Elegant Client Card — Single Clean Outer Rounded Card */
+/* Elegant Client Image Frame — Large, Crisp, Natural Colors */
 .client-card {
   position: relative;
-  background: rgba(16, 16, 16, 0.82);
+  background: rgba(15, 15, 15, 0.78);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.10);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 16px;
   padding: 12px 24px;
-  height: 72px;
-  width: auto;
-  min-width: 200px;
+  height: 96px;
+  width: 320px;
+  min-width: 320px;
   display: flex;
   align-items: center;
-  justify-content: flex-start;
-  gap: 14px;
+  justify-content: center;
   transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.55);
   cursor: pointer;
-  flex-shrink: 0;
 }
 
 .client-card::after {
@@ -737,28 +735,21 @@ section {
   opacity: 1;
 }
 
-.client-avatar {
-  width: 46px;
-  height: 46px;
-  border-radius: 50%;
-  object-fit: cover;
+.client-logo {
+  max-height: 72px;
+  max-width: 268px;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
   display: block;
-  flex-shrink: 0;
-  border: 1.5px solid rgba(255, 255, 255, 0.14);
-  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.35s ease;
+  filter: none;
+  opacity: 0.98;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s ease;
 }
 
-.client-card:hover .client-avatar {
-  transform: scale(1.08);
-  border-color: rgba(89, 199, 21, 0.6);
-}
-
-.client-name {
-  font-size: 1.05rem;
-  font-weight: 600;
-  color: #FFFFFF;
-  letter-spacing: -0.01em;
-  white-space: nowrap;
+.client-card:hover .client-logo {
+  opacity: 1;
+  transform: scale(1.04);
 }
 
 /* Right-to-Left Keyframe Animation */
@@ -2358,19 +2349,15 @@ section {
   }
 
   .client-card {
-    min-width: 185px;
-    height: 66px;
-    padding: 10px 20px;
-    gap: 12px;
+    width: 290px;
+    min-width: 290px;
+    height: 90px;
+    padding: 12px 22px;
   }
 
-  .client-avatar {
-    width: 42px;
-    height: 42px;
-  }
-
-  .client-name {
-    font-size: 0.98rem;
+  .client-logo {
+    max-height: 66px;
+    max-width: 240px;
   }
 
   .problem-hero {
@@ -2481,19 +2468,15 @@ section {
   }
 
   .client-card {
-    min-width: 175px;
-    height: 62px;
-    padding: 8px 18px;
-    gap: 11px;
+    width: 260px;
+    min-width: 260px;
+    height: 82px;
+    padding: 10px 18px;
   }
 
-  .client-avatar {
-    width: 38px;
-    height: 38px;
-  }
-
-  .client-name {
-    font-size: 0.92rem;
+  .client-logo {
+    max-height: 58px;
+    max-width: 215px;
   }
 
   .clients-marquee-track,
@@ -2633,20 +2616,16 @@ section {
   }
 
   .client-card {
-    height: 56px;
-    min-width: 155px;
-    padding: 7px 15px;
-    gap: 10px;
+    height: 72px;
+    width: 220px;
+    min-width: 220px;
+    padding: 8px 16px;
     border-radius: 12px;
   }
 
-  .client-avatar {
-    width: 34px;
-    height: 34px;
-  }
-
-  .client-name {
-    font-size: 0.88rem;
+  .client-logo {
+    max-height: 52px;
+    max-width: 185px;
   }
 
   .clients-marquee-track,
@@ -2862,20 +2841,15 @@ section {
   }
 
   .client-card {
-    height: 50px;
-    min-width: 140px;
+    height: 64px;
+    width: 195px;
+    min-width: 195px;
     padding: 6px 12px;
-    gap: 8px;
-    border-radius: 10px;
   }
 
-  .client-avatar {
-    width: 30px;
-    height: 30px;
-  }
-
-  .client-name {
-    font-size: 0.82rem;
+  .client-logo {
+    max-height: 48px;
+    max-width: 165px;
   }
 
   .vimeo-card {
