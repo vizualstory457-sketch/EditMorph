@@ -424,7 +424,7 @@ function openVslModal() {
   closeModals();
   const m = document.getElementById('vsl-modal');
   const iframe = document.getElementById('vsl-modal-iframe');
-  const videoId = (window.EDITMORPH && window.EDITMORPH.hero && window.EDITMORPH.hero.youtubeVideoId) || 'G8efi3QOOb8';
+  const videoId = (window.EDITMORPH && window.EDITMORPH.hero && window.EDITMORPH.hero.vslVideoId) || 'G8efi3QOOb8';
   if (!m || !iframe) return;
 
   iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&controls=1&rel=0&playsinline=1&enablejsapi=1`;

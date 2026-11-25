@@ -21,7 +21,8 @@ window.EDITMORPH = {
     description: "We transform your raw property footage into premium, attention-grabbing Reels that help real estate agents build their brand, showcase listings and stand out online.",
     primaryCta: "Get 15 Reels for $699",
     secondaryCta: "Watch Our VSL",
-    youtubeVideoId: "G8efi3QOOb8",
+    youtubeVideoId: "TWo9U0eds0s",
+    vslVideoId: "G8efi3QOOb8",
     badges: ["15 Premium Reels", "Monthly Editing", "Dedicated Creative Partner"],
     offerCard: {
       title: "THE REAL ESTATE CONTENT SYSTEM",
