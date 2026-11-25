@@ -406,7 +406,7 @@
 <hr class="section-divider">
 
     <!-- ═══════════════════════════════════════════════
-         WHO WE ARE — TEAM SECTION
+         WHO WE ARE — INTERACTIVE TEAM SECTION (APEX STYLE)
          ═══════════════════════════════════════════════ -->
     <section class="team-section" id="team" aria-label="Who We Are">
       <div class="container team-container">
@@ -417,10 +417,10 @@
           <p class="team-subtitle">A dedicated team of creative professionals turning raw ideas into content that stands out.</p>
         </div>
 
-        <!-- 5-Member Team Grid (Desktop 3 + 2 Layout) -->
-        <div class="team-grid reveal">
+        <!-- Interactive Expandable Team Accordion Cards -->
+        <div class="team-grid reveal" role="region" aria-label="Team members interactive showcase">
           <!-- Member 1: Dibendu Das (Primary Founder Profile) -->
-          <article class="team-card team-card-founder" id="team-dibendu">
+          <article class="team-card team-card-founder" id="team-dibendu" tabindex="0" role="button" aria-expanded="false" aria-label="Dibendu Das — Founder &amp; Creative Director">
             <div class="team-image-wrap">
               <img src="assets/images/team/dibendu-das.jpg" alt="Dibendu Das — Founder &amp; Creative Director" loading="lazy" class="team-img">
               <div class="team-image-overlay" aria-hidden="true"></div>
@@ -436,7 +436,7 @@
           </article>
 
           <!-- Member 2: Pabitra Das -->
-          <article class="team-card" id="team-pabitra">
+          <article class="team-card" id="team-pabitra" tabindex="0" role="button" aria-expanded="false" aria-label="Pabitra Das — Co-Founder">
             <div class="team-image-wrap">
               <img src="assets/images/team/pabitra-das.jpg" alt="Pabitra Das — Co-Founder" loading="lazy" class="team-img">
               <div class="team-image-overlay" aria-hidden="true"></div>
@@ -448,7 +448,7 @@
           </article>
 
           <!-- Member 3: Biswajit -->
-          <article class="team-card" id="team-biswajit">
+          <article class="team-card" id="team-biswajit" tabindex="0" role="button" aria-expanded="false" aria-label="Biswajit — Senior Video Editor">
             <div class="team-image-wrap">
               <img src="assets/images/team/biswajit.jpg" alt="Biswajit — Senior Video Editor" loading="lazy" class="team-img">
               <div class="team-image-overlay" aria-hidden="true"></div>
@@ -460,7 +460,7 @@
           </article>
 
           <!-- Member 4: Ashis -->
-          <article class="team-card" id="team-ashis">
+          <article class="team-card" id="team-ashis" tabindex="0" role="button" aria-expanded="false" aria-label="Ashis — Video Editor">
             <div class="team-image-wrap">
               <img src="assets/images/team/ashis.jpg" alt="Ashis — Video Editor" loading="lazy" class="team-img">
               <div class="team-image-overlay" aria-hidden="true"></div>
@@ -472,7 +472,7 @@
           </article>
 
           <!-- Member 5: Shubhajit -->
-          <article class="team-card" id="team-shubhajit">
+          <article class="team-card" id="team-shubhajit" tabindex="0" role="button" aria-expanded="false" aria-label="Shubhajit — Video Editor">
             <div class="team-image-wrap">
               <img src="assets/images/team/shubhajit.jpg" alt="Shubhajit — Video Editor" loading="lazy" class="team-img">
               <div class="team-image-overlay" aria-hidden="true"></div>
@@ -482,6 +482,14 @@
               <p class="team-role">Video Editor</p>
             </div>
           </article>
+        </div>
+
+        <!-- Mobile Touch / Swipe Hint -->
+        <div class="team-swipe-hint" aria-hidden="true">
+          <svg viewBox="0 0 24 24" class="team-hint-icon">
+            <path d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+          </svg>
+          <span>Swipe or tap to explore team</span>
         </div>
       </div>
     </section>

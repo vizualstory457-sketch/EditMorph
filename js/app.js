@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
   renderFAQ();
   initModals();
   initScrollReveal();
+  initTeamAccordion();
 });
 
 /* ── HERO YOUTUBE BACKGROUND VIDEO ────────────────── */
@@ -572,5 +573,60 @@ function initMethodTabs() {
         tabList[nextIndex].click();
       }
     });
+  });
+}
+
+
+/* ── WHO WE ARE INTERACTIVE EXPANDABLE TEAM ACCORDION ─ */
+function initTeamAccordion() {
+  const grid = document.querySelector('.team-grid');
+  const cards = document.querySelectorAll('.team-card');
+  if (!grid || !cards.length) return;
+
+  cards.forEach(card => {
+    // Click or tap to expand card
+    card.addEventListener('click', (e) => {
+      const isAlreadyExpanded = card.classList.contains('is-expanded');
+      cards.forEach(c => {
+        c.classList.remove('is-expanded');
+        c.setAttribute('aria-expanded', 'false');
+      });
+
+      if (!isAlreadyExpanded) {
+        card.classList.add('is-expanded');
+        card.setAttribute('aria-expanded', 'true');
+
+        // On mobile/touch track, scroll expanded card into view
+        if (window.innerWidth <= 768) {
+          card.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+        }
+      }
+    });
+
+    // Keyboard support: Enter or Space
+    card.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        card.click();
+      }
+    });
+  });
+
+  // When cursor leaves grid on desktop, clear is-expanded so CSS hover returns to balanced equal cards
+  grid.addEventListener('mouseleave', () => {
+    cards.forEach(c => {
+      c.classList.remove('is-expanded');
+      c.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  // Click outside to collapse expanded card
+  document.addEventListener('click', (e) => {
+    if (!grid.contains(e.target)) {
+      cards.forEach(c => {
+        c.classList.remove('is-expanded');
+        c.setAttribute('aria-expanded', 'false');
+      });
+    }
   });
 }

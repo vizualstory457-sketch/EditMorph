@@ -4367,13 +4367,25 @@ section {
 
 
 /* ═════════════════════════════════════════════════════════════
-   WHO WE ARE — TEAM SECTION STYLING
+   WHO WE ARE — APEX-STYLE INTERACTIVE EXPANDABLE TEAM CARDS
    ═════════════════════════════════════════════════════════════ */
 .team-section {
   position: relative;
   background-color: #000000;
   padding: 120px 24px;
   overflow: hidden;
+}
+
+.team-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 1200px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(89, 199, 21, 0.25) 50%, transparent 100%);
 }
 
 .team-container {
@@ -4386,7 +4398,7 @@ section {
 .team-header {
   text-align: center;
   max-width: 760px;
-  margin: 0 auto 60px auto;
+  margin: 0 auto 56px auto;
 }
 
 .team-eyebrow {
@@ -4419,75 +4431,78 @@ section {
   margin: 0;
 }
 
-/* Balanced 3 + 2 Team Grid */
+/* Horizontal Interactive Expandable Cards Track */
 .team-grid {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 28px;
+  flex-direction: row;
+  align-items: stretch;
+  gap: 16px;
+  width: 100%;
+  height: 520px;
+  position: relative;
 }
 
+/* Base Compact Balanced Card State */
 .team-card {
-  flex: 0 0 calc((100% - 56px) / 3);
-  max-width: calc((100% - 56px) / 3);
-  background: rgba(14, 14, 14, 0.85);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  flex: 1 1 0px;
+  min-width: 0;
+  height: 100%;
+  position: relative;
   border-radius: 20px;
   overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-              border-color 0.4s ease,
-              box-shadow 0.4s ease;
-  backdrop-filter: blur(12px);
+  background-color: #0b0b0b;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  cursor: pointer;
+  outline: none;
+  transition: flex 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.45s ease,
+              box-shadow 0.45s ease,
+              filter 0.5s ease,
+              transform 0.45s ease;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
-.team-card:hover {
-  transform: translateY(-6px);
-  border-color: rgba(89, 199, 21, 0.45);
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.7),
-              0 0 30px rgba(89, 199, 21, 0.12);
+/* When ANY card in the grid is hovered, shrink non-hovered sibling cards */
+@media (hover: hover) and (pointer: fine) {
+  .team-grid:hover .team-card:not(:hover) {
+    flex: 0.65 1 0px;
+    filter: brightness(0.65) contrast(0.95);
+    border-color: rgba(255, 255, 255, 0.04);
+  }
+
+  /* The Hovered Card Expands Significantly */
+  .team-card:hover {
+    flex: 3.2 1 0px;
+    border-color: rgba(89, 199, 21, 0.7);
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.85),
+                0 0 35px rgba(89, 199, 21, 0.2);
+    filter: brightness(1);
+    transform: translateY(-2px);
+    z-index: 5;
+  }
 }
 
-/* Primary Founder Profile Highlight */
+/* Programmatic / Touch Expanded State (for mobile or active click) */
+.team-card.is-expanded {
+  flex: 3.2 1 0px !important;
+  border-color: rgba(89, 199, 21, 0.75) !important;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.85),
+              0 0 35px rgba(89, 199, 21, 0.2) !important;
+  filter: brightness(1) !important;
+  transform: translateY(-2px);
+  z-index: 5;
+}
+
+/* Primary Founder Profile Distinction */
 .team-card-founder {
-  border-color: rgba(89, 199, 21, 0.28);
-  background: linear-gradient(180deg, rgba(89, 199, 21, 0.05) 0%, rgba(14, 14, 14, 0.95) 100%);
+  border-color: rgba(89, 199, 21, 0.22);
 }
 
-.team-image-wrap {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 4 / 5;
-  background-color: #0a0a0a;
-  overflow: hidden;
-}
-
-.team-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center top;
-  display: block;
-  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.team-card:hover .team-img {
-  transform: scale(1.04);
-}
-
-.team-image-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, transparent 55%, rgba(14, 14, 14, 0.85) 90%, rgba(14, 14, 14, 1) 100%);
-  pointer-events: none;
-}
-
-/* Founder Badge */
 .team-founder-badge {
   position: absolute;
-  top: 16px;
-  right: 16px;
+  top: 18px;
+  right: 18px;
   display: inline-flex;
   align-items: center;
   gap: 6px;
@@ -4502,7 +4517,7 @@ section {
   text-transform: uppercase;
   color: #59C715;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-  z-index: 2;
+  z-index: 4;
 }
 
 .team-badge-dot {
@@ -4513,73 +4528,212 @@ section {
   box-shadow: 0 0 8px #59C715;
 }
 
-/* Info */
+/* Portrait Image Container */
+.team-image-wrap {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: #080808;
+}
+
+.team-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 15%;
+  display: block;
+  transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+              filter 0.5s ease;
+}
+
+.team-card:hover .team-img,
+.team-card.is-expanded .team-img {
+  transform: scale(1.04);
+}
+
+/* Cinematic Dark Gradient Overlay */
+.team-image-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, 
+    rgba(0, 0, 0, 0.05) 0%, 
+    rgba(0, 0, 0, 0.2) 40%, 
+    rgba(10, 10, 10, 0.75) 75%, 
+    rgba(10, 10, 10, 0.96) 100%);
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+}
+
+/* Card Info Area */
 .team-info {
-  padding: 22px 24px 26px 24px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 24px 20px;
+  z-index: 3;
   display: flex;
   flex-direction: column;
-  gap: 6px;
-  position: relative;
-  z-index: 2;
+  gap: 4px;
+  pointer-events: none;
+  transition: padding 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .team-name {
-  font-size: 1.25rem;
+  font-size: 1.1875rem;
   font-weight: 700;
   color: #ffffff;
   letter-spacing: -0.01em;
   margin: 0;
   line-height: 1.25;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: font-size 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .team-role {
-  font-size: 0.875rem;
+  font-size: 0.8125rem;
   font-weight: 600;
   color: #59C715;
   letter-spacing: 0.02em;
   margin: 0;
   line-height: 1.35;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: font-size 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Responsive Breakpoints */
+/* Expanded Card Typography Enhancement */
+.team-card:hover .team-info,
+.team-card.is-expanded .team-info {
+  padding: 28px 26px;
+}
+
+.team-card:hover .team-name,
+.team-card.is-expanded .team-name {
+  font-size: 1.5rem;
+}
+
+.team-card:hover .team-role,
+.team-card.is-expanded .team-role {
+  font-size: 0.9375rem;
+}
+
+/* Mobile Touch / Swipe Hint */
+.team-swipe-hint {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 18px;
+  font-size: 0.8125rem;
+  color: rgba(255, 255, 255, 0.45);
+  letter-spacing: 0.02em;
+}
+
+.team-hint-icon {
+  width: 16px;
+  height: 16px;
+  stroke: #59C715;
+  stroke-width: 2;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  animation: teamHintPulse 1.8s ease-in-out infinite;
+}
+
+@keyframes teamHintPulse {
+  0%, 100% { transform: translateX(0); opacity: 0.7; }
+  50% { transform: translateX(5px); opacity: 1; }
+}
+
+/* ═════════════════════════════════════════════════════════════
+   RESPONSIVE DESIGN (TABLET & MOBILE)
+   ═════════════════════════════════════════════════════════════ */
 @media (max-width: 1024px) {
   .team-section {
     padding: 100px 20px;
   }
 
   .team-grid {
-    gap: 20px;
+    height: 480px;
+    gap: 12px;
   }
 
-  .team-card {
-    flex: 0 0 calc((100% - 20px) / 2);
-    max-width: calc((100% - 20px) / 2);
+  .team-card:hover,
+  .team-card.is-expanded {
+    flex: 2.8 1 0px;
   }
 }
 
-@media (max-width: 640px) {
+@media (max-width: 768px) {
   .team-section {
-    padding: 70px 16px;
+    padding: 80px 16px;
   }
 
   .team-header {
-    margin-bottom: 40px;
+    margin-bottom: 36px;
   }
 
+  /* Mobile: Horizontal Touch & Swipe Carousel Track */
   .team-grid {
-    gap: 16px;
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    height: 460px;
+    gap: 14px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    padding: 6px 12px 18px 12px;
+    scrollbar-width: none;
+  }
+
+  .team-grid::-webkit-scrollbar {
+    display: none;
   }
 
   .team-card {
-    flex: 0 0 100%;
-    max-width: 100%;
+    flex: 0 0 220px !important;
+    min-width: 220px;
+    height: 100%;
+    scroll-snap-align: center;
+    filter: brightness(0.9) !important;
   }
 
-  .team-image-wrap {
-    aspect-ratio: 4 / 5;
+  /* Active / Tapped card expands horizontally on mobile */
+  .team-card.is-expanded {
+    flex: 0 0 310px !important;
+    min-width: 310px;
+    filter: brightness(1) !important;
   }
 
-  .team-info {
-    padding: 18px 20px 22px 20px;
+  .team-card:hover {
+    transform: none;
+  }
+
+  .team-swipe-hint {
+    display: flex;
+  }
+}
+
+@media (max-width: 480px) {
+  .team-grid {
+    height: 430px;
+  }
+
+  .team-card {
+    flex: 0 0 200px !important;
+    min-width: 200px;
+  }
+
+  .team-card.is-expanded {
+    flex: 0 0 290px !important;
+    min-width: 290px;
   }
 }
