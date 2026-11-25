@@ -3691,3 +3691,297 @@ section {
     font-size: 0.8rem;
   }
 }
+
+
+/* ============================================================
+   THE COMMUNITY IN MOTION — APEX-STYLE TESTIMONIAL WALL
+   ============================================================ */
+.apex-wall-section {
+  position: relative;
+  padding: 100px 0 90px;
+  background: #000000;
+  overflow: hidden;
+}
+
+.apex-wall-container {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.apex-wall-header {
+  margin-bottom: 50px;
+}
+
+.apex-wall-eyebrow-wrap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.apex-wall-accent-line {
+  display: inline-block;
+  width: 24px;
+  height: 1px;
+  background: var(--accent);
+}
+
+.apex-wall-eyebrow {
+  color: var(--accent);
+  letter-spacing: 0.16em;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.apex-wall-title {
+  font-size: clamp(2.1rem, 4.5vw, 3.2rem);
+  font-weight: 800;
+  color: #FFFFFF;
+  letter-spacing: -0.025em;
+  line-height: 1.15;
+  margin-bottom: 14px;
+}
+
+.apex-wall-subtitle {
+  font-size: 1.05rem;
+  color: #A0A0A0;
+  line-height: 1.55;
+  max-width: 540px;
+  margin: 0 auto;
+}
+
+/* 3-Column Viewport with Top & Bottom Fade Masks */
+.apex-wall-viewport {
+  position: relative;
+  height: 640px;
+  overflow: hidden;
+  border-radius: 24px;
+  padding: 10px 0;
+}
+
+.apex-wall-viewport::before,
+.apex-wall-viewport::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 130px;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.apex-wall-viewport::before {
+  top: 0;
+  background: linear-gradient(to bottom, #000000 0%, rgba(0, 0, 0, 0.85) 45%, transparent 100%);
+}
+
+.apex-wall-viewport::after {
+  bottom: 0;
+  background: linear-gradient(to top, #000000 0%, rgba(0, 0, 0, 0.85) 45%, transparent 100%);
+}
+
+/* Grid Layout */
+.apex-wall-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+  height: 100%;
+}
+
+.apex-wall-col {
+  overflow: hidden;
+  position: relative;
+  height: 100%;
+}
+
+.apex-wall-track {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  will-change: transform;
+}
+
+/* Hover-to-pause functionality */
+.apex-wall-viewport:hover .apex-wall-track {
+  animation-play-state: paused;
+}
+
+/* Animation Speeds & Directions */
+.apex-wall-col-up-1 .apex-wall-track {
+  animation: wallScrollUp 36s linear infinite;
+}
+
+.apex-wall-col-down .apex-wall-track {
+  animation: wallScrollDown 42s linear infinite;
+}
+
+.apex-wall-col-up-2 .apex-wall-track {
+  animation: wallScrollUp 30s linear infinite;
+}
+
+@keyframes wallScrollUp {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-50%);
+  }
+}
+
+@keyframes wallScrollDown {
+  0% {
+    transform: translateY(-50%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+/* Testimonial Card Styling */
+.apex-wall-card {
+  position: relative;
+  background: #14161B;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 18px;
+  padding: 24px 24px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.55);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.apex-wall-card:hover {
+  transform: translateY(-3px) scale(1.01);
+  border-color: rgba(89, 199, 21, 0.45);
+  box-shadow: 0 16px 45px rgba(0, 0, 0, 0.75), 0 0 25px rgba(89, 199, 21, 0.15);
+  background: #191C22;
+}
+
+.apex-wall-card-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.apex-wall-avatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+  border: 1.5px solid rgba(255, 255, 255, 0.14);
+}
+
+.apex-wall-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.apex-wall-name {
+  font-size: 0.96rem;
+  font-weight: 700;
+  color: #FFFFFF;
+  line-height: 1.2;
+}
+
+.apex-wall-label {
+  font-size: 0.75rem;
+  color: var(--accent);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
+.apex-wall-headline {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #FFFFFF;
+  line-height: 1.38;
+  margin-bottom: 8px;
+  letter-spacing: -0.01em;
+}
+
+.apex-wall-message {
+  font-size: 0.88rem;
+  color: #A0A0A0;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* ── Responsive Styling ── */
+@media (max-width: 992px) {
+  .apex-wall-section {
+    padding: 80px 0 70px;
+  }
+
+  .apex-wall-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+  }
+
+  .apex-wall-col-up-2 {
+    display: none;
+  }
+
+  .apex-wall-viewport {
+    height: 580px;
+  }
+}
+
+@media (max-width: 640px) {
+  .apex-wall-section {
+    padding: 64px 0 54px;
+  }
+
+  .apex-wall-header {
+    margin-bottom: 36px;
+  }
+
+  .apex-wall-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .apex-wall-col-down {
+    display: none;
+  }
+
+  .apex-wall-viewport {
+    height: 520px;
+  }
+
+  .apex-wall-col-up-1 .apex-wall-track {
+    animation-duration: 28s;
+  }
+
+  .apex-wall-card {
+    padding: 20px 20px;
+  }
+
+  .apex-wall-headline {
+    font-size: 0.98rem;
+  }
+
+  .apex-wall-message {
+    font-size: 0.84rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .apex-wall-col-up-1 .apex-wall-track,
+  .apex-wall-col-down .apex-wall-track,
+  .apex-wall-col-up-2 .apex-wall-track {
+    animation: none !important;
+  }
+
+  .apex-wall-viewport {
+    height: auto;
+    overflow: visible;
+  }
+
+  .apex-wall-viewport::before,
+  .apex-wall-viewport::after {
+    display: none;
+  }
+}
